@@ -1,0 +1,46 @@
+.speed, .mistakes{
+    display: flex;
+    gap: 5px;
+}
+
+header{
+    border-bottom: 1px solid gray;
+}
+
+.header__container{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
+
+.header__right, .header__left{
+    gap: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+}
+
+.text_reset{
+    width: 25px;
+    height: 25px;
+
+    border: none;
+    background-color: transparent;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.text_reset:hover{
+    background-color: lightgray;
+}
+
+.timer{
+    margin-bottom: 5px;
+}

@@ -1,0 +1,49 @@
+.timer{
+    position: relative;
+}
+
+.current{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.switch{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.switch p{
+    color: gray;
+    text-decoration: underline dashed;
+}
+
+.showMenu{
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    top: 0;
+
+    width: 70px;
+    background-color: lightblue;
+    z-index: 999;
+
+    border-radius: 5px;
+}
+
+.closeMenu{
+    align-self: flex-end;
+}
+
+.hidden{
+    display: none;
+}
