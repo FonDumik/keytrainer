@@ -29,6 +29,7 @@ function InputText() {
     useEffect(() => {
         if(currentTime <= 1){
             setClassBreak('window__break')
+            inputValue.current.blur();
             setIsStarted(false);
         }else{
             setClassBreak('window__break hidden')
