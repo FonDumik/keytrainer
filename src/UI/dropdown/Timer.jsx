@@ -1,11 +1,8 @@
-import React from "react";
-import { useContext } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AutoContext } from "../../context";
 import classes from "./Timer.module.css";
 
-const Timer = (props) => {
+const Timer = () => {
     const {isStarted, setIsStarted, time, timeWrite, setTime, currentTime, setCurrentTime} = useContext(AutoContext)
     let [classMenu, setMenuClass] = useState(classes.hidden);
 

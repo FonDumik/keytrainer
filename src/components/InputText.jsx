@@ -7,15 +7,12 @@ import "../styles/InputText.css";
 
 function InputText() {
     const {setIsFinished,
-        setObjectLetter,
-        isFinished, 
+        setObjectLetter, 
         setIsStarted,  
         setTimeWrite,
-        setTextLength,
         setCurrentTime,
         errors,
         setErrors,
-        isRestart,
         setIsRestart,
         time,
         currentTime,

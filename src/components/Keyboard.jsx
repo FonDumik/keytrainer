@@ -1,8 +1,7 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import htmlToReact from "html-to-react";
 import ButtonKey from "../UI/keys/ButtonKey";
 import { AutoContext } from "../context";
-import { useEffect } from "react";
 
 const keysList = [
     {setType: '5', content: 'Ё'},
@@ -71,7 +70,7 @@ const keysCases = {
     simbols: ['!', '@', '#', '$', '%', '&', '?', '-', '+', '=', '~']
 };
 
-const Keyboard = (props) => {
+const Keyboard = () => {
     const {lastLetter, setObjectLetter, setShiftButton} = useContext(AutoContext);
     let HtmlToReact = new require('html-to-react');
     let htmlToReactParser = new HtmlToReact.Parser(React);
@@ -96,7 +95,7 @@ const Keyboard = (props) => {
                 elem.selected = true;
                 setObjectLetter(elem);
             }
-            
+
             if(elem.setType === 'sys shift'){
                 elem.selected = true;
                 setShiftButton(elem);
@@ -125,7 +124,9 @@ const Keyboard = (props) => {
     return(
         <section className="keyboard">
             {keysList.map(elem => 
-                <ButtonKey setType = {elem.setType} selected = {elem.selected} object = {elem}>{htmlToReactParser.parse(elem.content)}</ButtonKey>
+                <ButtonKey setType = {elem.setType} selected = {elem.selected} object = {elem}>
+                    {htmlToReactParser.parse(elem.content)}
+                </ButtonKey>
             )}
         </section>
     )

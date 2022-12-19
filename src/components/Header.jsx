@@ -1,30 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-import { useContext } from "react";
 import { AutoContext } from "../context";
 import "../styles/header.css";
 import Timer from "../UI/dropdown/Timer";
 
 const Header = () => {
-    const {isFinished, textLength, errors, timeWrite, isRestart, setIsRestart} = useContext(AutoContext);
+    const {isFinished, textLength, errors, timeWrite, setIsRestart} = useContext(AutoContext);
+    const [currentErrors, setCurrentErrors] = useState('--')
+    const [currentSpeed, setCurrentSpeed] = useState('--')
     let isComplete = false;
-    function setSpeed(isFinished, textLength, timeWrite){
-        if(isFinished === true && isComplete === false){
-            const currentSpeed = Math.floor(textLength/(timeWrite/60000));
-            isComplete = true;
-            return currentSpeed;
-        }else{
-            return 0;
-        }
-    }
 
-    function setError(errors){
-        if(isFinished){
-            return errors;
-        }else{
-            return 0;
+    useEffect(() => {
+        if(isFinished === true){
+            setCurrentErrors(String(errors))
         }
-    }
+
+        if(isFinished === true && isComplete === false){
+            setCurrentSpeed(Math.floor(textLength/(timeWrite/60000)));
+            isComplete = true;
+        }
+
+    }, [isFinished, isComplete])
 
     return(
         <header>
@@ -45,11 +42,11 @@ const Header = () => {
             <div className="header__right">
                 <div className="speed">
                     <img src="speed.png" alt="sp" width='20'/>
-                    <p title="Скорость печати, симв/мин">{setSpeed(isFinished, textLength, timeWrite)}</p>
+                    <p title="Скорость печати, симв/мин">{currentSpeed}</p>
                 </div>
                 <div className="mistakes">
                     <img src="stop.png" alt="" width='20'/>
-                    <p title="Число ошибок">{setError(errors)}</p>
+                    <p title="Число ошибок">{currentErrors}</p>
                 </div>
             </div>
                 </div>

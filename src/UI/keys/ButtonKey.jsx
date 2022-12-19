@@ -1,16 +1,13 @@
-import React from "react";
-import { useContext } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AutoContext } from "../../context";
 import classes from "./ButtonKey.module.css";
 
-const ButtonKey = (props) => {
-   const {setObjectLetter, lastLetter, objectLetter, shiftButton} = useContext(AutoContext);
+const ButtonKey = ({ setType, object, selected, children }) => {
+   const {lastLetter, objectLetter, shiftButton} = useContext(AutoContext);
    const [style, setClass] = useState('');
 
    function renderKeys(){
-      switch (props.setType){
+      switch (setType){
          case '1':
             setClass(classes.f1_1)
             break;
@@ -53,13 +50,13 @@ const ButtonKey = (props) => {
 
    useEffect(() => {
       renderKeys();
-      if(props.object === objectLetter && objectLetter.selected === true){
+      if(object === objectLetter && objectLetter.selected === true){
          setClass(style + ` ${classes.active}`);
-      }else if(props.object !== objectLetter || props.selected === false){
+      }else if(object !== objectLetter || selected === false){
          renderKeys();
       }
       
-      if(props.object === shiftButton && shiftButton.selected === true){
+      if(object === shiftButton && shiftButton.selected === true){
          setClass(style + ` ${classes.active}`);
       }
    }, [lastLetter, objectLetter, shiftButton]) 
@@ -67,7 +64,7 @@ const ButtonKey = (props) => {
     return(
         <div 
         className={style}>
-            {props.children}
+            {children}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import InputText from './components/InputText';
 import Keyboard from './components/Keyboard';
@@ -65,7 +65,7 @@ function generateText(word) {
 function resetText(){
   setText('');
   let sentence = generateText(selectWord(arrayWords.length)); 
-  setLastLetter(sentence[0]);
+  setLastLetter(sentence[0]);  
   setRandomText(sentence);
 }
 
@@ -111,7 +111,7 @@ function resetText(){
         <Keyboard/>
       </div>
     </AutoContext.Provider>
-  );
+  )
 }
 
 export default App;
