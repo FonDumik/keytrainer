@@ -62,8 +62,7 @@ const ButtonKey = ({ setType, object, selected, children }) => {
    }, [lastLetter, objectLetter, shiftButton]) 
 
     return(
-        <div 
-        className={style}>
+        <div className={style}>
             {children}
         </div>
     )
