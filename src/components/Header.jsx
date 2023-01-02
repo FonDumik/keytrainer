@@ -32,7 +32,7 @@ const Header = () => {
             setArrayErrors([...arrayErrors, errors])
         }
 
-        if(isFinished === true && isComplete === false){
+        if(isFinished === true){
             setCurrentSpeed(Math.floor(textLength/(timeWrite/60000)));
             setArraySpeed([...arraySpeed, Math.floor(textLength/(timeWrite/60000))])
             isComplete = true;
@@ -43,17 +43,17 @@ const Header = () => {
         <header>
             <div className="wrapper">
                 <div className="header__container">
-                <div className="header__left">
-                <a href="#">
-                   <img src="logo.png" alt="logo" />
-                </a>
-                <button className="text_reset"
-                        onClick={() => {
-                            setIsRestart(true);
-                        }}>
-                    <img src="restart.png" alt="" width='20px'/>
-                </button>
-            </div>
+                    <div className="header__left">
+                        <a href="#">
+                            <img src="logo.png" alt="logo" />
+                        </a>
+                        <button className="text_reset"
+                            onClick={() => {
+                                setIsRestart(true);
+                            }}>
+                            <img src="restart.png" alt="" width='20px'/>
+                        </button>
+                    </div>
             <Timer/>
             <div className="header__right">
                 <div className="speed">

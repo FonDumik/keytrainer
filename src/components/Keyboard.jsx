@@ -116,6 +116,8 @@ const Keyboard = () => {
                     case 'symbols':
                         upperCase(lastLetter, keysList);
                         break;
+                    default:
+                        break;
                 }
             }
         }

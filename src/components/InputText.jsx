@@ -1,21 +1,19 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { AutoContext } from "../context";
 import "../styles/InputText.css";
+import NotificationRest from "../UI/notificationRest/NotificationRest";
 
 function InputText() {
     const {setIsFinished,
         setObjectLetter, 
         setIsStarted,  
         setTimeWrite,
-        setCurrentTime,
         errors,
         setErrors,
         setIsRestart,
-        time,
-        currentTime,
         randomText,
         setLastLetter,
         setText,
@@ -23,17 +21,8 @@ function InputText() {
 
     const [styleInput, setStyleInput] = useState('input_text');
     const [styleText, setStyleText] = useState('text');
-    const inputValue = React.createRef();
+    const inputValue = useRef();
     let wasError = false;
-
-    useEffect(() => {
-        if(currentTime <= 1){
-            setClassBreak('window__break')
-            setIsStarted(false);
-        }else{
-            setClassBreak('window__break hidden')
-        }
-    }, [currentTime])
 
     useEffect(() => {
         setLastLetter(randomText[0]);
@@ -83,17 +72,6 @@ function InputText() {
             setStyleText('text');
         }
     }
-
-    const [classBreak, setClassBreak] = useState('window__break');
-
-    function backToTrain(e){
-        e.preventDefault();
-        inputValue.current.blur();
-        setCurrentTime(time*60);
-        setIsRestart(true);
-        setClassBreak('window__break hidden');
-    }
-
     return (
         <section className="input">
             <div className="wrapper">
@@ -111,13 +89,7 @@ function InputText() {
                         <div className="checked">{currentText}</div>
                         <div className="line1">{randomText}</div>
                     </div>
-                    <div className = {classBreak}>
-                        <p>Время вышло, пора отдохнуть</p>
-                        <a href=""
-                           onClick={(e) => {
-                            backToTrain(e);
-                           }}>Продолжить</a>
-                    </div>
+                    <NotificationRest input = {inputValue}/>
                 </div>
             </div>
         </section>

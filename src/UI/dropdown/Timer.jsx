@@ -3,9 +3,8 @@ import { AutoContext } from "../../context";
 import classes from "./Timer.module.css";
 
 const Timer = () => {
-    const {isStarted, setIsStarted, time, timeWrite, setTime, currentTime, setCurrentTime} = useContext(AutoContext)
+    const {isStarted, setIsStarted, setTime, currentTime, setCurrentTime} = useContext(AutoContext)
     let [classMenu, setMenuClass] = useState(classes.hidden);
-
 
     function chooseTime(e){
         setTime(Number(e.target.textContent));
@@ -36,14 +35,14 @@ const Timer = () => {
             <div className={classes.current}>
                 <img src="time.png" alt="t" width='20'/>
                 <button className={classes.switch}
-                        onClick={() => {setMenuClass(classes.showMenu)}}
-                        ><p>{timer(currentTime)}</p></button>
+                        onClick={() => {setMenuClass(classes.showMenu)}}>
+                        <p>{timer(currentTime)}</p>
+                </button>
             </div>
 
             <div className={classMenu}>
                 <button className={classes.closeMenu}
-                        onClick={() => {setMenuClass(classes.hidden)}}
-                        >X</button>
+                        onClick={() => {setMenuClass(classes.hidden)}}>X</button>
                 <button className={classes.switch}
                         onClick={chooseTime}><p>5</p></button>
                 <button className={classes.switch}
