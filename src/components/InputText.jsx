@@ -8,7 +8,6 @@ import NotificationRest from "../UI/notificationRest/NotificationRest";
 
 function InputText() {
     const {setIsFinished,
-        setObjectLetter, 
         setIsStarted,  
         setTimeWrite,
         errors,
@@ -26,12 +25,12 @@ function InputText() {
 
     useEffect(() => {
         setLastLetter(randomText[0]);
-    }, [randomText, setLastLetter]);
+    }, [randomText]);
 
     const [timeStart, setTimeStart] = useState(0);
     const [timeFinish, setTimeFinish] = useState(0);
 
-    function writeText(e) {
+    function writeText() {
         let value = inputValue.current.value;
         if (value[value.length - 1] === randomText[value.length - 1] && value.length !== randomText.length) {
             wasError = false;
@@ -60,7 +59,6 @@ function InputText() {
         let value = inputValue.current.value;
         if (wasError) {
             setLastLetter('backspace');
-            setObjectLetter({setType: 'sys backspace', content: 'backspace', selected: true});
             setErrors(errors + 1);
             inputValue.current.maxLength = inputValue.current.value.length;
             setStyleInput('input_text error_input');

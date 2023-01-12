@@ -3,63 +3,43 @@ import { AutoContext } from "../../context";
 import classes from "./ButtonKey.module.css";
 
 const ButtonKey = ({ setType, object, selected, children }) => {
-   const {lastLetter, objectLetter, shiftButton} = useContext(AutoContext);
+   const {lastLetter} = useContext(AutoContext);
    const [style, setClass] = useState('');
 
-   function renderKeys(){
+   function renderKey(){
       switch (setType){
          case '1':
-            setClass(classes.f1_1)
-            break;
+            return classes.f1_1
          case '1.1':
-            setClass(classes.f1_2)
-            break;
+            return classes.f1_2
          case '3':
-            setClass(classes.f3)
-            break;
+            return classes.f3
          case '4':
-            setClass(classes.f4)
-            break;
+            return classes.f4
          case '5':
-            setClass(classes.f5)
-            break;
+            return classes.f5
          case 'sys enter':
-            setClass(`${classes.sys} ${classes.enter} ${classes.sys_right}`)
-            break;
+            return `${classes.sys} ${classes.enter} ${classes.sys_right}`
          case 'sys backspace':
-            setClass(`${classes.sys} ${classes.backspace} ${classes.sys_right}`);
-            break;
+            return `${classes.sys} ${classes.backspace} ${classes.sys_right}`;
          case 'sys shift':
-            setClass(`${classes.sys} ${classes.shift}`);
-            break;
+            return `${classes.sys} ${classes.shift}`;
          case 'sys tab':
-            setClass(`${classes.sys} ${classes.tab} ${classes.sys_left}`);
-            break;
+            return `${classes.sys} ${classes.tab} ${classes.sys_left}`;
          case 'sys caps':
-            setClass(`${classes.sys} ${classes.caps} ${classes.sys_left}`);
-            break;
+            return `${classes.sys} ${classes.caps} ${classes.sys_left}`;
          case 'sys space':
-            setClass(`${classes.sys} ${classes.space}`);
-            break;
+            return `${classes.sys} ${classes.space}`;
       }
    }
 
    useEffect(() => {
-      renderKeys();
-   }, [])
-
-   useEffect(() => {
-      renderKeys();
-      if(object === objectLetter && objectLetter.selected === true){
-         setClass(style + ` ${classes.active}`);
-      }else if(object !== objectLetter || selected === false){
-         renderKeys();
+      if(selected === true){
+         setClass(renderKey() + ` ${classes.active}`);
+      }else {
+         setClass(renderKey())
       }
-      
-      if(object === shiftButton && shiftButton.selected === true){
-         setClass(style + ` ${classes.active}`);
-      }
-   }, [lastLetter, objectLetter, shiftButton]) 
+   }, [lastLetter]) 
 
     return(
         <div className={style}>

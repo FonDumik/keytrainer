@@ -31,8 +31,6 @@ function App() {
   const [randomText, setRandomText] = useState(generateText(selectWord(arrayWords.length)));
   const [lastLetter, setLastLetter] = useState(randomText[0]);
   const [textLength, setTextLength] = useState(randomText.length);
-  const [objectLetter, setObjectLetter] = useState();
-  const [shiftButton, setShiftButton] = useState(); 
 
   function resetText(){
     setText('');
@@ -55,9 +53,7 @@ function App() {
     <AutoContext.Provider value={{
       randomText, setRandomText,
       currentText, setText,
-      shiftButton, setShiftButton,
       time, setTime,
-      objectLetter, setObjectLetter,
       currentTime, setCurrentTime,
       isFinished, setIsFinished,
       isStarted, setIsStarted,
