@@ -1,6 +1,10 @@
 .speed, .mistakes{
     display: flex;
     gap: 5px;
+    font-size: 13px;
+    align-items: center;
+    color: gray;
+    cursor: pointer;
 }
 
 header{
@@ -43,4 +47,9 @@ header{
 
 .timer{
     margin-bottom: 5px;
+}
+
+.logo{
+    width: 70px;
+    height: 70px;
 }

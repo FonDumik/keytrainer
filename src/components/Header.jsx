@@ -44,8 +44,8 @@ const Header = () => {
             <div className="wrapper">
                 <div className="header__container">
                     <div className="header__left">
-                        <a href="#">
-                            <img src="logo.png" alt="logo" />
+                        <a href="#" >
+                            <img src="logo.png" alt="logo" className="logo"/>
                         </a>
                         <button className="text_reset"
                             onClick={() => {

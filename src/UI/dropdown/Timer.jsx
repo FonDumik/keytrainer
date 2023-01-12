@@ -42,7 +42,9 @@ const Timer = () => {
 
             <div className={classMenu}>
                 <button className={classes.closeMenu}
-                        onClick={() => {setMenuClass(classes.hidden)}}>X</button>
+                        onClick={() => {setMenuClass(classes.hidden)}}>
+                                <img src="close-button.png" alt="" />
+                        </button>
                 <button className={classes.switch}
                         onClick={chooseTime}><p>5</p></button>
                 <button className={classes.switch}

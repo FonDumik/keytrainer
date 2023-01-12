@@ -23,13 +23,12 @@
     flex-wrap: wrap;
     position: relative;
     left: 1%;
-    width: 710px;
 }
 
 .keyboard div{
-    border: 1px solid lightgray;
+    border: 1.5px solid gray;
     border-radius: 5px;
     padding: 5px;
-    margin: 1px;
+    margin: 2px;
     height: 50px;
 }

@@ -1,6 +1,6 @@
 .f1_1, .f1_2, .f3, .f4, .f5{
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
 
     display: flex;
     justify-content: center;
@@ -39,8 +39,8 @@
     align-items: center;
 
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 8px;
     color: gray;
+    font-size: 11px;
     background-color: lightgray;
     line-height: 100%;
     padding: 5px;
@@ -52,33 +52,34 @@
 }
 
 .backspace{
+    font-size: 8px;
     width: 60px;
-    height: 45px;
+    height: 50px;
 }
 
 .caps{
     width: 70px;
-    height: 45px;
+    height: 50px;
 }
 
 .enter{
-    width: 80px;
-    height: 45px;
+    width: 92px;
+    height: 50px;
 }
 
 .shift{
     width: 100%;
     text-align: center;
     justify-content: center;
-    width: 99px;
-    height: 45px;
+    width: 108px;
+    height: 50px;
 }
 
 .space{
-    height: 45px;
-    width: 250px;
+    height: 50px;
+    width: 300px;
     position: relative;
-    left: 210px;
+    left: 230px;
     margin: 1px 1px 1px 100px;
 }
 
@@ -99,4 +100,6 @@ sup{
 
 .active{
     background-color: #ffa!important;
+    border: 1.5px solid black!important;
+    color: black!important;
 }
