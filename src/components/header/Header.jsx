@@ -46,23 +46,23 @@ const Header = () => {
                 <div className={cn(styles.header__container)}>
                     <div className={cn(styles.header__left)}>
                         <a href="#" >
-                            <img src="logo.png" alt="logo" className={cn(styles.logo)}/>
+                            <img src="./img/logo.png" alt="logo" className={cn(styles.logo)}/>
                         </a>
                         <button className={cn(styles.text_reset)}
                             onClick={() => {
                                 setIsRestart(true);
                             }}>
-                            <img src="restart.png" alt="" width='20px'/>
+                            <img src="./img/restart.png" alt="" width='20px'/>
                         </button>
                     </div>
             <Timer/>
             <div className={cn(styles.header__right)}>
                 <div className={cn(styles.speed)}>
-                    <img src="speed.png" alt="sp" width='20'/>
+                    <img src="./img/speed.png" alt="sp" width='20'/>
                     <p title="Скорость печати / Средняя скорость, симв/мин">{`${currentSpeed} / ${average(arraySpeed)}`}</p>
                 </div>
                 <div className={cn(styles.mistakes)}>
-                    <img src="stop.png" alt="" width='20'/>
+                    <img src="./img/stop.png" alt="" width='20'/>
                     <p title="Число ошибок / Среднее число ошибок">{`${currentErrors} / ${average(arrayErrors)}`}</p>
                 </div>
             </div>

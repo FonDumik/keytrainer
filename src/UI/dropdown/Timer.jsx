@@ -1,10 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { AutoContext } from "../../context";
 import classes from "./Timer.module.scss";
+import {CSSTransition} from 'react-transition-group';
+import './animation.css'
 
 const Timer = () => {
     const {isStarted, setIsStarted, setTime, currentTime, setCurrentTime} = useContext(AutoContext)
     let [classMenu, setMenuClass] = useState(classes.hidden);
+    let [isOpenMenu, setIsOpenMenu] = useState(false)
+    const nodeRef = useRef(null);
 
     function chooseTime(e){
         setTime(Number(e.target.textContent));
@@ -33,17 +37,21 @@ const Timer = () => {
     return(
         <div className={classes.timer}>
             <div className={classes.current}>
-                <img src="time.png" alt="t" width='20'/>
+                <img src="./img/time.png" alt="t" width='20'/>
                 <button className={classes.switch}
-                        onClick={() => {setMenuClass(classes.showMenu)}}>
+                        onClick={() => setIsOpenMenu(true)}>
                         <p>{timer(currentTime)}</p>
                 </button>
             </div>
-
-            <div className={classMenu}>
+            <CSSTransition nodeRef={nodeRef} 
+                in={isOpenMenu} 
+                timeout={300} 
+                classNames="notification"
+                unmountOnExit>
+            <div className={classes.showMenu} ref={nodeRef} dismissible>
                 <button className={classes.closeMenu}
-                        onClick={() => {setMenuClass(classes.hidden)}}>
-                                <img src="close-button.png" alt="" />
+                        onClick={() => setIsOpenMenu(false)}>
+                                <img src="./img/close-button.png" alt="" />
                         </button>
                 <button className={classes.switch}
                         onClick={chooseTime}><p>5</p></button>
@@ -58,6 +66,7 @@ const Timer = () => {
                 <button className={classes.switch}
                         onClick={chooseTime}><p>30</p></button>
             </div>
+            </CSSTransition>
         </div>
     )
 }
