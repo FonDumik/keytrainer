@@ -62,5 +62,5 @@ export const arrayList =[
     {setType: '5', content1: '.', content2: ',', needShift: 'left'},
     {setType: 'sys shift', content1: 'Shift', positionFor: 'right', selected: false},
 
-    {setType: 'sys space', content: ' ', selected: false},    
+    {setType: 'sys space', content1: ' ', selected: false},    
 ]

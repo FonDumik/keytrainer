@@ -4,6 +4,7 @@ import cn from 'classnames'
 import { AutoContext } from "../../context";
 import Timer from "../../UI/dropdown/Timer";
 import styles from './styles.module.scss'
+import ConfigureTraining from "../configureTraining/ConfigureTraining";
 
 function average(array){
     if(array.length !== 0){
@@ -53,6 +54,7 @@ const Header = () => {
                             }}>
                             <img src="./img/restart.png" alt="" width='20px'/>
                         </button>
+                        <ConfigureTraining />
                     </div>
             <Timer/>
             <div className={cn(styles.header__right)}>
