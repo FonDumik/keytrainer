@@ -1,23 +1,20 @@
-import React, { useContext, useEffect } from "react";
-import htmlToReact from "html-to-react";
+import React, { useContext, useEffect, useState } from "react";
+import cn from 'classnames'
+
 import ButtonKey from "../../UI/keys/ButtonKey";
 import { AutoContext } from "../../context";
-import { useState } from "react";
 import { arrayList, keysCases } from "../../keyboardPresets/keyboardRU";
 import { setFirstSelect, setSelectedShift } from "../../keyboardPresets/common";
-import cn from 'classnames'
 import styles from './styles.module.scss'
 
 const Keyboard = () => {
     const {lastLetter} = useContext(AutoContext);
-    let HtmlToReact = new require('html-to-react');
-    let htmlToReactParser = new HtmlToReact.Parser(React);
     const [keysList, setKeysList] = useState(setFirstSelect(arrayList, lastLetter, keysCases))
 
     function selectDownCase(letter, keysList){
         setKeysList(keysList.map(elem => {
             elem.selected = false;
-            if(elem.content.indexOf(letter.toUpperCase()) !== Number(-1)){
+            if(elem.content1 === letter.toUpperCase() || elem.content1 === letter){
                 elem.selected = true;
             }
             return elem
@@ -27,7 +24,7 @@ const Keyboard = () => {
     function selectUpperCase(letter, keysList){
         setKeysList(keysList.map(elem => {
             elem.selected = false;
-            if(elem.content.indexOf(letter) !== Number(-1)){
+            if(elem.content1 === letter){
                 elem.selected = true;
             }
 
@@ -60,11 +57,28 @@ const Keyboard = () => {
         }
     }, [lastLetter])
 
+    function renderContentKey(content1, content2){
+        if(content2 !== undefined){
+            return (
+                <section>
+                    <p>{content1}</p>
+                    <sup>{content2}</sup>
+                </section>
+            )
+        }else if(content2 === undefined){
+            return (
+                <section>
+                    <p>{content1}</p>
+                </section>
+            )
+        }
+    }
+
     return(
         <section className={cn(styles.keyboard)}>
             {keysList.map(elem => 
                 <ButtonKey setType = {elem.setType} selected = {elem.selected}>
-                    {htmlToReactParser.parse(elem.content)}
+                    {renderContentKey(elem.content1, elem.content2)}
                 </ButtonKey>
             )}
         </section>

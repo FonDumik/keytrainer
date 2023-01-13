@@ -21,7 +21,7 @@ const ButtonKey = ({ setType, selected, children }) => {
          case 'sys enter':
             return `${classes.sys} ${classes.enter}`
          case 'sys backspace':
-            return `${classes.sys} ${classes.backspace} ${classes.sys_right}`;
+            return `${classes.sys} ${classes.backspace}`;
          case 'sys shift':
             return `${classes.sys} ${classes.shift}`;
          case 'sys tab':

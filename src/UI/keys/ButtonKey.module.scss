@@ -1,3 +1,7 @@
+section{
+    display: flex;
+}
+
 .f1_1, .f1_2, .f3, .f4, .f5{
     width: 50px;
     height: 50px;
@@ -52,7 +56,9 @@
 }
 
 .backspace{
-    font-size: 8px;
+    text-align: center;
+    justify-content: center;
+    font-size: 10px;
     width: 60px;
     height: 50px;
 }

@@ -13,7 +13,7 @@ export function setFirstSelect(array, lastLetter, keysCases){
                 case 'downCase':
                     return array.map(elem => {
                         elem.selected = false;
-                        if(elem.content.indexOf(lastLetter.toUpperCase()) !== Number(-1)){
+                        if(elem.content1 === lastLetter.toUpperCase() || elem.content1 === lastLetter){
                             elem.selected = true;
                         }
                         return elem
@@ -21,7 +21,7 @@ export function setFirstSelect(array, lastLetter, keysCases){
                 case 'upperCase':
                     return array.map(elem => {
                         elem.selected = false;
-                        if(elem.content.indexOf(lastLetter) !== Number(-1)){
+                        if(elem.content1 === lastLetter){
                             elem.selected = true;
                         }
             
@@ -35,7 +35,7 @@ export function setFirstSelect(array, lastLetter, keysCases){
                 case 'symbols':
                     return array.map(elem => {
                         elem.selected = false;
-                        if(elem.content.indexOf(lastLetter) !== Number(-1)){
+                        if(elem.content1 === lastLetter){
                             elem.selected = true;
                         }
             

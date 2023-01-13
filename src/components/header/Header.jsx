@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import cn from 'classnames'
+
 import { AutoContext } from "../../context";
 import Timer from "../../UI/dropdown/Timer";
-import cn from 'classnames'
 import styles from './styles.module.scss'
 
 function average(array){

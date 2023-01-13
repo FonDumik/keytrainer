@@ -1,7 +1,8 @@
 import React, { useContext, useRef, useEffect, useState } from "react";
+import cn from 'classnames'
+
 import { AutoContext } from "../../context";
 import NotificationRest from "../../UI/notificationRest/NotificationRest";
-import cn from 'classnames'
 import styles from './styles.module.scss'
 
 function InputText() {
@@ -56,7 +57,7 @@ function InputText() {
     function errorHandler(wasError) {
         let value = inputValue.current.value;
         if (wasError) {
-            setLastLetter('backspace');
+            setLastLetter('Backspace');
             setErrors(errors + 1);
             inputValue.current.maxLength = inputValue.current.value.length;
             setStyleInput(cn(styles.input_text, styles.error_input));

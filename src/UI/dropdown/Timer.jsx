@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
+import { CSSTransition } from 'react-transition-group';
+
 import { AutoContext } from "../../context";
 import classes from "./Timer.module.scss";
-import {CSSTransition} from 'react-transition-group';
 import './animation.css'
 
 const Timer = () => {
@@ -14,7 +15,7 @@ const Timer = () => {
         setTime(Number(e.target.textContent));
         setCurrentTime(Number(e.target.textContent)*60)
         setIsStarted(false);
-        setMenuClass(classes.hidden);
+        setIsOpenMenu(false);
     }
 
     function timer(currentTime){
