@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AutoContext } from "../../context";
-import classes from "./ButtonKey.module.css";
+import classes from "./ButtonKey.module.scss";
 
-const ButtonKey = ({ setType, object, selected, children }) => {
+const ButtonKey = ({ setType, selected, children }) => {
    const {lastLetter} = useContext(AutoContext);
    const [style, setClass] = useState('');
 
@@ -19,7 +19,7 @@ const ButtonKey = ({ setType, object, selected, children }) => {
          case '5':
             return classes.f5
          case 'sys enter':
-            return `${classes.sys} ${classes.enter} ${classes.sys_right}`
+            return `${classes.sys} ${classes.enter}`
          case 'sys backspace':
             return `${classes.sys} ${classes.backspace} ${classes.sys_right}`;
          case 'sys shift':

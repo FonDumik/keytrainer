@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { AutoContext } from "../context";
-import "../styles/header.css";
-import Timer from "../UI/dropdown/Timer";
+import { AutoContext } from "../../context";
+import Timer from "../../UI/dropdown/Timer";
+import cn from 'classnames'
+import styles from './styles.module.scss'
 
 function average(array){
     if(array.length !== 0){
@@ -42,12 +43,12 @@ const Header = () => {
     return(
         <header>
             <div className="wrapper">
-                <div className="header__container">
-                    <div className="header__left">
+                <div className={cn(styles.header__container)}>
+                    <div className={cn(styles.header__left)}>
                         <a href="#" >
-                            <img src="logo.png" alt="logo" className="logo"/>
+                            <img src="logo.png" alt="logo" className={cn(styles.logo)}/>
                         </a>
-                        <button className="text_reset"
+                        <button className={cn(styles.text_reset)}
                             onClick={() => {
                                 setIsRestart(true);
                             }}>
@@ -55,12 +56,12 @@ const Header = () => {
                         </button>
                     </div>
             <Timer/>
-            <div className="header__right">
-                <div className="speed">
+            <div className={cn(styles.header__right)}>
+                <div className={cn(styles.speed)}>
                     <img src="speed.png" alt="sp" width='20'/>
                     <p title="Скорость печати / Средняя скорость, симв/мин">{`${currentSpeed} / ${average(arraySpeed)}`}</p>
                 </div>
-                <div className="mistakes">
+                <div className={cn(styles.mistakes)}>
                     <img src="stop.png" alt="" width='20'/>
                     <p title="Число ошибок / Среднее число ошибок">{`${currentErrors} / ${average(arrayErrors)}`}</p>
                 </div>

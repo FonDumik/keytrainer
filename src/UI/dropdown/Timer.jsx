@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AutoContext } from "../../context";
-import classes from "./Timer.module.css";
+import classes from "./Timer.module.scss";
 
 const Timer = () => {
     const {isStarted, setIsStarted, setTime, currentTime, setCurrentTime} = useContext(AutoContext)

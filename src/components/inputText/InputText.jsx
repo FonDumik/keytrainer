@@ -1,10 +1,8 @@
-import React from "react";
-import { useContext, useRef } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { AutoContext } from "../context";
-import "../styles/InputText.css";
-import NotificationRest from "../UI/notificationRest/NotificationRest";
+import React, { useContext, useRef, useEffect, useState } from "react";
+import { AutoContext } from "../../context";
+import NotificationRest from "../../UI/notificationRest/NotificationRest";
+import cn from 'classnames'
+import styles from './styles.module.scss'
 
 function InputText() {
     const {setIsFinished,
@@ -18,8 +16,8 @@ function InputText() {
         setText,
         currentText} = useContext(AutoContext);
 
-    const [styleInput, setStyleInput] = useState('input_text');
-    const [styleText, setStyleText] = useState('text');
+    const [styleInput, setStyleInput] = useState(cn(styles.input_text));
+    const [styleText, setStyleText] = useState(cn(styles.text));
     const inputValue = useRef();
     let wasError = false;
 
@@ -61,19 +59,19 @@ function InputText() {
             setLastLetter('backspace');
             setErrors(errors + 1);
             inputValue.current.maxLength = inputValue.current.value.length;
-            setStyleInput('input_text error_input');
-            setStyleText('text error_text');
+            setStyleInput(cn(styles.input_text, styles.error_input));
+            setStyleText(cn(styles.text, styles.error_text));
         } else {
             setLastLetter(randomText[value.length]);
             inputValue.current.maxLength = randomText.length;
-            setStyleInput('input_text');
-            setStyleText('text');
+            setStyleInput(cn(styles.input_text));
+            setStyleText(cn(styles.text));
         }
     }
     return (
-        <section className="input">
+        <section className={cn(styles.input)}>
             <div className="wrapper">
-                <div className="input__container">
+                <div className={cn(styles.input__container)}>
                     <input type="text"
                         className={styleInput}
                         onInput={e => setText(e.target.value)}
@@ -84,8 +82,8 @@ function InputText() {
                         maxLength={randomText.length}
                         ref={inputValue} />
                     <div className={styleText}>
-                        <div className="checked">{currentText}</div>
-                        <div className="line1">{randomText}</div>
+                        <div className={cn(styles.checked)}>{currentText}</div>
+                        <div className={cn(styles.line1)}>{randomText}</div>
                     </div>
                     <NotificationRest input = {inputValue}/>
                 </div>

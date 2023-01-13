@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import Header from './components/Header';
-import InputText from './components/InputText';
-import Keyboard from './components/Keyboard';
+import Header from './components/header/Header';
+import InputText from './components/inputText/InputText';
+import Keyboard from './components/keyboard/Keyboard';
 import { AutoContext } from './context';
-import "./styles/App.css";
+import "./styles/App.scss";
 import { arrayWords } from './wordsToPrint'
 
 const selectWord = (arrLength) => {

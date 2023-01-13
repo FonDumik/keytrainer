@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import htmlToReact from "html-to-react";
-import ButtonKey from "../UI/keys/ButtonKey";
-import { AutoContext } from "../context";
+import ButtonKey from "../../UI/keys/ButtonKey";
+import { AutoContext } from "../../context";
 import { useState } from "react";
-import { arrayList, keysCases } from "../keyboardPresets/keyboardRU";
-import { setFirstSelect, setSelectedShift } from "../keyboardPresets/common";
+import { arrayList, keysCases } from "../../keyboardPresets/keyboardRU";
+import { setFirstSelect, setSelectedShift } from "../../keyboardPresets/common";
+import cn from 'classnames'
+import styles from './styles.module.scss'
 
 const Keyboard = () => {
     const {lastLetter} = useContext(AutoContext);
@@ -59,7 +61,7 @@ const Keyboard = () => {
     }, [lastLetter])
 
     return(
-        <section className="keyboard">
+        <section className={cn(styles.keyboard)}>
             {keysList.map(elem => 
                 <ButtonKey setType = {elem.setType} selected = {elem.selected}>
                     {htmlToReactParser.parse(elem.content)}

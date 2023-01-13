@@ -1,30 +1,32 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AutoContext } from '../../context'
+import cn from 'classnames'
+import styles from './NotificationRest.module.scss'
 
 function NotificationRest({ input }) {
-    const [classBreak, setClassBreak] = useState('window__break');
+    const [classBreak, setClassBreak] = useState(cn(styles.window__break));
     const { setCurrentTime, time, setIsRestart, setIsStarted, currentTime, isRestart } = useContext(AutoContext)
 
     function backToTrain(e){
         e.preventDefault();
         setCurrentTime(time*60);
         setIsRestart(true);
-        setClassBreak('window__break hidden');
+        setClassBreak(cn(styles.window__break, styles.hidden));
     }
 
     useEffect(() => {
         if(currentTime <= 1){
-            setClassBreak('window__break')
+            setClassBreak(cn(styles.window__break))
             input.current.blur()
             setIsStarted(false);
         }else{
-            setClassBreak('window__break hidden')
+            setClassBreak(cn(styles.window__break, styles.hidden))
         }
     }, [currentTime])
 
     useEffect(() => {
-        if(isRestart === true && classBreak === 'window__break'){
-            setClassBreak('window__break hidden')
+        if(isRestart === true && classBreak === styles.window__break){
+            setClassBreak(cn(styles.window__break, styles.hidden))
         }
     }, [isRestart])
 
