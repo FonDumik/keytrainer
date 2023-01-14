@@ -1,6 +1,6 @@
 import { arrayWords } from './wordsToPrint'
 
-const selectWord = (arrLength) => {
+const selectWord = (arrLength: number) => {
   let randomNum = Math.floor(arrLength * Math.random());
   return arrayWords[randomNum];
 }

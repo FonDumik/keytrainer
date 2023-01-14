@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import cn from 'classnames'
 
-import ButtonKey from "../../UI/keys/ButtonKey";
+import ButtonKey from "../UI/keys/ButtonKey";
 import { AutoContext } from "../../context";
 import { arrayList, keysCases } from "../../keyboardPresets/keyboardRU";
 import { setFirstSelect, setSelectedShift } from "../../keyboardPresets/common";
 import styles from './styles.module.scss'
+import { keyboardCasesKeys, keyboardConfiguration } from "../../types/keyboardConfiguration";
 
 const Keyboard = () => {
     const {lastLetter} = useContext(AutoContext);
     const [keysList, setKeysList] = useState(setFirstSelect(arrayList, lastLetter, keysCases))
 
-    function selectDownCase(letter, keysList){
+    function selectDownCase(letter: string, keysList: Array<keyboardConfiguration>){
         setKeysList(keysList.map(elem => {
             elem.selected = false;
             if(elem.content1 === letter.toUpperCase() || elem.content1 === letter){
@@ -21,7 +22,7 @@ const Keyboard = () => {
         }))
     }
     
-    function selectUpperCase(letter, keysList){
+    function selectUpperCase(letter: string, keysList: Array<keyboardConfiguration>){
         setKeysList(keysList.map(elem => {
             elem.selected = false;
             if(elem.content1 === letter){
@@ -39,7 +40,7 @@ const Keyboard = () => {
 
     useEffect(() => {
         for (let elem in keysCases) {
-            if (keysCases[elem].indexOf(lastLetter) !== -1) {
+            if (keysCases[elem as keyof keyboardCasesKeys].indexOf(lastLetter) !== -1) {
                 switch (elem) {
                     case 'downCase':
                         selectDownCase(lastLetter, keysList)
@@ -57,7 +58,7 @@ const Keyboard = () => {
         }
     }, [lastLetter])
 
-    function renderContentKey(content1, content2){
+    function renderContentKey(content1: string, content2: string){
         if(content2 !== undefined){
             return (
                 <section>

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { AutoContext } from "../../context";
+import { AutoContext } from "../../../context";
 import classes from "./ButtonKey.module.scss";
 
 const ButtonKey = ({ setType, selected, children }) => {

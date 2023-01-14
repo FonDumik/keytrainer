@@ -2,11 +2,11 @@ import React, { useContext, useState, useEffect } from "react";
 import cn from 'classnames'
 
 import { AutoContext } from "../../context";
-import Timer from "../../UI/dropdown/Timer";
+import Timer from "../UI/dropdown/Timer";
 import styles from './styles.module.scss'
 import ConfigureTraining from "../configureTraining/ConfigureTraining";
 
-function average(array){
+function average(array: Array<number>){
     if(array.length !== 0){
         let sum = 0
         for(let elem of array){
@@ -21,8 +21,8 @@ function average(array){
 
 const Header = () => {
     const {isFinished, textLength, errors, timeWrite, setIsRestart} = useContext(AutoContext);
-    const [currentErrors, setCurrentErrors] = useState('--')
-    const [currentSpeed, setCurrentSpeed] = useState('--')
+    const [currentErrors, setCurrentErrors] = useState<string | number>('--')
+    const [currentSpeed, setCurrentSpeed] = useState<string | number>('--')
     const [arraySpeed, setArraySpeed] = useState([])
     const [arrayErrors, setArrayErrors] = useState([])
     let isComplete = false;

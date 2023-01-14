@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { AutoContext } from '../../context'
+import { AutoContext } from '../../../context'
 import cn from 'classnames'
 import styles from './NotificationRest.module.scss'
 

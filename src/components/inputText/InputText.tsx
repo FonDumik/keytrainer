@@ -2,10 +2,10 @@ import React, { useContext, useRef, useEffect, useState } from "react";
 import cn from 'classnames'
 
 import { AutoContext } from "../../context";
-import NotificationRest from "../../UI/notificationRest/NotificationRest";
+import NotificationRest from "../UI/notificationRest/NotificationRest";
 import styles from './styles.module.scss'
 
-function InputText() {
+function InputText(): JSX.Element {
     const {setIsFinished,
         setIsStarted,  
         setTimeWrite,
@@ -19,7 +19,7 @@ function InputText() {
 
     const [styleInput, setStyleInput] = useState(cn(styles.input_text));
     const [styleText, setStyleText] = useState(cn(styles.text));
-    const inputValue = useRef();
+    const inputValue = useRef<any>();
     let wasError = false;
 
     useEffect(() => {
@@ -54,7 +54,7 @@ function InputText() {
         }
     }
 
-    function errorHandler(wasError) {
+    function errorHandler(wasError: boolean) {
         let value = inputValue.current.value;
         if (wasError) {
             setLastLetter('Backspace');
@@ -75,7 +75,10 @@ function InputText() {
                 <div className={cn(styles.input__container)}>
                     <input type="text"
                         className={styleInput}
-                        onInput={e => setText(e.target.value)}
+                        onInput={e => {
+                            let target = e.target as HTMLInputElement
+                            return setText(target.value)
+                        }}
                         onChange={() => {
                             writeText();
                         }}
