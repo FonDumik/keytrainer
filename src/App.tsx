@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from './components/header/Header';
 import InputText from './components/inputText/InputText';
 import Keyboard from './components/keyboard/Keyboard';
 import { AutoContext } from './context';
-import { generateOneWordText } from './textGenerator/generateOneWordText'
-import { generateMultipleWordText } from './textGenerator/generateMultipleWordText'
+import { generateOneWordText } from './shared/textGenerator/generateOneWordText'
+import { generateMultipleWordText } from './shared/textGenerator/generateMultipleWordText'
 import "./App.scss";
+import { configurationTrainingType } from './types/configurationTraining';
 
-function selectText(configuration){
+function selectText(configuration: configurationTrainingType){
   if(configuration.language === 'RU'){
     if(configuration.mode === 'start'){
       return generateOneWordText()

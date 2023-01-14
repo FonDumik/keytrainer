@@ -1,4 +1,4 @@
-import { keyboardCases, keyboardCasesKeys, keyboardConfiguration } from "../types/keyboardConfiguration";
+import { keyboardCases, keyboardCasesKeys, keyboardConfiguration } from "../../types/keyboardConfiguration";
 
 export function setSelectedShift(pos: string, keysList: Array<keyboardConfiguration>){
     for(let elem of keysList){

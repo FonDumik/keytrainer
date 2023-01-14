@@ -3,11 +3,15 @@ import { AutoContext } from '../../../context'
 import cn from 'classnames'
 import styles from './NotificationRest.module.scss'
 
-function NotificationRest({ input }) {
+interface notificationRestProps {
+    input: React.MutableRefObject<any>
+}
+
+function NotificationRest({ input }: notificationRestProps) {
     const [classBreak, setClassBreak] = useState(cn(styles.window__break));
     const { setCurrentTime, time, setIsRestart, setIsStarted, currentTime, isRestart } = useContext(AutoContext)
 
-    function backToTrain(e){
+    function backToTrain(e: Event){
         e.preventDefault();
         setCurrentTime(time*60);
         setIsRestart(true);
@@ -33,7 +37,7 @@ function NotificationRest({ input }) {
     return ( 
         <div className = {classBreak}>
             <p>Время вышло, пора отдохнуть</p>
-            <a href="" onClick={(e) => {backToTrain(e)}}>Продолжить</a>
+            <a href="" onClick={(e: any) => {backToTrain(e)}}>Продолжить</a>
         </div>
     );
 }

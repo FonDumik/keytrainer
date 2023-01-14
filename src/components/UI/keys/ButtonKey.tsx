@@ -2,7 +2,13 @@ import React, { useContext, useState, useEffect } from "react";
 import { AutoContext } from "../../../context";
 import classes from "./ButtonKey.module.scss";
 
-const ButtonKey = ({ setType, selected, children }) => {
+interface buttonKeyInterface {
+   setType: string,
+   selected: boolean,
+   children: any
+}
+
+const ButtonKey = ({ setType, selected, children }: buttonKeyInterface) => {
    const {lastLetter} = useContext(AutoContext);
    const [style, setClass] = useState('');
 

@@ -3,8 +3,8 @@ import cn from 'classnames'
 
 import ButtonKey from "../UI/keys/ButtonKey";
 import { AutoContext } from "../../context";
-import { arrayList, keysCases } from "../../keyboardPresets/keyboardRU";
-import { setFirstSelect, setSelectedShift } from "../../keyboardPresets/common";
+import { arrayList, keysCases } from "../../shared/keyboardPresets/keyboardRU";
+import { setFirstSelect, setSelectedShift } from "../../shared/keyboardPresets/common";
 import styles from './styles.module.scss'
 import { keyboardCasesKeys, keyboardConfiguration } from "../../types/keyboardConfiguration";
 
