@@ -55,8 +55,8 @@ const Header = () => {
                             <img src="./img/restart.png" alt="" width='20px'/>
                         </button>
                         <ConfigureTraining />
+                        <Timer/>
                     </div>
-            <Timer/>
             <div className={cn(styles.header__right)}>
                 <div className={cn(styles.speed)}>
                     <img src="./img/speed.png" alt="sp" width='20'/>

@@ -27,6 +27,11 @@ header{
     align-items: flex-end;
 }
 
+.header__left{
+    width: 55%;
+    justify-content: space-between;
+}
+
 .text_reset{
     width: 25px;
     height: 25px;
