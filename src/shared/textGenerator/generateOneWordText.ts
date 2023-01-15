@@ -8,8 +8,12 @@ const selectWord = (arrLength: number) => {
 export const generateOneWordText = () => {
     let string = '';
     let word = selectWord(arrayWords.length)
-    for (let i = 0; i < 70; i += word.length + 1) {
-        string = string + word + ' ';
-    }
+    while(string.length < 70){
+      if(string.length + word.length + 1 < 70){
+          string = string + word + ' '
+      }else{
+          break
+      }
+  }
     return string;
 }
