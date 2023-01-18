@@ -1,4 +1,4 @@
-import { configurationTrainingType } from "../../../types/configurationTraining";
+import { configurationTrainingType } from "../../../shared/types/configurationTraining";
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export function setNewTextConfiguration(configuration: configurationTrainingType){
@@ -41,4 +41,4 @@ const configurationTrainingSlice = createSlice({
 
 export const {updateConfigurationTraining, updateConfigurationText} = configurationTrainingSlice.actions
 
-export default configurationTrainingSlice.reducer
+export const configurationTrainingReducer = configurationTrainingSlice.reducer

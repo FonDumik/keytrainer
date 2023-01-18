@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { keyboardCases, keyboardConfiguration , keyboardCasesKeys} from '../../../types/keyboardConfiguration';
-import { keysCases, arrayList } from '../../../shared/keyboardPresets/keyboardRU';
-import { setSelectedShift } from "../../../shared/keyboardPresets/common";
+import { keyboardCases, keyboardConfiguration, keyboardCasesKeys} from '../../../shared/types/keyboardConfiguration';
+import { keysCases, arrayList } from '../../../shared/utils/keyboardPresets/keyboardRU';
+import { setSelectedShift } from "../../../shared/utils/keyboardPresets/common";
 
 interface keyboardState {
     keyList: Array<keyboardConfiguration>
@@ -23,7 +23,7 @@ const keyboardSlice = createSlice({
 
 export const { updateKeyboard } = keyboardSlice.actions
 
-export default keyboardSlice.reducer
+export const keyboardReducer = keyboardSlice.reducer
 
 export function selectLetter(keysCases: keyboardCases, lastLetter: string, keysList: Array<keyboardConfiguration>){
     for (let elem in keysCases) {

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import headerReducer from "../components/header/model"
-import inputTextReducer from "../components/inputText/model"
-import keyboardReducer from "../components/keyboard/model"
-import configurationTrainingReducer from "../components/configureTraining/model"
-import timerReducer from "../components/Timer/model"
+import { headerReducer } from "../../components/Header"
+import { inputTextReducer } from "../../components/InputText"
+import { keyboardReducer } from "../../components/Keyboard"
+import { configurationTrainingReducer } from "../../components/ConfigureTraining"
+import { timerReducer } from "../../components/Timer"
 
 export const store = configureStore({
     reducer: {

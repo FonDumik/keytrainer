@@ -16,7 +16,7 @@ const initialState: headerState = {
     isRestart: false
 }
 
-export const headerSlice = createSlice({
+const headerSlice = createSlice({
   name: 'header',
   initialState,
   reducers: {
@@ -35,7 +35,7 @@ export const headerSlice = createSlice({
 });
 
 export const { updateErrors, updateSpeed, setIsRestart } = headerSlice.actions
-export default headerSlice.reducer
+export const headerReducer = headerSlice.reducer
 
 export function average(array: Array<number>){
     if(array.length !== 0){

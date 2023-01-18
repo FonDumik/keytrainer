@@ -28,7 +28,7 @@ const timerSlice = createSlice({
 
 export const {setSelectedTime, updateCurrentTime} = timerSlice.actions
 
-export default timerSlice.reducer
+export const timerReducer = timerSlice.reducer
 
 export function renderToTimer(currentTime: number){
     let minutes: number = Math.floor((currentTime/60));

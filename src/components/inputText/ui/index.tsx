@@ -1,20 +1,22 @@
-import React, { useContext, useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import cn from 'classnames'
 
-import NotificationRest from "../UI/notificationRest/NotificationRest";
+import { NotificationRest } from "../../NotificationRest";
 import styles from './styles.module.scss'
-import { useAppDispatch, useAppSelector } from "../../shared/hooks";
-import {setTimeWrite, updateCurrentText, setLastLetter, clearTextErrors, updateTextErrors, setIsStartedLine, setIsFinishedLine, setIsStartedTime, updateRandomText} from './model'
-import { updateErrors, updateSpeed } from "../header/model";
+import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { updateCurrentText, 
+        setLastLetter, 
+        clearTextErrors, 
+        updateTextErrors, 
+        setIsStartedLine, 
+        setIsFinishedLine, 
+        setIsStartedTime, 
+        updateRandomText } from '../../InputText'
+import { updateErrors, updateSpeed } from "../../Header/model";
 
-function InputText(): JSX.Element {
-    const randomText = useAppSelector((state) => state.inputTextReducer.randomText)
-    const currentText = useAppSelector((state) => state.inputTextReducer.currentText)
-    const timeWrite = useAppSelector((state) => state.inputTextReducer.timeWrite)
-    const textErrors = useAppSelector((state) => state.inputTextReducer.textErrors)
-
-    const currentTime = useAppSelector(state => state.timerReducer.currentTime)
-    const selectedTime = useAppSelector(state => state.timerReducer.selectedTime)
+export const InputText = (): JSX.Element => {
+    const { randomText, currentText, textErrors } = useAppSelector(state => state.inputTextReducer)
+    const { currentTime, selectedTime } = useAppSelector(state => state.timerReducer)
 
     const configuration = useAppSelector(state => state.configurationTrainingReducer.configuration)
     
@@ -79,11 +81,13 @@ function InputText(): JSX.Element {
             setStyleText(cn(styles.text));
         }
     }
+
     return (
         <section className={cn(styles.input)}>
             <div className="wrapper">
                 <div className={cn(styles.input__container)}>
-                    <input type="text"
+                    <input 
+                        type="text"
                         className={styleInput}
                         onInput={e => {
                             let target = e.target as HTMLInputElement
@@ -94,7 +98,8 @@ function InputText(): JSX.Element {
                         }}
                         value={currentText}
                         maxLength={randomText.length}
-                        ref={inputValue} />
+                        ref={inputValue} 
+                    />
                     <div className={styleText}>
                         <div className={cn(styles.checked)}>{currentText}</div>
                         <div className={cn(styles.line1)}>{randomText}</div>
@@ -105,5 +110,3 @@ function InputText(): JSX.Element {
         </section>
     );
 }
-
-export default InputText;

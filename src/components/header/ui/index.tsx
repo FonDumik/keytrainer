@@ -1,15 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import cn from 'classnames'
 
-import Timer from "../Timer/Timer";
+import { Timer } from "../../Timer";
 import styles from './styles.module.scss'
-import ConfigureTraining from "../configureTraining/ConfigureTraining";
-import { useAppDispatch, useAppSelector } from "../../shared/hooks"
-import { average, setIsRestart } from "./model";
-import { setSelectedTime } from "../Timer/model";
-import { clearTextErrors, setIsFinishedLine, setIsStartedLine, setIsStartedTime, updateCurrentText, updateRandomText } from "../inputText/model";
+import { ConfigureTraining } from "../../ConfigureTraining";
+import { useAppDispatch, useAppSelector } from "../../../shared/hooks"
+import { average, setIsRestart } from "../model";
+import { setSelectedTime } from "../../Timer/model";
+import { clearTextErrors, 
+         setIsFinishedLine, 
+         setIsStartedLine, 
+         setIsStartedTime, 
+         updateCurrentText, 
+         updateRandomText } from "../../InputText";
 
-const Header = () => {
+export const Header = () => {
     const speedDisplay = useAppSelector((state) => state.headerReducer.speed)
     const speedArrayDisplay = useAppSelector((state) => state.headerReducer.speedArray)
     const errorsDisplay = useAppSelector((state) => state.headerReducer.errors)
@@ -65,5 +70,3 @@ const Header = () => {
         </header>
     )
 }
-
-export default Header;

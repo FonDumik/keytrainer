@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { generateOneWordText } from '../../../shared/textGenerator/generateOneWordText'
-import { generateMultipleWordText } from '../../../shared/textGenerator/generateMultipleWordText'
-import { configurationTrainingType } from '../../../types/configurationTraining';
+import { generateOneWordText } from '../../../shared/utils/textGenerator/generateOneWordText'
+import { generateMultipleWordText } from '../../../shared/utils/textGenerator/generateMultipleWordText'
+import { configurationTrainingType } from '../../../shared/types/configurationTraining';
 
 interface inputTextState {
     currentText: string,
@@ -61,9 +61,17 @@ const inputTextSlice = createSlice({
   }
 });
 
-export const {updateCurrentText, updateRandomText, updateTextErrors, clearTextErrors, setTimeWrite, setLastLetter, setIsStartedLine, setIsFinishedLine, setIsStartedTime} = inputTextSlice.actions
+export const {updateCurrentText, 
+              updateRandomText,
+              updateTextErrors, 
+              clearTextErrors, 
+              setTimeWrite, 
+              setLastLetter, 
+              setIsStartedLine,
+              setIsFinishedLine, 
+              setIsStartedTime} = inputTextSlice.actions
 
-export default inputTextSlice.reducer
+export const inputTextReducer = inputTextSlice.reducer
 
 function selectText(configuration: configurationTrainingType){
     if(configuration.language === 'RU'){

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import cn from 'classnames'
 
-import ButtonKey from "../UI/keys/ButtonKey";
+import { ButtonKey } from "../../ButtonKey";
 import styles from './styles.module.scss'
-import { useAppDispatch, useAppSelector } from "../../shared/hooks";
-import { updateKeyboard } from "./model";
+import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { updateKeyboard } from "../../Keyboard";
 
-const Keyboard = () => {
+export const Keyboard = () => {
     const lastLetter = useAppSelector(state => state.inputTextReducer.lastLetter)
     const keysList = useAppSelector((state) => state.keyboardReducer.keyList)
     const dispatch = useAppDispatch()
@@ -42,5 +42,3 @@ const Keyboard = () => {
         </section>
     )
 }
-
-export default Keyboard;

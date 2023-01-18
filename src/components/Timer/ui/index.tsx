@@ -3,11 +3,11 @@ import { CSSTransition } from 'react-transition-group';
 
 import classes from "./Timer.module.scss";
 import './animation.css'
-import { useAppDispatch, useAppSelector } from "../../shared/hooks";
-import { setSelectedTime, updateCurrentTime, renderToTimer } from "./model";
-import { setIsStartedTime } from "../inputText/model";
+import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { setSelectedTime, updateCurrentTime, renderToTimer } from "../model";
+import { setIsStartedTime } from "../../InputText";
 
-const Timer = () => {
+export const Timer = () => {
     const currentTime = useAppSelector(state => state.timerReducer.currentTime)
     const isTimeStarted = useAppSelector(state => state.inputTextReducer.isTimeStarted)
     const dispatch = useAppDispatch()
@@ -65,5 +65,3 @@ const Timer = () => {
         </div>
     )
 }
-
-export default Timer;
