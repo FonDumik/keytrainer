@@ -1,44 +1,37 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import cn from 'classnames'
 
-import { AutoContext } from "../../context";
-import Timer from "../UI/dropdown/Timer";
+import Timer from "../Timer/Timer";
 import styles from './styles.module.scss'
 import ConfigureTraining from "../configureTraining/ConfigureTraining";
-
-function average(array: Array<number>){
-    if(array.length !== 0){
-        let sum = 0
-        for(let elem of array){
-            sum = Number(sum + elem)
-        }
-        let number = Number(sum/array.length)
-        return number.toFixed(2)
-    }else{
-        return '--'
-    }
-}
+import { useAppDispatch, useAppSelector } from "../../shared/hooks"
+import { average, setIsRestart } from "./model";
+import { setSelectedTime } from "../Timer/model";
+import { clearTextErrors, setIsFinishedLine, setIsStartedLine, setIsStartedTime, updateCurrentText, updateRandomText } from "../inputText/model";
 
 const Header = () => {
-    const {isFinished, textLength, errors, timeWrite, setIsRestart} = useContext(AutoContext);
-    const [currentErrors, setCurrentErrors] = useState<string | number>('--')
-    const [currentSpeed, setCurrentSpeed] = useState<string | number>('--')
-    const [arraySpeed, setArraySpeed] = useState([])
-    const [arrayErrors, setArrayErrors] = useState([])
-    let isComplete = false;
+    const speedDisplay = useAppSelector((state) => state.headerReducer.speed)
+    const speedArrayDisplay = useAppSelector((state) => state.headerReducer.speedArray)
+    const errorsDisplay = useAppSelector((state) => state.headerReducer.errors)
+    const errorsArrayDisplay = useAppSelector((state) => state.headerReducer.errorsArray)
 
-    useEffect(() => {
-        if(isFinished === true){
-            setCurrentErrors(String(errors))
-            setArrayErrors([...arrayErrors, errors])
-        }
+    const selectedTime = useAppSelector(state => state.timerReducer.selectedTime)
 
-        if(isFinished === true){
-            setCurrentSpeed(Math.floor(textLength/(timeWrite/60000)));
-            setArraySpeed([...arraySpeed, Math.floor(textLength/(timeWrite/60000))])
-            isComplete = true;
-        }
-    }, [isFinished, isComplete])
+    const configuration = useAppSelector(state => state.configurationTrainingReducer.configuration)
+
+    const dispatch = useAppDispatch()
+
+    function restartTraining(){
+        dispatch(setIsRestart(true))
+        dispatch(setSelectedTime(selectedTime))
+        dispatch(clearTextErrors())
+        dispatch(updateRandomText(configuration))
+        dispatch(updateCurrentText(''))
+        dispatch(setIsStartedTime(false))
+        dispatch(setIsStartedLine(false))
+        dispatch(setIsFinishedLine(false))
+        dispatch(setIsRestart(false))
+    }
 
     return(
         <header>
@@ -50,7 +43,7 @@ const Header = () => {
                         </a>
                         <button className={cn(styles.text_reset)}
                             onClick={() => {
-                                setIsRestart(true);
+                                restartTraining()
                             }}>
                             <img src="./img/restart.png" alt="" width='20px'/>
                         </button>
@@ -60,11 +53,11 @@ const Header = () => {
             <div className={cn(styles.header__right)}>
                 <div className={cn(styles.speed)}>
                     <img src="./img/speed.png" alt="sp" width='20'/>
-                    <p title="Скорость печати / Средняя скорость, симв/мин">{`${currentSpeed} / ${average(arraySpeed)}`}</p>
+                    <p title="Скорость печати / Средняя скорость, симв/мин">{`${speedDisplay} / ${average(speedArrayDisplay)}`}</p>
                 </div>
                 <div className={cn(styles.mistakes)}>
                     <img src="./img/stop.png" alt="" width='20'/>
-                    <p title="Число ошибок / Среднее число ошибок">{`${currentErrors} / ${average(arrayErrors)}`}</p>
+                    <p title="Число ошибок / Среднее число ошибок">{`${errorsDisplay} / ${average(errorsArrayDisplay)}`}</p>
                 </div>
             </div>
                 </div>

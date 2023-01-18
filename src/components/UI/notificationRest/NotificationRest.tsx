@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { AutoContext } from '../../../context'
 import cn from 'classnames'
 import styles from './NotificationRest.module.scss'
+import { useAppDispatch, useAppSelector } from '../../../shared/hooks'
+import { setSelectedTime } from '../../Timer/model'
+import { setIsStartedTime } from '../../inputText/model'
 
 interface notificationRestProps {
     input: React.MutableRefObject<any>
@@ -9,12 +11,15 @@ interface notificationRestProps {
 
 function NotificationRest({ input }: notificationRestProps) {
     const [classBreak, setClassBreak] = useState(cn(styles.window__break));
-    const { setCurrentTime, time, setIsRestart, setIsStarted, currentTime, isRestart } = useContext(AutoContext)
+
+    const selectedTime = useAppSelector(state => state.timerReducer.selectedTime)
+    const currentTime = useAppSelector(state => state.timerReducer.currentTime)
+    const isRestart = useAppSelector(state => state.headerReducer.isRestart)
+    const dispatch = useAppDispatch()
 
     function backToTrain(e: Event){
         e.preventDefault();
-        setCurrentTime(time*60);
-        setIsRestart(true);
+        dispatch(setSelectedTime(selectedTime))
         setClassBreak(cn(styles.window__break, styles.hidden));
     }
 
@@ -22,7 +27,7 @@ function NotificationRest({ input }: notificationRestProps) {
         if(currentTime <= 1){
             setClassBreak(cn(styles.window__break))
             input.current.blur()
-            setIsStarted(false);
+            dispatch(setIsStartedTime(false))
         }else{
             setClassBreak(cn(styles.window__break, styles.hidden))
         }
@@ -37,7 +42,7 @@ function NotificationRest({ input }: notificationRestProps) {
     return ( 
         <div className = {classBreak}>
             <p>Время вышло, пора отдохнуть</p>
-            <a href="" onClick={(e: any) => {backToTrain(e)}}>Продолжить</a>
+            <a onClick={(e: any) => {backToTrain(e)}}>Продолжить</a>
         </div>
     );
 }

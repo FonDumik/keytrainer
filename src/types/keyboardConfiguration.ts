@@ -4,7 +4,7 @@ export type keyboardConfiguration = {
     selected: boolean,
     needShift?: string | undefined,
     setType: string,
-    positionFor?: string | undefined
+    positionFor?: string | undefined,
 }
 
 export type keyboardCases = {

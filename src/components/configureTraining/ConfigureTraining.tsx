@@ -1,32 +1,47 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import styles from './styles.module.scss'
 import './animation.css'
-import { AutoContext } from '../../context';
-import { setNewTextConfiguration } from './setTextConfiguration';
+import { useAppDispatch, useAppSelector } from '../../shared/hooks';
+import { updateConfigurationText, updateConfigurationTraining } from './model';
+import { setIsRestart } from "../header/model";
+import { setSelectedTime } from "../Timer/model";
+import { clearTextErrors, setIsFinishedLine, setIsStartedLine, setIsStartedTime, updateCurrentText, updateRandomText } from "../inputText/model";
+
 
 function ConfigureTraining() {
-    const {setConfigurationTraining, configurationTraining} = useContext(AutoContext)
+    const textConfiguration = useAppSelector(state => state.configurationTrainingReducer.configurationText)
+    const selectedTime = useAppSelector(state => state.timerReducer.selectedTime)
+    const dispatch = useAppDispatch()
     const nodeRef = useRef()
 
     const [isOpen, setIsOpen] = useState(false)
 
-    const [textConfiguration, setTextConfiguration] = useState('Русский стартовый')
-
     function setNewConfiguration(e: any, language: string, mode: string){
         e.preventDefault()
-        setConfigurationTraining({
+        dispatch(updateConfigurationTraining({
             language,
             mode
-        })
+        }))
+        dispatch(updateConfigurationText({
+            language,
+            mode
+        }))
+        dispatch(setIsRestart(true))
+        dispatch(setSelectedTime(selectedTime))
+        dispatch(clearTextErrors())
+        dispatch(updateRandomText({
+            language,
+            mode
+        }))
+        dispatch(updateCurrentText(''))
+        dispatch(setIsStartedTime(false))
+        dispatch(setIsStartedLine(false))
+        dispatch(setIsFinishedLine(false))
+        dispatch(setIsRestart(false))
         setIsOpen(false)
     }
-
-    useEffect(() => {
-        let text: string = setNewTextConfiguration(configurationTraining)
-        setTextConfiguration(text)
-    }, [configurationTraining])
 
     return ( 
         <div className={styles.container__configuration}>

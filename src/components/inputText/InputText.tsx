@@ -1,21 +1,24 @@
 import React, { useContext, useRef, useEffect, useState } from "react";
 import cn from 'classnames'
 
-import { AutoContext } from "../../context";
 import NotificationRest from "../UI/notificationRest/NotificationRest";
 import styles from './styles.module.scss'
+import { useAppDispatch, useAppSelector } from "../../shared/hooks";
+import {setTimeWrite, updateCurrentText, setLastLetter, clearTextErrors, updateTextErrors, setIsStartedLine, setIsFinishedLine, setIsStartedTime, updateRandomText} from './model'
+import { updateErrors, updateSpeed } from "../header/model";
 
 function InputText(): JSX.Element {
-    const {setIsFinished,
-        setIsStarted,  
-        setTimeWrite,
-        errors,
-        setErrors,
-        setIsRestart,
-        randomText,
-        setLastLetter,
-        setText,
-        currentText} = useContext(AutoContext);
+    const randomText = useAppSelector((state) => state.inputTextReducer.randomText)
+    const currentText = useAppSelector((state) => state.inputTextReducer.currentText)
+    const timeWrite = useAppSelector((state) => state.inputTextReducer.timeWrite)
+    const textErrors = useAppSelector((state) => state.inputTextReducer.textErrors)
+
+    const currentTime = useAppSelector(state => state.timerReducer.currentTime)
+    const selectedTime = useAppSelector(state => state.timerReducer.selectedTime)
+
+    const configuration = useAppSelector(state => state.configurationTrainingReducer.configuration)
+    
+    const dispatch = useAppDispatch()
 
     const [styleInput, setStyleInput] = useState(cn(styles.input_text));
     const [styleText, setStyleText] = useState(cn(styles.text));
@@ -23,7 +26,7 @@ function InputText(): JSX.Element {
     let wasError = false;
 
     useEffect(() => {
-        setLastLetter(randomText[0]);
+        dispatch(setLastLetter(randomText[0]));
     }, [randomText]);
 
     const [timeStart, setTimeStart] = useState(0);
@@ -38,32 +41,39 @@ function InputText(): JSX.Element {
             wasError = true;
         } else if (value.length === randomText.length) {
             wasError = false;
-            setIsRestart(true);
             setTimeFinish(Date.now());
         }
+
         errorHandler(wasError);
 
         if (value.length === 1) {
-            setErrors(0);
-            setIsStarted(true)
-            setIsFinished(false);
+            if(currentTime === selectedTime * 60){
+                dispatch(setIsStartedTime(true))
+            }
+            dispatch(clearTextErrors());
+            dispatch(setIsStartedLine(true))
+            dispatch(setIsFinishedLine(false));
             setTimeStart(Date.now());
         }else if (value.length === randomText.length) {
-            setIsFinished(true);
-            setTimeWrite(Number(timeFinish) - Number(timeStart));
+            dispatch(setIsFinishedLine(true))
+            dispatch(updateSpeed(Math.floor(randomText.length/((timeFinish - timeStart)/60000))))
+            dispatch(updateErrors(textErrors))
+            dispatch(updateCurrentText(''))
+            dispatch(updateRandomText(configuration))
+            dispatch(setLastLetter(randomText[0]))
         }
     }
 
     function errorHandler(wasError: boolean) {
         let value = inputValue.current.value;
         if (wasError) {
-            setLastLetter('Backspace');
-            setErrors(errors + 1);
+            dispatch(setLastLetter('Backspace'));
+            dispatch(updateTextErrors())
             inputValue.current.maxLength = inputValue.current.value.length;
             setStyleInput(cn(styles.input_text, styles.error_input));
             setStyleText(cn(styles.text, styles.error_text));
         } else {
-            setLastLetter(randomText[value.length]);
+            dispatch(setLastLetter(randomText[value.length]))
             inputValue.current.maxLength = randomText.length;
             setStyleInput(cn(styles.input_text));
             setStyleText(cn(styles.text));
@@ -77,7 +87,7 @@ function InputText(): JSX.Element {
                         className={styleInput}
                         onInput={e => {
                             let target = e.target as HTMLInputElement
-                            return setText(target.value)
+                            return dispatch(updateCurrentText(target.value))
                         }}
                         onChange={() => {
                             writeText();

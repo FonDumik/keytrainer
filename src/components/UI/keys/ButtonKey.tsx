@@ -1,15 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
-import { AutoContext } from "../../../context";
+import React, { useState, useEffect } from "react";
+import { useAppSelector } from "../../../shared/hooks";
 import classes from "./ButtonKey.module.scss";
 
-interface buttonKeyInterface {
+type buttonKeyInterface = {
    setType: string,
    selected: boolean,
    children: any
 }
 
 const ButtonKey = ({ setType, selected, children }: buttonKeyInterface) => {
-   const {lastLetter} = useContext(AutoContext);
+   const lastLetter = useAppSelector(state => state.inputTextReducer.lastLetter)
    const [style, setClass] = useState('');
 
    function renderKey(){
@@ -45,7 +45,7 @@ const ButtonKey = ({ setType, selected, children }: buttonKeyInterface) => {
       }else {
          setClass(renderKey())
       }
-   }, [lastLetter]) 
+   }, [selected]) 
 
     return(
         <div className={style}>

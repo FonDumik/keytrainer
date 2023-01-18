@@ -1,36 +1,30 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { CSSTransition } from 'react-transition-group';
 
-import { AutoContext } from "../../../context";
 import classes from "./Timer.module.scss";
 import './animation.css'
-
-function timer(currentTime: number){
-    let minutes: number = Math.floor((currentTime/60));
-    let seconds: number | string = Math.floor(currentTime % 60);
-    if(seconds < 10){
-            seconds = '0'+seconds;
-    }
-    return `${minutes}:${seconds}`;       
-}
+import { useAppDispatch, useAppSelector } from "../../shared/hooks";
+import { setSelectedTime, updateCurrentTime, renderToTimer } from "./model";
+import { setIsStartedTime } from "../inputText/model";
 
 const Timer = () => {
-    const {isStarted, setIsStarted, setTime, currentTime, setCurrentTime} = useContext(AutoContext)
+    const currentTime = useAppSelector(state => state.timerReducer.currentTime)
+    const isTimeStarted = useAppSelector(state => state.inputTextReducer.isTimeStarted)
+    const dispatch = useAppDispatch()
+
     let [isOpenMenu, setIsOpenMenu] = useState(false)
     const nodeRef = useRef(null);
 
     function chooseTime(selectedTime: number){
-        setTime(selectedTime);
-        setCurrentTime(selectedTime*60)
-        setIsStarted(false);
+        dispatch(setSelectedTime(selectedTime))
+        dispatch(setIsStartedTime(false));
         setIsOpenMenu(false);
     }
 
     useEffect(() => {
-        if(isStarted){
-                setTimeout(() => {
-                        setCurrentTime(currentTime - 1)
-                }, 1000)
+        if(isTimeStarted){
+                const interval = setTimeout(() => {dispatch(updateCurrentTime())}, 1000)
+                return () => clearInterval(interval)
         }
     })
 
@@ -40,7 +34,7 @@ const Timer = () => {
                 <img src="./img/time.png" alt="t" width='20'/>
                 <button className={classes.switch}
                         onClick={() => setIsOpenMenu(true)}>
-                        <p>{timer(currentTime)}</p>
+                        <p>{renderToTimer(currentTime)}</p>
                 </button>
             </div>
             <CSSTransition 
@@ -55,17 +49,17 @@ const Timer = () => {
                                     <img src="./img/close-button.png" alt="" />
                             </button>
                     <button className={classes.switch}
-                            onClick={() => chooseTime(5)}><p>5</p></button>
+                            onClick={() => chooseTime(5)}><p>5:00</p></button>
                     <button className={classes.switch}
-                            onClick={() => chooseTime(10)}><p>10</p></button>
+                            onClick={() => chooseTime(10)}><p>10:00</p></button>
                     <button className={classes.switch}
-                            onClick={() => chooseTime(15)}><p>15</p></button>
+                            onClick={() => chooseTime(15)}><p>15:00</p></button>
                     <button className={classes.switch}
-                            onClick={() => chooseTime(20)}><p>20</p></button>
+                            onClick={() => chooseTime(20)}><p>20:00</p></button>
                     <button className={classes.switch}
-                            onClick={() => chooseTime(25)}><p>25</p></button>
+                            onClick={() => chooseTime(25)}><p>25:00</p></button>
                     <button className={classes.switch}
-                            onClick={() => chooseTime(30)}><p>30</p></button>
+                            onClick={() => chooseTime(30)}><p>30:00</p></button>
                 </div>
             </CSSTransition>
         </div>
