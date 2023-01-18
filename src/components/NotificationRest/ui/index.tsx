@@ -3,7 +3,7 @@ import cn from 'classnames'
 import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks'
 import { setSelectedTime } from '../../Timer'
-import { setIsStartedTime } from '../../InputText'
+import { setIsStartedTime } from '../../../widgets/InputText'
 
 interface notificationRestProps {
     input: React.MutableRefObject<any>

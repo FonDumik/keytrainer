@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { headerReducer } from "../../components/Header"
-import { inputTextReducer } from "../../components/InputText"
-import { keyboardReducer } from "../../components/Keyboard"
+import { headerReducer } from "../../widgets/Header"
+import { inputTextReducer } from "../../widgets/InputText"
+import { keyboardReducer } from "../../widgets/Keyboard"
 import { configurationTrainingReducer } from "../../components/ConfigureTraining"
 import { timerReducer } from "../../components/Timer"
 

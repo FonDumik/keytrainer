@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Header } from '../components/Header';
-import { InputText } from '../components/InputText';
-import { Keyboard } from '../components/Keyboard';
+import { Header } from '../widgets/Header';
+import { InputText } from '../widgets/InputText';
+import { Keyboard } from '../widgets/Keyboard';
 import "./App.scss";
 import { Provider } from 'react-redux';
 import { store } from '../shared/store';

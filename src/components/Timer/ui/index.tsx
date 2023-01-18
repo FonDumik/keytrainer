@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import { CSSTransition } from 'react-transition-group';
+import React, { useEffect, useState } from "react";
 
 import classes from "./Timer.module.scss";
-import './animation.css'
 import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
 import { setSelectedTime, updateCurrentTime, renderToTimer } from "../model";
-import { setIsStartedTime } from "../../InputText";
+import { setIsStartedTime } from "../../../widgets/InputText";
+import { DropdownObject } from "../../../entities/DropdownObject";
 
 export const Timer = () => {
     const currentTime = useAppSelector(state => state.timerReducer.currentTime)
@@ -13,7 +12,6 @@ export const Timer = () => {
     const dispatch = useAppDispatch()
 
     let [isOpenMenu, setIsOpenMenu] = useState(false)
-    const nodeRef = useRef(null);
 
     function chooseTime(selectedTime: number){
         dispatch(setSelectedTime(selectedTime))
@@ -37,17 +35,7 @@ export const Timer = () => {
                         <p>{renderToTimer(currentTime)}</p>
                 </button>
             </div>
-            <CSSTransition 
-                nodeRef={nodeRef} 
-                in={isOpenMenu} 
-                timeout={300} 
-                classNames="notification"
-                unmountOnExit>
-                <div className={classes.showMenu} ref={nodeRef}>
-                    <button className={classes.closeMenu}
-                            onClick={() => setIsOpenMenu(false)}>
-                                    <img src="./img/close-button.png" alt="" />
-                            </button>
+            <DropdownObject isOpenDropDownState={{state: isOpenMenu, action: setIsOpenMenu}} header={'Таймер'}>
                     <button className={classes.switch}
                             onClick={() => chooseTime(5)}><p>5:00</p></button>
                     <button className={classes.switch}
@@ -60,8 +48,7 @@ export const Timer = () => {
                             onClick={() => chooseTime(25)}><p>25:00</p></button>
                     <button className={classes.switch}
                             onClick={() => chooseTime(30)}><p>30:00</p></button>
-                </div>
-            </CSSTransition>
+            </DropdownObject>
         </div>
     )
 }

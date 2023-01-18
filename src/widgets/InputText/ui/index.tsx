@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import cn from 'classnames'
 
-import { NotificationRest } from "../../NotificationRest";
+import { NotificationRest } from "../../../components/NotificationRest";
 import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
 import { updateCurrentText, 

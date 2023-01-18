@@ -1,18 +1,17 @@
-import React, { useState, useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import React, { useState } from 'react';
 
 import styles from './styles.module.scss'
-import './animation.css'
-import { useAppDispatch, useAppSelector } from '../../../shared/hooks';
-import { updateConfigurationText, updateConfigurationTraining } from '../../ConfigureTraining';
-import { setIsRestart } from "../../Header/model";
-import { setSelectedTime } from "../../Timer/model";
+import { useAppDispatch, useAppSelector } from '../../../shared/hooks'
+import { updateConfigurationText, updateConfigurationTraining } from '../../ConfigureTraining'
+import { setIsRestart } from "../../../widgets/Header"
+import { setSelectedTime } from "../../Timer"
 import { clearTextErrors, 
          setIsFinishedLine,
          setIsStartedLine, 
          setIsStartedTime, 
          updateCurrentText, 
-         updateRandomText } from "../../InputText";
+         updateRandomText } from "../../../widgets/InputText";
+import { DropdownObject } from '../../../entities/DropdownObject';
 
 
 export const ConfigureTraining = () => {
@@ -20,7 +19,6 @@ export const ConfigureTraining = () => {
     const selectedTime = useAppSelector(state => state.timerReducer.selectedTime)
     const dispatch = useAppDispatch()
 
-    const nodeRef = useRef()
     const [isOpen, setIsOpen] = useState(false)
 
     function setNewConfiguration(e: any, language: string, mode: string){
@@ -75,27 +73,14 @@ export const ConfigureTraining = () => {
                     <p>{textConfiguration}</p>
                 </button>
             </div>
-            <CSSTransition 
-                nodeRef={nodeRef} 
-                in={isOpen} 
-                timeout={300} 
-                classNames="configuration"
-                unmountOnExit
-            >
-                <div className={styles.showMenu} 
-                     ref={nodeRef}
-                >
-                    <button className={styles.closeMenu} onClick = {closeDropdown}>
-                        <img src="./img/close-button.png" alt="" />
-                    </button>
-                    <section className={styles.configuration__sectionMenu}>
-                        <p>Русский</p>
-                        <a href='' onClick={configureRuStart}>Стартовый</a>
-                        <a href='' onClick={configureRuBegin}>Начальный</a>
-                        <a href='' onClick={configureRuTraining}>Тренировка</a>
-                    </section>
-                </div>
-            </CSSTransition>
+            <DropdownObject isOpenDropDownState={{state: isOpen, action: setIsOpen}} header={'Выберите режим'}>
+                <section className={styles.configuration__sectionMenu}>
+                    <p>Русский</p>
+                    <a href='' onClick={configureRuStart}>Стартовый</a>
+                    <a href='' onClick={configureRuBegin}>Начальный</a>
+                    <a href='' onClick={configureRuTraining}>Тренировка</a>
+                </section>
+            </DropdownObject>
         </div>
      );
 }

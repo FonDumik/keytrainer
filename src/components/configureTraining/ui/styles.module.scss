@@ -18,40 +18,11 @@
     }
 }
 
-.showMenu{
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    top: 0;
-
-    width: 300px;
-    background-color: white;
-    z-index: 999;
-    border: 1px solid lightgray;
-    box-shadow: 5px 6px 4px rgba(0, 0, 0, 0.25)
-}
-
-.closeMenu{
-    align-self: flex-end;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    img{
-        width: 15px;
-        height: 15px;
-    }
-}
-
 .configuration__sectionMenu{
     margin-top: 2px;
     margin-bottom: 2px;
     height: 50px;
+    width: 300px;
     display: flex;
     gap: 6px;
     align-items: center;
