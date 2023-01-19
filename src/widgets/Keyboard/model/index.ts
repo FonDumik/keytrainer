@@ -66,7 +66,7 @@ export function selectLetter(keysCases: keyboardCases, lastLetter: string, keysL
                         return elem
                     })
                 default:
-                    break;
+                    return keysList
             }
         }
     }

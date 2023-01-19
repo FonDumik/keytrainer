@@ -1,12 +1,12 @@
 import React from "react";
 import cn from 'classnames'
 
-import { Timer } from "../../../components/Timer";
+import { Timer } from "../../../features/Timer";
 import styles from './styles.module.scss'
-import { ConfigureTraining } from "../../../components/ConfigureTraining";
+import { ConfigureTraining } from "../../../features/ConfigureTraining";
 import { useAppDispatch, useAppSelector } from "../../../shared/hooks"
 import { average, setIsRestart } from "../model";
-import { setSelectedTime } from "../../../components/Timer/model";
+import { setSelectedTime } from "../../../features/Timer/model";
 import { clearTextErrors, 
          setIsFinishedLine, 
          setIsStartedLine, 

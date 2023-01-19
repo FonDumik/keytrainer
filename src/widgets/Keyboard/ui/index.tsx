@@ -17,7 +17,7 @@ export const Keyboard = () => {
         dispatch(updateKeyboard(lastLetter))
     }, [lastLetter])
 
-    function renderContentKey(content1: string, content2: string){
+    function renderContentKey(content1: string, content2: string | undefined){
         if(content2 !== undefined){
             return (
                 <section>
