@@ -2,7 +2,7 @@ import "./App.scss";
 import Routing from '../pages';
 import { withProviders } from './providers';
 
-const App: any = () => {
+const App = () => {
   return (
     <div className="App">
       <Routing />
