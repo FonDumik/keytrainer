@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import cn from 'classnames'
 
 import { NotificationRest } from "../../../features/NotificationRest";
@@ -34,7 +34,7 @@ export const InputText = (): JSX.Element => {
     const [timeStart, setTimeStart] = useState(0);
     const [timeFinish, setTimeFinish] = useState(0);
 
-    function writeText() {
+    const writeText = () => {
         let value = inputValue.current.value;
         if (value[value.length - 1] === randomText[value.length - 1] && value.length !== randomText.length) {
             wasError = false;
@@ -66,7 +66,7 @@ export const InputText = (): JSX.Element => {
         }
     }
 
-    function errorHandler(wasError: boolean) {
+    const errorHandler = (wasError: boolean) => {
         let value = inputValue.current.value;
         if (wasError) {
             dispatch(setLastLetter('Backspace'));
@@ -82,6 +82,11 @@ export const InputText = (): JSX.Element => {
         }
     }
 
+    const updateInput = (e: any) => {
+        let target = e.target as HTMLInputElement
+        return dispatch(updateCurrentText(target.value))
+    }
+
     return (
         <section className={cn(styles.input)}>
             <div className="wrapper">
@@ -89,13 +94,8 @@ export const InputText = (): JSX.Element => {
                     <input 
                         type="text"
                         className={styleInput}
-                        onInput={e => {
-                            let target = e.target as HTMLInputElement
-                            return dispatch(updateCurrentText(target.value))
-                        }}
-                        onChange={() => {
-                            writeText();
-                        }}
+                        onInput={updateInput}
+                        onChange={writeText}
                         value={currentText}
                         maxLength={randomText.length}
                         ref={inputValue} 

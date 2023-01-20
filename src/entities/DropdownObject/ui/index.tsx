@@ -14,6 +14,10 @@ type DropdownObjectProps = {
 
 export const DropdownObject = ({isOpenDropDownState, children, header}: DropdownObjectProps) => {
     const nodeRef = useRef()
+
+    const closeDropdown = () => {
+        return isOpenDropDownState.action(false)
+    }
     
     return(
         <CSSTransition 
@@ -27,7 +31,7 @@ export const DropdownObject = ({isOpenDropDownState, children, header}: Dropdown
             <div className={styles.dropdown__header}>
                 <p className={styles.header__text}>{header}</p>
                 <button className={styles.header__closeButton}
-                        onClick={() => isOpenDropDownState.action(false)}
+                        onClick={closeDropdown}
                 >
                     <img src="./img/close-button.png" alt="" />
                 </button>

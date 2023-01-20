@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import cn from 'classnames'
+import { useEffect } from "react";
 
 import styles from './styles.module.scss'
 
@@ -10,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
 
 export const Keyboard = () => {
     const lastLetter = useAppSelector(state => state.inputTextReducer.lastLetter)
-    const keysList = useAppSelector((state) => state.keyboardReducer.keyList)
+    const keysList = useAppSelector(state => state.keyboardReducer.keyList)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -35,7 +34,7 @@ export const Keyboard = () => {
     }
 
     return(
-        <section className={cn(styles.keyboard)}>
+        <section className={styles.keyboard}>
             {keysList.map(elem => 
                 <ButtonKey setType = {elem.setType} selected = {elem.selected}>
                     {renderContentKey(elem.content1, elem.content2)}

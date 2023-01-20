@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks'
@@ -44,10 +44,6 @@ export const ConfigureTraining = () => {
         dispatch(setIsFinishedLine(false))
         dispatch(setIsRestart(false))
         setIsOpen(false)
-    }
-
-    function closeDropdown() {
-        return setIsOpen(false)
     }
 
     function openDropdown() {

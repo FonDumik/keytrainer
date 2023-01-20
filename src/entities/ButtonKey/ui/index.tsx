@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { renderKey } from "../model";
 import classes from "./ButtonKey.module.scss";
 

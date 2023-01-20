@@ -5,11 +5,9 @@ const MainPage = lazy(() => import('./MainPage'))
 
 const Routing = () => {
     return(
-        <>
         <Routes>
             <Route path='/' element={<MainPage/>}></Route>
         </Routes>
-        </>
     )
 }
 

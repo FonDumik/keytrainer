@@ -1,4 +1,3 @@
-import React from "react";
 import cn from 'classnames'
 
 import { Timer } from "../../../features/Timer";
@@ -15,13 +14,8 @@ import { clearTextErrors,
          updateRandomText } from "../../InputText";
 
 export const Header = () => {
-    const speedDisplay = useAppSelector((state) => state.headerReducer.speed)
-    const speedArrayDisplay = useAppSelector((state) => state.headerReducer.speedArray)
-    const errorsDisplay = useAppSelector((state) => state.headerReducer.errors)
-    const errorsArrayDisplay = useAppSelector((state) => state.headerReducer.errorsArray)
-
+    const {speed, speedArray, errors, errorsArray} = useAppSelector(state => state.headerReducer)
     const selectedTime = useAppSelector(state => state.timerReducer.selectedTime)
-
     const configuration = useAppSelector(state => state.configurationTrainingReducer.configuration)
 
     const dispatch = useAppDispatch()
@@ -47,9 +41,8 @@ export const Header = () => {
                             <img src="./img/logo.png" alt="logo" className={cn(styles.logo)}/>
                         </a>
                         <button className={cn(styles.text_reset)}
-                            onClick={() => {
-                                restartTraining()
-                            }}>
+                                onClick={restartTraining}
+                        >
                             <img src="./img/restart.png" alt="" width='20px'/>
                         </button>
                         <ConfigureTraining />
@@ -58,11 +51,15 @@ export const Header = () => {
             <div className={cn(styles.header__right)}>
                 <div className={cn(styles.speed)}>
                     <img src="./img/speed.png" alt="sp" width='20'/>
-                    <p title="Скорость печати / Средняя скорость, симв/мин">{`${speedDisplay} / ${average(speedArrayDisplay)}`}</p>
+                    <p title="Скорость печати / Средняя скорость, симв/мин">
+                        {`${speed} / ${average(speedArray)}`}
+                    </p>
                 </div>
                 <div className={cn(styles.mistakes)}>
                     <img src="./img/stop.png" alt="" width='20'/>
-                    <p title="Число ошибок / Среднее число ошибок">{`${errorsDisplay} / ${average(errorsArrayDisplay)}`}</p>
+                    <p title="Число ошибок / Среднее число ошибок">
+                        {`${errors} / ${average(errorsArray)}`}
+                    </p>
                 </div>
             </div>
                 </div>
