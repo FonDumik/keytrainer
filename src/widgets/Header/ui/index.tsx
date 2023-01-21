@@ -10,26 +10,22 @@ import { clearTextErrors,
          setIsFinishedLine, 
          setIsStartedLine, 
          setIsStartedTime, 
-         updateCurrentText, 
-         updateRandomText } from "../../InputText";
+         updateCurrentText} from "../../InputText";
 
 export const Header = () => {
-    const {speed, speedArray, errors, errorsArray} = useAppSelector(state => state.headerReducer)
+    const {speed, speedArray, errors, errorsArray, isRestart} = useAppSelector(state => state.headerReducer)
     const selectedTime = useAppSelector(state => state.timerReducer.selectedTime)
-    const configuration = useAppSelector(state => state.configurationTrainingReducer.configuration)
 
     const dispatch = useAppDispatch()
 
     function restartTraining(){
-        dispatch(setIsRestart(true))
+        dispatch(setIsRestart(!isRestart))
         dispatch(setSelectedTime(selectedTime))
         dispatch(clearTextErrors())
-        dispatch(updateRandomText(configuration))
         dispatch(updateCurrentText(''))
         dispatch(setIsStartedTime(false))
         dispatch(setIsStartedLine(false))
         dispatch(setIsFinishedLine(false))
-        dispatch(setIsRestart(false))
     }
 
     return(

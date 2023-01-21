@@ -10,9 +10,9 @@ import { updateCurrentText,
         updateTextErrors, 
         setIsStartedLine, 
         setIsFinishedLine, 
-        setIsStartedTime, 
-        updateRandomText } from '../../InputText'
+        setIsStartedTime} from '../../InputText'
 import { updateErrors, updateSpeed } from "../../Header/model";
+import { TextContainer } from "features/TextContainer";
 
 export const InputText = (): JSX.Element => {
     const { randomText, currentText, textErrors } = useAppSelector(state => state.inputTextReducer)
@@ -61,7 +61,6 @@ export const InputText = (): JSX.Element => {
             dispatch(updateSpeed(Math.floor(randomText.length/((timeFinish - timeStart)/60000))))
             dispatch(updateErrors(textErrors))
             dispatch(updateCurrentText(''))
-            dispatch(updateRandomText(configuration))
             dispatch(setLastLetter(randomText[0]))
         }
     }
@@ -101,8 +100,8 @@ export const InputText = (): JSX.Element => {
                         ref={inputValue} 
                     />
                     <div className={styleText}>
-                        <div className={cn(styles.checked)}>{currentText}</div>
-                        <div className={cn(styles.line1)}>{randomText}</div>
+                        <div className={styles.checked}>{currentText}</div>
+                        <TextContainer />
                     </div>
                     <NotificationRest input = {inputValue}/>
                 </div>

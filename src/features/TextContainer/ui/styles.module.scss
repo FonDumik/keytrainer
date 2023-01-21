@@ -1,0 +1,12 @@
+.complexText{
+    display: flex;
+    flex-direction: column;
+}
+
+.line{
+    display: inline;
+}
+
+.line:nth-child(n+4){
+    opacity: 0;
+}

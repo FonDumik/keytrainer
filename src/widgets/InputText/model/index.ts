@@ -2,6 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { generateOneWordText } from '../../../shared/utils/textGenerator/generateOneWordText'
 import { generateMultipleWordText } from '../../../shared/utils/textGenerator/generateMultipleWordText'
 import { configurationTrainingType } from '../../../shared/types/configurationTraining';
+import { generateSentence } from 'shared/utils/textGenerator/generateSentences';
+
+console.log(generateSentence())
 
 interface inputTextState {
     currentText: string,
@@ -57,6 +60,9 @@ const inputTextSlice = createSlice({
     },
     setIsStartedTime(state, action: PayloadAction<boolean>){
       state.isTimeStarted = action.payload
+    },
+    setRandomTextTraining(state, action: PayloadAction<string>){
+      state.randomText = action.payload
     }
   }
 });
@@ -69,7 +75,8 @@ export const {updateCurrentText,
               setLastLetter, 
               setIsStartedLine,
               setIsFinishedLine, 
-              setIsStartedTime} = inputTextSlice.actions
+              setIsStartedTime,
+              setRandomTextTraining} = inputTextSlice.actions
 
 export const inputTextReducer = inputTextSlice.reducer
 
@@ -78,8 +85,6 @@ function selectText(configuration: configurationTrainingType){
       if(configuration.mode === 'start'){
         return generateOneWordText()
       }else if(configuration.mode === 'begin'){
-        return generateMultipleWordText()
-      }else if(configuration.mode === 'training'){
         return generateMultipleWordText()
       } 
     }

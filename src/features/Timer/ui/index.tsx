@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 
+//styles
 import styles from "./Timer.module.scss";
+//hooks
 import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+
 import { setSelectedTime, updateCurrentTime, renderToTimer } from "../model";
 import { setIsStartedTime } from "../../../widgets/InputText";
 import { DropdownObject } from "../../../entities/DropdownObject";
+
+const timeSelectCases = [5, 10, 15, 20, 25, 30]
 
 export const Timer = () => {
     const { currentTime } = useAppSelector(state => state.timerReducer)
@@ -40,18 +45,13 @@ export const Timer = () => {
                 </button>
             </div>
             <DropdownObject isOpenDropDownState={{state: isOpenMenu, action: setIsOpenMenu}} header={'Таймер'}>
+                {timeSelectCases.map(elem => (
                     <button className={styles.switch}
-                            onClick={() => chooseTime(5)}><p>5:00</p></button>
-                    <button className={styles.switch}
-                            onClick={() => chooseTime(10)}><p>10:00</p></button>
-                    <button className={styles.switch}
-                            onClick={() => chooseTime(15)}><p>15:00</p></button>
-                    <button className={styles.switch}
-                            onClick={() => chooseTime(20)}><p>20:00</p></button>
-                    <button className={styles.switch}
-                            onClick={() => chooseTime(25)}><p>25:00</p></button>
-                    <button className={styles.switch}
-                            onClick={() => chooseTime(30)}><p>30:00</p></button>
+                            onClick={() => chooseTime(elem)}
+                    >
+                        <p>{`${elem}:00`}</p>
+                    </button>
+                ))}
             </DropdownObject>
         </div>
     )

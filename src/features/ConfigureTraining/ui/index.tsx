@@ -34,10 +34,6 @@ export const ConfigureTraining = () => {
         dispatch(setIsRestart(true))
         dispatch(setSelectedTime(selectedTime))
         dispatch(clearTextErrors())
-        dispatch(updateRandomText({
-            language,
-            mode
-        }))
         dispatch(updateCurrentText(''))
         dispatch(setIsStartedTime(false))
         dispatch(setIsStartedLine(false))

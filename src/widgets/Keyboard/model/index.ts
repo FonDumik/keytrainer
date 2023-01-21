@@ -39,7 +39,7 @@ export function selectLetter(keysCases: keyboardCases, lastLetter: string, keysL
                     })
                 case 'upperCase':
                     return keysList.map(elem => {
-                        elem.selected = false
+                        elem.selected = false;
                         if(elem.content1 === lastLetter){
                             elem.selected = true;
                         }
@@ -53,15 +53,16 @@ export function selectLetter(keysCases: keyboardCases, lastLetter: string, keysL
                     })
                 case 'symbols':
                     return keysList.map(elem => {
-                        elem.selected = false;
+                        elem.selected = false
                         if(elem.content1 === lastLetter){
                             elem.selected = true;
-                        }
-                
-                        if(elem.needShift === 'left'){
-                            setSelectedShift('left', keysList)
-                        }else if(elem.needShift === 'right'){
-                            setSelectedShift('right', keysList)
+                        }else if(elem.content2 === lastLetter){
+                            elem.selected = true;
+                            if(elem.needShift === 'left'){
+                                setSelectedShift('left', keysList)
+                            }else if(elem.needShift === 'right'){
+                                setSelectedShift('right', keysList)
+                            }
                         }
                         return elem
                     })
