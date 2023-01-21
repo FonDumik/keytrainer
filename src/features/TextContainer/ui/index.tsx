@@ -1,14 +1,14 @@
-import {useState, useEffect} from 'react'
-import { generateSentence } from 'shared/utils/textGenerator/generateSentences';
+import { useEffect } from 'react'
 import { setRandomTextTraining, updateRandomText } from 'widgets/InputText';
 import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { resetComplexText, updateComplexText } from '../model';
 import styles from './styles.module.scss'
 
 export function TextContainer() {
     const { randomText, isFinishedLine } = useAppSelector(state => state.inputTextReducer)
     const { configuration } = useAppSelector(state => state.configurationTrainingReducer)
     const { isRestart } = useAppSelector(state => state.headerReducer)
-    const [complexText, setComplexText] = useState(generateSentence())
+    const { complexText } = useAppSelector(state => state.textContainerReducer)
     const dispatch = useAppDispatch()
 
     let configurationRUSimpleText = configuration.language === 'RU' && (configuration.mode === 'start' || configuration.mode === 'begin')
@@ -17,10 +17,9 @@ export function TextContainer() {
     useEffect(() => {
         if(isFinishedLine && configurationRUComplexText){
             if(complexText.length === 1){
-                setComplexText(generateSentence())
+                dispatch(resetComplexText())
             }else{
-                complexText.shift()
-                setComplexText(complexText)
+                dispatch(updateComplexText())
             }
         }else if(isFinishedLine && configurationRUSimpleText){
             dispatch(updateRandomText(configuration))
@@ -41,7 +40,7 @@ export function TextContainer() {
 
     useEffect(() => {
         if(configurationRUComplexText){
-            setComplexText(generateSentence())
+            dispatch(resetComplexText())
         }else if(configurationRUSimpleText){
             dispatch(updateRandomText(configuration))
         }
@@ -50,11 +49,13 @@ export function TextContainer() {
   return (
     <div>
         {configurationRUSimpleText 
-        ? <div className={styles.line}>{randomText}</div>
-        : <div className={styles.complexText}>
-            {complexText.map(elem => (
-                <div className={styles.line}>{elem}</div>
-            ))} 
+        ?   <div className={styles.line}>
+                {randomText}
+            </div>
+        :   <div className={styles.complexText}>
+                {complexText.map(elem => (
+                    <div className={styles.line}>{elem}</div>
+                ))} 
             </div>
         }
     </div>

@@ -4,6 +4,7 @@ import { inputTextReducer } from "../../widgets/InputText"
 import { keyboardReducer } from "../../widgets/Keyboard"
 import { configurationTrainingReducer } from "../../features/ConfigureTraining"
 import { timerReducer } from "../../features/Timer"
+import { textContainerReducer } from "features/TextContainer/model";
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
         inputTextReducer,
         keyboardReducer,
         configurationTrainingReducer,
-        timerReducer
+        timerReducer,
+        textContainerReducer,
     }
 })
 
