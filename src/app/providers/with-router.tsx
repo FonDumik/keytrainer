@@ -1,4 +1,4 @@
-import Loader from "entities/Loader";
+import Loader from "shared/ui/Loader";
 import { Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
 

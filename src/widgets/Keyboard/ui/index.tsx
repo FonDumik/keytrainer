@@ -2,10 +2,10 @@ import { useEffect } from "react";
 
 import styles from './styles.module.scss'
 
-import { ButtonKey } from "../../../entities/ButtonKey";
-import { updateKeyboard } from "../../Keyboard";
+import { ButtonKey } from "entities/ButtonKey";
+import { updateKeyboard } from "../model";
 
-import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks";
 
 export const Keyboard = () => {
     const lastLetter = useAppSelector(state => state.inputTextReducer.lastLetter)

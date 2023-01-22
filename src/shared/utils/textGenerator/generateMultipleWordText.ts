@@ -9,7 +9,7 @@ export const generateMultipleWordText = () => {
     let string = '';
     while(string.length < 70){
         let word = selectWord(arrayWords.length)
-        if(string.length + word.length + 1 < 70){
+        if(string.length + word.length + 1 < 80){
             string = string + word + ' '
         }else{
             break

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
 import styles from './styles.module.scss'
-import { useAppDispatch, useAppSelector } from '../../../shared/hooks'
-import { setSelectedTime } from '../../Timer'
-import { setIsStartedTime } from '../../../widgets/InputText'
+import { useAppDispatch, useAppSelector } from 'shared/hooks'
+import { setSelectedTime } from 'features/Timer'
+import { setIsStartedTime } from 'widgets/InputText'
 
 interface notificationRestProps {
     input: React.MutableRefObject<any>
@@ -42,7 +42,7 @@ export const NotificationRest = ({ input }: notificationRestProps) => {
     return ( 
         <div className = {classBreak}>
             <p>Время вышло, пора отдохнуть</p>
-            <a onClick={backToTrain}>Продолжить</a>
+            <a href='#' onClick={backToTrain}>Продолжить</a>
         </div>
     );
 }

@@ -1,11 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 * {
+    font-family: "Roboto";
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 .wrapper{
-    width: 710px;
+    width: 800px;
     margin-right: auto;
     margin-left: auto;
 }

@@ -1,25 +1,23 @@
 import { useRef, useEffect, useState } from "react";
 import cn from 'classnames'
 
-import { NotificationRest } from "../../../features/NotificationRest";
+import { NotificationRest } from "features/NotificationRest";
 import styles from './styles.module.scss'
-import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { updateCurrentText, 
         setLastLetter, 
         clearTextErrors, 
         updateTextErrors, 
         setIsStartedLine, 
         setIsFinishedLine, 
-        setIsStartedTime} from '../../InputText'
-import { updateErrors, updateSpeed } from "../../Header/model";
+        setIsStartedTime} from 'widgets/InputText'
+import { updateErrors, updateSpeed } from "widgets/Header";
 import { TextContainer } from "features/TextContainer";
 
 export const InputText = (): JSX.Element => {
     const { randomText, currentText, textErrors } = useAppSelector(state => state.inputTextReducer)
     const { currentTime, selectedTime } = useAppSelector(state => state.timerReducer)
 
-    const configuration = useAppSelector(state => state.configurationTrainingReducer.configuration)
-    
     const dispatch = useAppDispatch()
 
     const [styleInput, setStyleInput] = useState(cn(styles.input_text));

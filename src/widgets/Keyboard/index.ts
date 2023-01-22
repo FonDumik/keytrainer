@@ -1,2 +1,2 @@
-export * from './ui'
-export * from './model'
+export { Keyboard } from './ui'
+export { keyboardReducer } from './model'

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { setRandomTextTraining, updateRandomText } from 'widgets/InputText';
-import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { resetComplexText, updateComplexText } from '../model';
 import styles from './styles.module.scss'
 

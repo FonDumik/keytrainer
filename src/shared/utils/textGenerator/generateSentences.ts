@@ -11,11 +11,11 @@ export const generateSentence = () => {
     let splitedArray = text.split(' ')
     let string = ''
     for(let elem of splitedArray){
-        if(string.length + elem.length+1 < 75){
+        if(string.length + elem.length+1 < 80){
             string = string + elem + ' '
         }else{
             array.push(string)
-            string = elem
+            string = elem + ' '
         }
 
         if(splitedArray[splitedArray.length-1] === elem && string.length < 70){

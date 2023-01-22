@@ -1,17 +1,16 @@
 import { useState } from 'react';
 
 import styles from './styles.module.scss'
-import { useAppDispatch, useAppSelector } from '../../../shared/hooks'
-import { updateConfigurationText, updateConfigurationTraining } from '../../ConfigureTraining'
-import { setIsRestart } from "../../../widgets/Header"
-import { setSelectedTime } from "../../Timer"
+import { useAppDispatch, useAppSelector } from 'shared/hooks'
+import { updateConfigurationText, updateConfigurationTraining } from '../model'
+import { setIsRestart } from "widgets/Header"
+import { setSelectedTime } from "features/Timer"
 import { clearTextErrors, 
          setIsFinishedLine,
          setIsStartedLine, 
          setIsStartedTime, 
-         updateCurrentText, 
-         updateRandomText } from "../../../widgets/InputText";
-import { DropdownObject } from '../../../entities/DropdownObject';
+         updateCurrentText } from "widgets/InputText";
+import { DropdownObject } from 'shared/ui/DropdownObject';
 
 
 export const ConfigureTraining = () => {

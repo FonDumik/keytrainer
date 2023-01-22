@@ -4,6 +4,7 @@
     font-size: 13px;
     align-items: center;
     color: gray;
+    position: relative;
     cursor: pointer;
 }
 
@@ -27,14 +28,9 @@ header{
     align-items: flex-end;
 }
 
-.header__left{
-    width: 55%;
-    justify-content: space-between;
-}
-
 .text_reset{
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 
     border: none;
     background-color: transparent;
@@ -43,18 +39,23 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 5px;
+    cursor: pointer;
+
+    img{
+        width: 15px;
+        height: 15px;
+    }
 }
 
 .text_reset:hover{
     background-color: lightgray;
 }
 
-.timer{
-    margin-bottom: 5px;
-}
-
 .logo{
     width: 70px;
     height: 70px;
+    img{
+        width: 70px;
+        height: 70px;
+    }
 }

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-
 //styles
 import styles from "./Timer.module.scss";
 //hooks
-import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks";
 
 import { setSelectedTime, updateCurrentTime, renderToTimer } from "../model";
-import { setIsStartedTime } from "../../../widgets/InputText";
-import { DropdownObject } from "../../../entities/DropdownObject";
+import { setIsStartedTime } from "widgets/InputText";
+import { DropdownObject } from "shared/ui/DropdownObject";
 
 const timeSelectCases = [5, 10, 15, 20, 25, 30]
 
