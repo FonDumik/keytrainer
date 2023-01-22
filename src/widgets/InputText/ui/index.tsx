@@ -12,10 +12,11 @@ import { updateCurrentText,
         setIsFinishedLine, 
         setIsStartedTime} from 'widgets/InputText'
 import { updateErrors, updateSpeed } from "widgets/Header";
-import { TextContainer } from "features/TextContainer";
+import { TextContainer } from "entities/TextContainer";
 
 export const InputText = (): JSX.Element => {
-    const { randomText, currentText, textErrors } = useAppSelector(state => state.inputTextReducer)
+    const { currentText, textErrors } = useAppSelector(state => state.inputTextReducer)
+    const { randomText } = useAppSelector(state => state.textContainerReducer)
     const { currentTime, selectedTime } = useAppSelector(state => state.timerReducer)
 
     const dispatch = useAppDispatch()

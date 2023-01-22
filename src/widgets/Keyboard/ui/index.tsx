@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import styles from './styles.module.scss'
 
 import { ButtonKey } from "entities/ButtonKey";
-import { updateKeyboard } from "../model";
+import { changeKeyboard, updateKeyboard } from "../model";
 
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 
 export const Keyboard = () => {
     const lastLetter = useAppSelector(state => state.inputTextReducer.lastLetter)
     const keysList = useAppSelector(state => state.keyboardReducer.keyList)
+    const { configuration } = useAppSelector(state => state.configurationTrainingReducer)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -32,6 +33,14 @@ export const Keyboard = () => {
             )
         }
     }
+
+    useEffect(() => {
+        if(configuration.language === "RU"){
+            dispatch(changeKeyboard('RU'))
+        }else if(configuration.language === "ENG"){
+            dispatch(changeKeyboard('ENG'))
+        }
+    }, [configuration])
 
     return(
         <section className={styles.keyboard}>

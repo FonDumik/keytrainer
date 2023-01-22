@@ -1,14 +1,12 @@
-import { arrayWords } from './wordsToPrint'
-
-const selectWord = (arrLength: number) => {
-  let randomNum = Math.floor(arrLength * Math.random());
+const selectWord = (arrayWords: string[]) => {
+  let randomNum = Math.floor(arrayWords.length * Math.random());
   return arrayWords[randomNum];
 }
   
-export const generateMultipleWordText = () => {
+export const generateMultipleWordText = (arrayWords: string[]) => {
     let string = '';
     while(string.length < 70){
-        let word = selectWord(arrayWords.length)
+        let word = selectWord(arrayWords)
         if(string.length + word.length + 1 < 80){
             string = string + word + ' '
         }else{

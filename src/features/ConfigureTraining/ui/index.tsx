@@ -57,6 +57,14 @@ export const ConfigureTraining = () => {
         return setNewConfiguration(event, 'RU', 'training')
     }
 
+    function configureENGStart(event: any){
+        return setNewConfiguration(event, 'ENG', 'start')
+    }
+
+    function configureENGBegin(event: any){
+        return setNewConfiguration(event, 'ENG', 'begin')
+    }
+
     return ( 
         <div className={styles.container__configuration}>
             <div className={styles.button__textConfiguration}>
@@ -70,6 +78,11 @@ export const ConfigureTraining = () => {
                     <a href='' onClick={configureRuStart}>Стартовый</a>
                     <a href='' onClick={configureRuBegin}>Начальный</a>
                     <a href='' onClick={configureRuTraining}>Тренировка</a>
+                </section>
+                <section className={styles.configuration__sectionMenu}>
+                    <p>English</p>
+                    <a href='' onClick={configureENGStart}>Start</a>
+                    <a href='' onClick={configureENGBegin}>Begin</a>
                 </section>
             </DropdownObject>
         </div>

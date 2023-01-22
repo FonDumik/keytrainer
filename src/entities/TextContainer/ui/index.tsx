@@ -1,17 +1,17 @@
 import { useEffect } from 'react'
-import { setRandomTextTraining, updateRandomText } from 'widgets/InputText';
 import { useAppDispatch, useAppSelector } from "shared/hooks";
-import { resetComplexText, updateComplexText } from '../model';
+import { resetComplexText, updateComplexText, setRandomTextTraining, updateRandomText } from '../model';
 import styles from './styles.module.scss'
 
 export function TextContainer() {
-    const { randomText, isFinishedLine } = useAppSelector(state => state.inputTextReducer)
+    const { isFinishedLine } = useAppSelector(state => state.inputTextReducer)
     const { configuration } = useAppSelector(state => state.configurationTrainingReducer)
     const { isRestart } = useAppSelector(state => state.headerReducer)
-    const { complexText } = useAppSelector(state => state.textContainerReducer)
+    const { complexText, randomText } = useAppSelector(state => state.textContainerReducer)
     const dispatch = useAppDispatch()
 
     let configurationRUSimpleText = configuration.language === 'RU' && (configuration.mode === 'start' || configuration.mode === 'begin')
+    let configurationENGSimpleText = configuration.language === 'ENG' && (configuration.mode === 'start' || configuration.mode === 'begin')
     let configurationRUComplexText = configuration.language === 'RU' && configuration.mode === 'training'
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export function TextContainer() {
             }else{
                 dispatch(updateComplexText())
             }
-        }else if(isFinishedLine && configurationRUSimpleText){
+        }else if(isFinishedLine && (configurationRUSimpleText || configurationENGSimpleText)){
             dispatch(updateRandomText(configuration))
         }
     }, [isFinishedLine])
@@ -33,7 +33,7 @@ export function TextContainer() {
     useEffect(() => {
         if(configurationRUComplexText){
             dispatch(setRandomTextTraining(complexText[0]))
-        }else if(configurationRUSimpleText){
+        }else if(configurationRUSimpleText || configurationENGSimpleText){
             dispatch(updateRandomText(configuration))
         }
     }, [configuration])
@@ -41,14 +41,14 @@ export function TextContainer() {
     useEffect(() => {
         if(configurationRUComplexText){
             dispatch(resetComplexText())
-        }else if(configurationRUSimpleText){
+        }else if(configurationRUSimpleText || configurationENGSimpleText){
             dispatch(updateRandomText(configuration))
         }
     }, [isRestart])
 
   return (
     <div>
-        {configurationRUSimpleText 
+        {configurationRUSimpleText || configurationENGSimpleText
         ?   <div className={styles.line}>
                 {randomText}
             </div>

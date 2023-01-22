@@ -10,6 +10,12 @@ export function setNewTextConfiguration(configuration: configurationTrainingType
         }else if(configuration.mode === 'training'){
             return 'Русский тренировка'
         }
+    }else if(configuration.language === 'ENG'){
+        if(configuration.mode === 'start'){
+            return 'English start'
+        }else if(configuration.mode === 'begin'){
+            return 'English begin'
+        }
     }
 }
 

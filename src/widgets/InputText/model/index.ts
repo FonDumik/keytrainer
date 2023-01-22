@@ -1,14 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { generateOneWordText } from '../../../shared/utils/textGenerator/generateOneWordText'
-import { generateMultipleWordText } from '../../../shared/utils/textGenerator/generateMultipleWordText'
-import { configurationTrainingType } from '../../../shared/types/configurationTraining';
-import { generateSentence } from 'shared/utils/textGenerator/generateSentences';
-
-console.log(generateSentence())
 
 interface inputTextState {
     currentText: string,
-    randomText: string,
     timeWrite: number,
     textErrors: number,
     lastLetter: string,
@@ -19,7 +12,6 @@ interface inputTextState {
 
 const initialState: inputTextState = {
     currentText: '',
-    randomText: selectText({language: "RU", mode: "start"}),
     timeWrite: 0,
     textErrors: 0,
     lastLetter: '',
@@ -28,17 +20,12 @@ const initialState: inputTextState = {
     isTimeStarted: false
 }
 
-initialState.lastLetter = initialState.randomText[0]
-
 const inputTextSlice = createSlice({
   name: 'inputText',
   initialState,
   reducers: {
     updateCurrentText(state, action: PayloadAction<string>){
         state.currentText = action.payload
-    },
-    updateRandomText(state, action: PayloadAction<configurationTrainingType>){
-        state.randomText = selectText(action.payload)
     },
     updateTextErrors(state){
         state.textErrors++
@@ -61,31 +48,16 @@ const inputTextSlice = createSlice({
     setIsStartedTime(state, action: PayloadAction<boolean>){
       state.isTimeStarted = action.payload
     },
-    setRandomTextTraining(state, action: PayloadAction<string>){
-      state.randomText = action.payload
-    }
   }
 });
 
-export const {updateCurrentText, 
-              updateRandomText,
+export const { updateCurrentText, 
               updateTextErrors, 
               clearTextErrors, 
               setTimeWrite, 
               setLastLetter, 
               setIsStartedLine,
               setIsFinishedLine, 
-              setIsStartedTime,
-              setRandomTextTraining} = inputTextSlice.actions
+              setIsStartedTime } = inputTextSlice.actions
 
 export const inputTextReducer = inputTextSlice.reducer
-
-function selectText(configuration: configurationTrainingType){
-    if(configuration.language === 'RU'){
-      if(configuration.mode === 'start'){
-        return generateOneWordText()
-      }else if(configuration.mode === 'begin'){
-        return generateMultipleWordText()
-      } 
-    }
-}
