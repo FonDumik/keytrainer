@@ -1,2 +1,2 @@
-export * from './ui'
-export * from './model'
+export { ConfigureTraining } from './ui'
+export { configurationTrainingReducer } from './model'

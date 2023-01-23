@@ -1,2 +1,4 @@
-export * from './ui'
-export * from './model'
+export { InputText } from './ui'
+export { inputTextReducer, 
+         setLastLetter, 
+         setIsStartedTime } from './model'

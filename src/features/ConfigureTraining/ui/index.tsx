@@ -4,18 +4,11 @@ import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from 'shared/hooks'
 import { updateConfigurationText, updateConfigurationTraining } from '../model'
 import { setIsRestart } from "widgets/Header"
-import { setSelectedTime } from "features/Timer"
-import { clearTextErrors, 
-         setIsFinishedLine,
-         setIsStartedLine, 
-         setIsStartedTime, 
-         updateCurrentText } from "widgets/InputText";
 import { DropdownObject } from 'shared/ui/DropdownObject';
-
 
 export const ConfigureTraining = () => {
     const textConfiguration = useAppSelector(state => state.configurationTrainingReducer.configurationText)
-    const selectedTime = useAppSelector(state => state.timerReducer.selectedTime)
+    const isRestart = useAppSelector(state => state.headerReducer.isRestart)
     const dispatch = useAppDispatch()
 
     const [isOpen, setIsOpen] = useState(false)
@@ -30,14 +23,7 @@ export const ConfigureTraining = () => {
             language,
             mode
         }))
-        dispatch(setIsRestart(true))
-        dispatch(setSelectedTime(selectedTime))
-        dispatch(clearTextErrors())
-        dispatch(updateCurrentText(''))
-        dispatch(setIsStartedTime(false))
-        dispatch(setIsStartedLine(false))
-        dispatch(setIsFinishedLine(false))
-        dispatch(setIsRestart(false))
+        dispatch(setIsRestart(!isRestart))
         setIsOpen(false)
     }
 

@@ -5,21 +5,20 @@ import styles from "./Timer.module.scss";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 
 import { setSelectedTime, updateCurrentTime, renderToTimer } from "../model";
-import { setIsStartedTime } from "widgets/InputText";
 import { DropdownObject } from "shared/ui/DropdownObject";
 
 const timeSelectCases = [5, 10, 15, 20, 25, 30]
 
 export const Timer = () => {
-    const { currentTime } = useAppSelector(state => state.timerReducer)
+    const { currentTime, selectedTime } = useAppSelector(state => state.timerReducer)
     const { isTimeStarted } = useAppSelector(state => state.inputTextReducer)
+    const { isRestart } = useAppSelector((state => state.headerReducer))
     const dispatch = useAppDispatch()
 
     let [isOpenMenu, setIsOpenMenu] = useState(false)
 
     const chooseTime = (selectedTime: number) => {
         dispatch(setSelectedTime(selectedTime))
-        dispatch(setIsStartedTime(false));
         setIsOpenMenu(false);
     }
 
@@ -28,6 +27,10 @@ export const Timer = () => {
                 setTimeout(() => dispatch(updateCurrentTime()), 1000);
         }
     }, [isTimeStarted, currentTime])
+
+    useEffect(() => {
+        dispatch(setSelectedTime(selectedTime))
+    }, [isRestart])
 
     const openMenu = () => {
         return setIsOpenMenu(true)
@@ -40,7 +43,7 @@ export const Timer = () => {
                 <button className={styles.switch}
                         onClick={openMenu}
                 >
-                        <p>{renderToTimer(currentTime)}</p>
+                    <p>{renderToTimer(currentTime)}</p>
                 </button>
             </div>
             <DropdownObject isOpenDropDownState={{state: isOpenMenu, action: setIsOpenMenu}} header={'Таймер'}>

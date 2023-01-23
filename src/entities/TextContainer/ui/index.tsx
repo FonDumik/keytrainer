@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { resetComplexText, updateComplexText, setRandomTextTraining, updateRandomText } from '../model';
+import { setLastLetter } from 'widgets/InputText';
 import styles from './styles.module.scss'
 
 export function TextContainer() {
@@ -13,6 +14,10 @@ export function TextContainer() {
     let configurationRUSimpleText = configuration.language === 'RU' && (configuration.mode === 'start' || configuration.mode === 'begin')
     let configurationENGSimpleText = configuration.language === 'ENG' && (configuration.mode === 'start' || configuration.mode === 'begin')
     let configurationRUComplexText = configuration.language === 'RU' && configuration.mode === 'training'
+
+    useEffect(() => {
+        dispatch(setLastLetter(randomText[0]));
+    }, [randomText]);
 
     useEffect(() => {
         if(isFinishedLine && configurationRUComplexText){

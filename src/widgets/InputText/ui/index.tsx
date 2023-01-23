@@ -1,23 +1,29 @@
 import { useRef, useEffect, useState } from "react";
 import cn from 'classnames'
 
-import { NotificationRest } from "features/NotificationRest";
 import styles from './styles.module.scss'
+
 import { useAppDispatch, useAppSelector } from "shared/hooks";
+
 import { updateCurrentText, 
         setLastLetter, 
         clearTextErrors, 
         updateTextErrors, 
         setIsStartedLine, 
         setIsFinishedLine, 
-        setIsStartedTime} from 'widgets/InputText'
-import { updateErrors, updateSpeed } from "widgets/Header";
-import { TextContainer } from "entities/TextContainer";
+        setIsStartedTime } from '../model'
 
-export const InputText = (): JSX.Element => {
+import { updateErrors, updateSpeed } from "widgets/Header";
+
+import { TextContainer } from "entities/TextContainer";
+import { NotificationRest } from "entities/NotificationRest";
+
+
+export const InputText = () => {
     const { currentText, textErrors } = useAppSelector(state => state.inputTextReducer)
     const { randomText } = useAppSelector(state => state.textContainerReducer)
     const { currentTime, selectedTime } = useAppSelector(state => state.timerReducer)
+    const { isRestart } = useAppSelector(state => state.headerReducer)
 
     const dispatch = useAppDispatch()
 
@@ -25,10 +31,6 @@ export const InputText = (): JSX.Element => {
     const [styleText, setStyleText] = useState(cn(styles.text));
     const inputValue = useRef<any>();
     let wasError = false;
-
-    useEffect(() => {
-        dispatch(setLastLetter(randomText[0]));
-    }, [randomText]);
 
     const [timeStart, setTimeStart] = useState(0);
     const [timeFinish, setTimeFinish] = useState(0);
@@ -84,6 +86,18 @@ export const InputText = (): JSX.Element => {
         let target = e.target as HTMLInputElement
         return dispatch(updateCurrentText(target.value))
     }
+
+    useEffect(() => {
+        dispatch(clearTextErrors())
+        dispatch(updateCurrentText(''))
+        dispatch(setIsStartedTime(false))
+        dispatch(setIsStartedLine(false))
+        dispatch(setIsFinishedLine(false))
+    }, [isRestart])
+
+    useEffect(() => {
+        dispatch(setIsStartedTime(false));
+    }, [selectedTime])
 
     return (
         <section className={cn(styles.input)}>
