@@ -14,13 +14,14 @@ export function TextContainer() {
     let configurationRUSimpleText = configuration.language === 'RU' && (configuration.mode === 'start' || configuration.mode === 'begin')
     let configurationENGSimpleText = configuration.language === 'ENG' && (configuration.mode === 'start' || configuration.mode === 'begin')
     let configurationRUComplexText = configuration.language === 'RU' && configuration.mode === 'training'
+    let configurationENGComplexText = configuration.language === 'ENG' && configuration.mode === 'training'
 
     useEffect(() => {
         dispatch(setLastLetter(randomText[0]));
     }, [randomText]);
 
     useEffect(() => {
-        if(isFinishedLine && configurationRUComplexText){
+        if(isFinishedLine && (configurationRUComplexText || configurationENGComplexText)){
             if(complexText.length === 1){
                 dispatch(resetComplexText())
             }else{
@@ -36,16 +37,16 @@ export function TextContainer() {
     }, [complexText])
 
     useEffect(() => {
-        if(configurationRUComplexText){
-            dispatch(setRandomTextTraining(complexText[0]))
+        if(configurationRUComplexText || configurationENGComplexText){
+            dispatch(resetComplexText(configuration.language))
         }else if(configurationRUSimpleText || configurationENGSimpleText){
             dispatch(updateRandomText(configuration))
         }
     }, [configuration])
 
     useEffect(() => {
-        if(configurationRUComplexText){
-            dispatch(resetComplexText())
+        if(configurationRUComplexText || configurationENGComplexText){
+            dispatch(resetComplexText(configuration.language))
         }else if(configurationRUSimpleText || configurationENGSimpleText){
             dispatch(updateRandomText(configuration))
         }

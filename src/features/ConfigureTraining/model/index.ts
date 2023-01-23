@@ -15,6 +15,8 @@ export function setNewTextConfiguration(configuration: configurationTrainingType
             return 'English start'
         }else if(configuration.mode === 'begin'){
             return 'English begin'
+        }else if(configuration.mode === 'training'){
+            return 'English training'
         }
     }
 }

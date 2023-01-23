@@ -5,14 +5,15 @@ import { generateMultipleWordText } from 'shared/utils/textGenerator/generateMul
 import { configurationTrainingType } from 'shared/types/configurationTraining';
 import { arrayWords } from 'shared/utils/textGenerator/wordsToPrint';
 import { arrayWordsENG } from 'shared/utils/textGenerator/wordsToPrintENG';
-
+import {sentencesToPrintENG} from 'shared/utils/textGenerator/sentenceToPrintENG'
+import {sentencesToPrint} from 'shared/utils/textGenerator/sentenceToPrint'
 interface textContainerState {
     complexText: string[],
     randomText: string,
 }
 
 const initialState: textContainerState = {
-    complexText: generateSentence(),
+    complexText: generateSentence(sentencesToPrint),
     randomText: selectText({language: "RU", mode: "start"}),
 }
 
@@ -36,8 +37,12 @@ const textContainerSlice = createSlice({
   name: "textContainer",
   initialState,
   reducers: {
-    resetComplexText(state){
-        state.complexText = generateSentence()
+    resetComplexText(state, mode: PayloadAction<string>){
+        if(mode.payload === 'RU'){
+            state.complexText = generateSentence(sentencesToPrint)
+        }else if(mode.payload === "ENG"){
+            state.complexText = generateSentence(sentencesToPrintENG)
+        }
     },
     updateComplexText(state){
         if(state.complexText.length !== 0){

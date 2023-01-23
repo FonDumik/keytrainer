@@ -1,12 +1,10 @@
-import { sentencesToPrint } from "./sentenceToPrint"
-
-const selectSentence = (arrLength: number) => {
-    let randomNum = Math.floor(arrLength * Math.random());
-    return sentencesToPrint[randomNum];
+const selectSentence = (sentenceArray: string[]) => {
+    let randomNum = Math.floor(sentenceArray.length * Math.random());
+    return sentenceArray[randomNum];
 }
 
-export const generateSentence = () => {
-    const text = selectSentence(sentencesToPrint.length)
+export const generateSentence = (sentenceArray: string[]) => {
+    const text = selectSentence(sentenceArray)
     let array = []
     let splitedArray = text.split(' ')
     let string = ''

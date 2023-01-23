@@ -15,14 +15,8 @@ export const ConfigureTraining = () => {
 
     function setNewConfiguration(e: any, language: string, mode: string){
         e.preventDefault()
-        dispatch(updateConfigurationTraining({
-            language,
-            mode
-        }))
-        dispatch(updateConfigurationText({
-            language,
-            mode
-        }))
+        dispatch(updateConfigurationTraining({language, mode}))
+        dispatch(updateConfigurationText({language,mode}))
         dispatch(setIsRestart(!isRestart))
         setIsOpen(false)
     }
@@ -50,6 +44,10 @@ export const ConfigureTraining = () => {
     function configureENGBegin(event: any){
         return setNewConfiguration(event, 'ENG', 'begin')
     }
+    
+    function configureENGTraining(event: any){
+        return setNewConfiguration(event, 'ENG', 'training')
+    }
 
     return ( 
         <div className={styles.container__configuration}>
@@ -69,6 +67,7 @@ export const ConfigureTraining = () => {
                     <p>English</p>
                     <a href='' onClick={configureENGStart}>Start</a>
                     <a href='' onClick={configureENGBegin}>Begin</a>
+                    <a href='' onClick={configureENGTraining}>Training</a>
                 </section>
             </DropdownObject>
         </div>
