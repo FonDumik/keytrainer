@@ -7,7 +7,8 @@ interface inputTextState {
     lastLetter: string,
     isStartedLine: boolean,
     isFinishedLine: boolean,
-    isTimeStarted: boolean
+    isTimeStarted: boolean,
+    wasError: boolean
 }
 
 const initialState: inputTextState = {
@@ -17,10 +18,11 @@ const initialState: inputTextState = {
     lastLetter: '',
     isStartedLine: false,
     isFinishedLine: false,
-    isTimeStarted: false
+    isTimeStarted: false,
+    wasError: false
 }
 
-const inputTextSlice = createSlice({
+const inputCurrentTextSlice = createSlice({
   name: 'inputText',
   initialState,
   reducers: {
@@ -32,9 +34,6 @@ const inputTextSlice = createSlice({
     },
     clearTextErrors(state){
         state.textErrors = 0
-    },
-    setTimeWrite(state, action: PayloadAction<number>){
-        state.timeWrite = action.payload
     },
     setLastLetter(state, action: PayloadAction<string>){
       state.lastLetter = action.payload
@@ -48,16 +47,19 @@ const inputTextSlice = createSlice({
     setIsStartedTime(state, action: PayloadAction<boolean>){
       state.isTimeStarted = action.payload
     },
+    setWasError(state, action: PayloadAction<boolean>){
+      state.wasError = action.payload
+    }
   }
 });
 
 export const { updateCurrentText, 
               updateTextErrors, 
               clearTextErrors, 
-              setTimeWrite, 
               setLastLetter, 
               setIsStartedLine,
               setIsFinishedLine, 
-              setIsStartedTime } = inputTextSlice.actions
+              setIsStartedTime,
+              setWasError } = inputCurrentTextSlice.actions
 
-export const inputTextReducer = inputTextSlice.reducer
+export const inputCurrentTextReducer = inputCurrentTextSlice.reducer

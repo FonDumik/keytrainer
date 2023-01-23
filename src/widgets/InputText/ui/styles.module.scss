@@ -11,18 +11,7 @@
     align-items: center;
 }
 
-.input_text{
-    border-radius: 0;
-    border-bottom: 1px dotted lightgray;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    background-color: white;
-    user-select: none;
-    border-radius: 5px 5px 0 0;
-}
-
-.text, .input_text{
+.text{
     width: 100%;
     padding: 5px 20px;
     font-size: 18px;
@@ -51,8 +40,4 @@
 
 .line1{
     display: inline;
-}
-
-.error_input{
-    background-color: yellow;
 }

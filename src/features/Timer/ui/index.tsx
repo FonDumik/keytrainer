@@ -11,7 +11,7 @@ const timeSelectCases = [5, 10, 15, 20, 25, 30]
 
 export const Timer = () => {
     const { currentTime, selectedTime } = useAppSelector(state => state.timerReducer)
-    const { isTimeStarted } = useAppSelector(state => state.inputTextReducer)
+    const { isTimeStarted } = useAppSelector(state => state.inputCurrentTextReducer)
     const { isRestart } = useAppSelector((state => state.headerReducer))
     const dispatch = useAppDispatch()
 

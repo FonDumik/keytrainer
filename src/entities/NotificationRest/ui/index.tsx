@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import cn from 'classnames'
 import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from 'shared/hooks'
 import { setSelectedTime } from 'features/Timer'
-import { setIsStartedTime } from 'widgets/InputText'
+import { setIsStartedTime } from 'features/InputCurrentText/model'
 
-interface notificationRestProps {
-    input: React.MutableRefObject<any>
-}
-
-export const NotificationRest = ({ input }: notificationRestProps) => {
+export const NotificationRest = () => {
     const [classBreak, setClassBreak] = useState(cn(styles.window__break));
 
     const {selectedTime, currentTime} = useAppSelector(state => state.timerReducer)
@@ -26,7 +22,6 @@ export const NotificationRest = ({ input }: notificationRestProps) => {
     useEffect(() => {
         if(currentTime <= 1){
             setClassBreak(cn(styles.window__break))
-            input.current.blur()
             dispatch(setIsStartedTime(false))
         }else{
             setClassBreak(cn(styles.window__break, styles.hidden))

@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { resetComplexText, updateComplexText, setRandomTextTraining, updateRandomText } from '../model';
-import { setLastLetter } from 'widgets/InputText';
+import { setLastLetter } from 'features/InputCurrentText/model';
 import styles from './styles.module.scss'
 
 export function TextContainer() {
-    const { isFinishedLine } = useAppSelector(state => state.inputTextReducer)
+    const { isFinishedLine } = useAppSelector(state => state.inputCurrentTextReducer)
     const { configuration } = useAppSelector(state => state.configurationTrainingReducer)
     const { isRestart } = useAppSelector(state => state.headerReducer)
     const { complexText, randomText } = useAppSelector(state => state.textContainerReducer)

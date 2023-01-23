@@ -8,7 +8,7 @@ import { changeKeyboard, updateKeyboard } from "../model";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 
 export const Keyboard = () => {
-    const lastLetter = useAppSelector(state => state.inputTextReducer.lastLetter)
+    const lastLetter = useAppSelector(state => state.inputCurrentTextReducer.lastLetter)
     const keysList = useAppSelector(state => state.keyboardReducer.keyList)
     const { configuration } = useAppSelector(state => state.configurationTrainingReducer)
     const dispatch = useAppDispatch()
