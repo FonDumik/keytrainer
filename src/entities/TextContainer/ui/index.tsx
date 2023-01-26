@@ -23,7 +23,7 @@ export function TextContainer() {
     useEffect(() => {
         if(isFinishedLine && (configurationRUComplexText || configurationENGComplexText)){
             if(complexText.length === 1){
-                dispatch(resetComplexText())
+                dispatch(resetComplexText(configuration.language))
             }else{
                 dispatch(updateComplexText())
             }

@@ -8,8 +8,8 @@ import { changeKeyboard, updateKeyboard } from "../model";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 
 export const Keyboard = () => {
-    const lastLetter = useAppSelector(state => state.inputCurrentTextReducer.lastLetter)
-    const keysList = useAppSelector(state => state.keyboardReducer.keyList)
+    const { lastLetter } = useAppSelector(state => state.inputCurrentTextReducer)
+    const { keyList } = useAppSelector(state => state.keyboardReducer)
     const { configuration } = useAppSelector(state => state.configurationTrainingReducer)
     const dispatch = useAppDispatch()
 
@@ -44,7 +44,7 @@ export const Keyboard = () => {
 
     return(
         <section className={styles.keyboard}>
-            {keysList.map(elem => 
+            {keyList.map(elem => 
                 <ButtonKey setType = {elem.setType} selected = {elem.selected}>
                     {renderContentKey(elem.content1, elem.content2)}
                 </ButtonKey>

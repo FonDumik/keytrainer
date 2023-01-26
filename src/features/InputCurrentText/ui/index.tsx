@@ -77,6 +77,12 @@ export function InputCurrentText() {
     }, [wasError])
 
     useEffect(() => {
+        if(currentTime === 0){
+            inputValue.current.blur()
+        }
+    }, [currentTime])
+
+    useEffect(() => {
         dispatch(setWasError(false))
         dispatch(clearTextErrors())
         dispatch(updateCurrentText(''))
