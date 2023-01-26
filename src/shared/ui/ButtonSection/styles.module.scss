@@ -1,0 +1,65 @@
+.linkButton{
+    text-decoration: none;
+}
+
+%button-main{
+    padding: 10px 15px;
+    border: 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: transparent;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.documentation{
+    @extend %button-main;
+    color: #343a40;
+    border-color: #343a40;
+}
+
+.documentation:hover{
+    background-color: #343a40!important;
+    color: white;
+}
+
+.klavaogr{
+    @extend %button-main;
+    color: #28a745;
+    border-color: #28a745;
+    img{
+        filter: invert(51%) sepia(45%) saturate(762%) hue-rotate(81deg) brightness(94%) contrast(87%);
+    }
+}
+
+.klavaogr:hover{
+    background-color: #28a745!important;
+    color: white;
+    img{
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(206deg) brightness(107%) contrast(101%);
+    }
+}
+
+.clikclik{
+    @extend %button-main;
+    color: #dc3545;
+    border-color: #dc3545;
+
+    img{
+        filter: invert(31%) sepia(98%) saturate(4955%) hue-rotate(342deg) brightness(95%) contrast(81%);
+    }
+}
+
+.clikclik:hover{
+    color: white;
+    background-color: #dc3545!important;
+
+    img{
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(206deg) brightness(107%) contrast(101%);
+    }
+}

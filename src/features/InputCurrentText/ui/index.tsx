@@ -26,7 +26,9 @@ export function InputCurrentText() {
     const [timeStart, setTimeStart] = useState(0);
     const [timeFinish, setTimeFinish] = useState(0);
 
-    const writeText = () => {
+    const updateInput = (e: any) => {
+        let target = e.target as HTMLInputElement
+        dispatch(updateCurrentText(target.value))
         let value = inputValue.current.value;
         let lastIndexText = value.length - 1
         if (value[lastIndexText] === randomText[lastIndexText] && value.length !== randomText.length) {
@@ -55,11 +57,6 @@ export function InputCurrentText() {
             dispatch(updateCurrentText(''))
             dispatch(setLastLetter(randomText[0]))
         }
-    }
-
-    const updateInput = (e: any) => {
-        let target = e.target as HTMLInputElement
-        return dispatch(updateCurrentText(target.value))
     }
 
     useEffect(() => {
@@ -97,7 +94,6 @@ export function InputCurrentText() {
             type="text"
             className={styleInput}
             onInput={updateInput}
-            onChange={writeText}
             value={currentText}
             maxLength={randomText.length}
             ref={inputValue} 

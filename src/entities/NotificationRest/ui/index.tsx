@@ -4,6 +4,7 @@ import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from 'shared/hooks'
 import { setSelectedTime } from 'features/Timer'
 import { setIsStartedTime } from 'features/InputCurrentText/model'
+import { setIsRestart } from 'widgets/Header'
 
 export const NotificationRest = () => {
     const [classBreak, setClassBreak] = useState(cn(styles.window__break));
@@ -15,6 +16,7 @@ export const NotificationRest = () => {
 
     function backToTrain(e: any){
         e.preventDefault();
+        setIsRestart(!isRestart)
         dispatch(setSelectedTime(selectedTime))
         setClassBreak(cn(styles.window__break, styles.hidden));
     }

@@ -1,12 +1,14 @@
 import { lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-const MainPage = lazy(() => import('./MainPage/ui'))
+const Klavaogr = lazy(() => import('./Klavaogr/ui'))
+const StartPage = lazy(() => import('./StartPage'))
 
 const Routing = () => {
     return(
         <Routes>
-            <Route path='/' element={<MainPage/>}></Route>
+            <Route path='/' element={<StartPage />}></Route>
+            <Route path='/klavaogr' element={<Klavaogr />}></Route>
         </Routes>
     )
 }

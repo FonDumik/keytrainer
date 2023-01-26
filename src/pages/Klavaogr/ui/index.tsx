@@ -7,7 +7,7 @@ import { Keyboard } from 'widgets/Keyboard';
 import { store } from '../model';
 import styles from './styles.module.scss'
 
-const MainPage = () => {
+const Klavaogr = () => {
     return (
         <Provider store={store}>
             <div className={styles.MainPage}>
@@ -20,4 +20,4 @@ const MainPage = () => {
 }
 
 
-export default MainPage
+export default Klavaogr

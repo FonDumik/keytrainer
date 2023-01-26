@@ -1,0 +1,13 @@
+.documentationSection{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+}
+
+.description_icon{
+    width: 30px;
+    color: #505050;
+    height: 30px;
+    filter: invert(34%) sepia(0%) saturate(27%) hue-rotate(203deg) brightness(83%) contrast(85%);
+}

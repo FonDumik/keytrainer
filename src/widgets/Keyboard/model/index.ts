@@ -59,12 +59,8 @@ function selectLetter(keysCases: keyboardCases, lastLetter: string, keysList: Ar
                         if(elem.content1 === lastLetter){
                             elem.selected = true;
                         }
-                
-                        if(elem.needShift === 'left'){
-                            setSelectedShift('left', keysList)
-                        }else if(elem.needShift === 'right'){
-                            setSelectedShift('right', keysList)
-                        }
+
+                        setSelectedShift(elem.needShift, keysList)
                         return elem
                     })
                 case 'symbols':
@@ -74,12 +70,9 @@ function selectLetter(keysCases: keyboardCases, lastLetter: string, keysList: Ar
                             elem.selected = true;
                         }else if(elem.content2 === lastLetter){
                             elem.selected = true;
-                            if(elem.needShift === 'left'){
-                                setSelectedShift('left', keysList)
-                            }else if(elem.needShift === 'right'){
-                                setSelectedShift('right', keysList)
-                            }
                         }
+
+                        setSelectedShift(elem.needShift, keysList)
                         return elem
                     })
                 default:
