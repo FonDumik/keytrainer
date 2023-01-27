@@ -1,0 +1,33 @@
+.accordion{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.accordion__header{
+    padding: 10px 20px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+
+    h1{
+        font-size: 25px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 600;
+    }
+}
+
+.accordion__content{
+    background-color: white;
+    padding: 20px;
+}
+
+.button__img{
+    transform: rotate(0deg)
+}
+
+.button__img_active{
+    transform: rotate(180deg)
+}

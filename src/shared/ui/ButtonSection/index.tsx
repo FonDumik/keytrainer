@@ -7,7 +7,7 @@ type buttonSectionProps = {
     styleSheet: string
 }
 
-export const ButtonSection = ({ children, link, styleSheet }: buttonSectionProps) => {
+export const ButtonSection = ({ children, link, styleSheet }: buttonSectionProps, ...props) => {
 
     const configureStyle = () => {
         if(styleSheet === 'documentation'){

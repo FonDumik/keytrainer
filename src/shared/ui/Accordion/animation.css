@@ -1,0 +1,20 @@
+.accordion-enter {
+    opacity: 0;
+    transform: scale(1, 0);
+    transform-origin: top;
+  }
+  .accordion-enter-active {
+    opacity: 1;
+    transform: scale(1, 1);
+    transform-origin: top;
+    transition: opacity 500ms, transform 500ms;
+  }
+  .accordion-exit {
+    opacity: 1;
+  }
+  .accordion-exit-active {
+    opacity: 0;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: opacity 300ms, transform 300ms;
+  }
