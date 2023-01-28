@@ -1,7 +1,6 @@
-.button_primary{
-    padding: 10px;
-    border: 1px solid #2c2ca0;
-    background-color: transparent;
+%button_template{
+    padding: 15px;
+    border: 1px solid;
     border-radius: 5px;
     transition: 0.3s;
 
@@ -10,7 +9,13 @@
     justify-content: center;
 
     cursor: pointer;
+}
 
+.button_primary{
+    @extend %button_template;
+
+    border-color: #2c2ca0;
+    background-color: transparent;
     img{
         transition: 0.3s;
         filter: invert(17%) sepia(26%) saturate(7429%) hue-rotate(235deg) brightness(93%) contrast(102%);
@@ -23,4 +28,31 @@
     img{
         filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(206deg) brightness(107%) contrast(101%);
     }
+}
+
+.button_home{
+    @extend %button_template;
+    background-color: transparent;
+    border-color: #343a40;
+    img{
+        transition: 0.3s;
+        filter: invert(20%) sepia(11%) saturate(545%) hue-rotate(169deg) brightness(100%) contrast(93%);   
+    }
+}
+
+.button_home:hover{
+    background-color: #343a40;
+    img{
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(206deg) brightness(107%) contrast(101%);
+    }
+}
+
+.button_menu{
+    @extend %button_template;
+    background-color: white;
+    border-color: white;
+}
+
+.button_menu:hover{
+    background-color: whitesmoke;
 }

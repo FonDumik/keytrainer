@@ -23,7 +23,7 @@ export const Accordion = ({ children, header }) => {
     <div className={styles.accordion}>
         <div className={styles.accordion__header}>
             <h1>{header}</h1>
-            <PrimaryButton onClick = {toggleContent}>
+            <PrimaryButton onClick = {toggleContent} styleSheet='primary'>
                 <img src="./img/chevron-down.svg" alt=""  className={styleImg}/>
             </PrimaryButton>
         </div>

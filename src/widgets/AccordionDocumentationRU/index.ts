@@ -1,0 +1,1 @@
+export { AccordionDocumentationRU } from './ui'
