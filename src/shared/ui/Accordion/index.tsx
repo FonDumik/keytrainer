@@ -1,47 +1,46 @@
-import { PrimaryButton } from '../PrimaryButton'
+import { PrimaryButton } from 'shared/ui/PrimaryButton'
 import styles from './styles.module.scss'
-import { CSSTransition } from 'react-transition-group'
-import { useRef, useState } from 'react'
-import './animation.css'
+import { useState } from 'react'
+import AnimateHeight from 'react-animate-height'
 
 export const Accordion = ({ children, header }) => {
-    const [isOpen, setIsOpen] = useState(false)
     const [styleImg, setStyleImg] = useState(styles.button__img)
-
-    const nodeRef = useRef()
+    const [height, setHeight] = useState<"auto" | number>(0)
 
     const toggleContent = () => {
-        if(isOpen){
-            setStyleImg(styles.button__img)
-        }else{
+        if(height === 0){
             setStyleImg(styles.button__img_active)
+        }else{
+            setStyleImg(styles.button__img)
         }
-        return setIsOpen(!isOpen)
+        return setHeight(height === 0 ? 'auto' : 0)
     }
 
   return (
     <div className={styles.accordion}>
         <div className={styles.accordion__header}>
             <h1>{header}</h1>
-            <PrimaryButton onClick = {toggleContent} styleSheet='primary'>
+            <PrimaryButton 
+                styleSheet='primary'
+                aria-expanded={height !== 0}
+                aria-controls="open_accordion_content"
+                onClick={toggleContent}
+            >
                 <img src="./img/chevron-down.svg" alt=""  className={styleImg}/>
             </PrimaryButton>
         </div>
         
-        <CSSTransition
-            ref={nodeRef}
-            in={isOpen} 
-            timeout={300} 
-            classNames="accordion"
-            unmountOnExit
+        <AnimateHeight
+            id="open_accordion_content"
+            duration={300}
+            height={height}
         >
             <div 
                 className={styles.accordion__content}
-                ref={nodeRef}
             >
                 {children}
             </div>
-        </CSSTransition>    
+        </AnimateHeight>
     </div>
   )
 }

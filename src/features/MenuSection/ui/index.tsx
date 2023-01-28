@@ -1,33 +1,34 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { PrimaryButton } from 'shared/ui/PrimaryButton'
-import { CSSTransition } from 'react-transition-group'
+import AnimateHeight from 'react-animate-height'
 import styles from './styles.module.scss'
-import './animation.css'
 import { Link } from 'react-router-dom'
 
 export const MenuSection = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const nodeRef = useRef()
+    const [height, setHeight] = useState<"auto" | number>(0)
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen)
+        return setHeight(height === 0 ? 'auto' : 0)
     }
 
   return (
     <div className={styles.menu_container}>
-        <PrimaryButton styleSheet='menu' onClick={toggleDropdown}>
+        <PrimaryButton 
+            styleSheet='menu' 
+            aria-expanded={height !== 0}
+            aria-controls="open_menu"
+            onClick={toggleDropdown}
+        >
             <img src="./img/list.svg" alt="menu" />
         </PrimaryButton>
-        <CSSTransition
-            in={isOpen} 
-            timeout={300} 
-            classNames="dropdown"
-            unmountOnExit
-            nodeRef={nodeRef}
+
+        <AnimateHeight
+            id="open_menu"
+            duration={300}
+            height={height}
         >
             <div 
                 className={styles.menu_hiddenContent}
-                ref={nodeRef}
             >
                 <Link to = '/'>
                     <PrimaryButton styleSheet='home'>
@@ -35,7 +36,7 @@ export const MenuSection = () => {
                     </PrimaryButton>
                 </Link>
             </div>
-        </CSSTransition>
+        </AnimateHeight>
     </div>
   )
 }

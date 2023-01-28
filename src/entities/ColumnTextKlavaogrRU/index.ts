@@ -1,0 +1,1 @@
+export { ColumnTextKlavaogrRU } from './ui'

@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 
 export const HeaderDocumentation = () => {
   return (
-    <div className="wrapper">
+    <div className="wrapper_documentation">
         <div className={styles.header}>
             <MenuSection />
         </div>
