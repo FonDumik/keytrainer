@@ -1,16 +1,16 @@
-.keyboard{
-    margin: 10px auto;
-    width: 800px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    position: relative;    
-    
-    div{
-        border: 1.5px solid gray;
-        border-radius: 5px;
-        padding: 5px;
-        margin: 3px 2px;
-        height: 50px;
-    }
+.keyboard {
+  margin: 10px auto;
+  width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  position: relative;
+
+  div {
+    border: 1.5px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 3px 2px;
+    height: 50px;
+  }
 }

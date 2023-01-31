@@ -1,4 +1,4 @@
 export type configurationTrainingType = {
-    language: string,
-    mode: string
-}
+  language: string;
+  mode: string;
+};

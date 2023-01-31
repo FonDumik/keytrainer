@@ -1,1 +1,1 @@
-export { ColumnTextKlavaogrRU } from './ui'
+export { ColumnTextKlavaogrRU } from "./ui";

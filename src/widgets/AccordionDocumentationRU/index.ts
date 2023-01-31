@@ -1,1 +1,1 @@
-export { AccordionDocumentationRU } from './ui'
+export { AccordionDocumentationRU } from "./ui";

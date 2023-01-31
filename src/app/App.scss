@@ -1,25 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-.App, #root{
-    width: 100%;
-    height: 100vh;
+.App,
+#root {
+  width: 100%;
+  height: 100vh;
 }
 
 * {
-    font-family: "Roboto";
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.wrapper{
-    width: 800px;
-    margin-right: auto;
-    margin-left: auto;
+.wrapper {
+  width: 800px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.wrapper_documentation{
-    width: 900px;
-    margin-right: auto;
-    margin-left: auto;
+.wrapper_documentation {
+  width: 900px;
+  margin-right: auto;
+  margin-left: auto;
 }
