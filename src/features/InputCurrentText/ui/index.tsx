@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import cn from "classnames";
-import { useAppDispatch, useAppSelector } from "shared/hooks";
+import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
 import styles from "./styles.module.scss";
 import { updateErrors, updateSpeed } from "widgets/Header";
 import {
@@ -15,15 +15,17 @@ import {
 } from "../model";
 
 export function InputCurrentText() {
-  const { randomText } = useAppSelector((state) => state.textContainerReducer);
-  const { currentText, textErrors, wasError } = useAppSelector(
+  const { randomText } = useKlavaogrSelector(
+    (state) => state.textContainerReducer
+  );
+  const { currentText, textErrors, wasError } = useKlavaogrSelector(
     (state) => state.inputCurrentTextReducer
   );
-  const { currentTime, selectedTime } = useAppSelector(
+  const { currentTime, selectedTime } = useKlavaogrSelector(
     (state) => state.timerReducer
   );
-  const { isRestart } = useAppSelector((state) => state.headerReducer);
-  const dispatch = useAppDispatch();
+  const { isRestart } = useKlavaogrSelector((state) => state.headerReducer);
+  const dispatch = useKlavaogrDispatch();
 
   const [styleInput, setStyleInput] = useState(cn(styles.input_text));
 

@@ -1,16 +1,18 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import { useAppDispatch, useAppSelector } from "shared/hooks";
+import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
 import { updateConfigurationText, updateConfigurationTraining } from "../model";
 import { setIsRestart } from "widgets/Header";
 import { DropdownObject } from "shared/ui/DropdownObject";
 
 export const ConfigureTraining = () => {
-  const textConfiguration = useAppSelector(
+  const textConfiguration = useKlavaogrSelector(
     (state) => state.configurationTrainingReducer.configurationText
   );
-  const isRestart = useAppSelector((state) => state.headerReducer.isRestart);
-  const dispatch = useAppDispatch();
+  const isRestart = useKlavaogrSelector(
+    (state) => state.headerReducer.isRestart
+  );
+  const dispatch = useKlavaogrDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
 

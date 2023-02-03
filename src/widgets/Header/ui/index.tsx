@@ -1,14 +1,13 @@
 import { Timer } from "features/Timer";
 import styles from "./styles.module.scss";
 import { ConfigureTraining } from "features/ConfigureTraining";
-import { useAppDispatch, useAppSelector } from "shared/hooks";
+import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
 import { average, setIsRestart } from "../model";
 
 export const Header = () => {
-  const { speed, speedArray, errors, errorsArray, isRestart } = useAppSelector(
-    (state) => state.headerReducer
-  );
-  const dispatch = useAppDispatch();
+  const { speed, speedArray, errors, errorsArray, isRestart } =
+    useKlavaogrSelector((state) => state.headerReducer);
+  const dispatch = useKlavaogrDispatch();
 
   function restartTraining() {
     dispatch(setIsRestart(!isRestart));

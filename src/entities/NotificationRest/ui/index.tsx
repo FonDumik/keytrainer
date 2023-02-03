@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import cn from "classnames";
 import styles from "./styles.module.scss";
-import { useAppDispatch, useAppSelector } from "shared/hooks";
+import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
 import { setSelectedTime } from "features/Timer";
 import { setIsStartedTime } from "features/InputCurrentText/model";
 import { setIsRestart } from "widgets/Header";
@@ -9,12 +9,14 @@ import { setIsRestart } from "widgets/Header";
 export const NotificationRest = () => {
   const [classBreak, setClassBreak] = useState(cn(styles.window__break));
 
-  const { selectedTime, currentTime } = useAppSelector(
+  const { selectedTime, currentTime } = useKlavaogrSelector(
     (state) => state.timerReducer
   );
-  const isRestart = useAppSelector((state) => state.headerReducer.isRestart);
+  const isRestart = useKlavaogrSelector(
+    (state) => state.headerReducer.isRestart
+  );
 
-  const dispatch = useAppDispatch();
+  const dispatch = useKlavaogrDispatch();
 
   function backToTrain(e: any) {
     e.preventDefault();

@@ -50,6 +50,9 @@ export const keysCases: keyboardCases = {
     "9",
     "0",
     "Backspace",
+    "ShiftLeft",
+    "ShiftRight",
+    "Enter",
   ],
   upperCase: [
     "А",

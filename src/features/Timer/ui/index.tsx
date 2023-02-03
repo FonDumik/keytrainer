@@ -10,14 +10,16 @@ import { DropdownObject } from "shared/ui/DropdownObject";
 const timeSelectCases = [5, 10, 15, 20, 25, 30];
 
 export const Timer = () => {
-  const { currentTime, selectedTime } = hooks.useAppSelector(
+  const { currentTime, selectedTime } = hooks.useKlavaogrSelector(
     (state) => state.timerReducer
   );
-  const { isTimeStarted } = hooks.useAppSelector(
+  const { isTimeStarted } = hooks.useKlavaogrSelector(
     (state) => state.inputCurrentTextReducer
   );
-  const { isRestart } = hooks.useAppSelector((state) => state.headerReducer);
-  const dispatch = hooks.useAppDispatch();
+  const { isRestart } = hooks.useKlavaogrSelector(
+    (state) => state.headerReducer
+  );
+  const dispatch = hooks.useKlavaogrDispatch();
 
   let [isOpenMenu, setIsOpenMenu] = useState(false);
 

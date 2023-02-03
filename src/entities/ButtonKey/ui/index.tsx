@@ -1,27 +1,37 @@
-import { useState, useEffect } from "react";
-import { renderKey } from "../model";
+import { useState, useEffect, FC } from "react";
+import { renderDefault, renderKey } from "../model";
 import classes from "./ButtonKey.module.scss";
 
 type buttonKeyInterface = {
-   setType: string,
-   selected: boolean,
-   children: any
-}
+  setType: string;
+  selected: boolean;
+  isColored?: boolean;
+  children: any;
+};
 
-export const ButtonKey = ({ setType, selected, children }: buttonKeyInterface) => {
-   const [style, setClass] = useState('');
+export const ButtonKey: FC<buttonKeyInterface> = ({
+  setType,
+  selected,
+  children,
+  isColored,
+}) => {
+  const [style, setClass] = useState("");
 
-   useEffect(() => {
-      if(selected === true){
-         setClass(renderKey(setType) + ` ${classes.active}`);
-      }else {
-         setClass(renderKey(setType))
+  useEffect(() => {
+    if (isColored === true) {
+      if (selected === true) {
+        setClass(renderKey(setType) + ` ${classes.active}`);
+      } else {
+        setClass(renderKey(setType));
       }
-   }, [selected]) 
+    } else {
+      if (selected === true) {
+        setClass(renderDefault(setType) + ` ${classes.active_default}`);
+      } else {
+        setClass(renderDefault(setType));
+      }
+    }
+  }, [selected]);
 
-    return(
-        <div className={style}>
-            {children}
-        </div>
-    )
-}
+  return <div className={style}>{children}</div>;
+};

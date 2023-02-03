@@ -1,0 +1,23 @@
+$font-primary: "Roboto Mono", sans-serif;
+
+.last_letter {
+  background-color: rgb(110, 150, 224);
+  padding: 1px;
+  color: white;
+  font-family: $font-primary;
+}
+
+.container {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.complete_text {
+  font-family: $font-primary;
+  color: rgba(211, 211, 211, 0.658);
+}
+
+.text_input {
+  color: white;
+  font-family: $font-primary;
+}
