@@ -1,5 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
+import HeaderResults from "widgets/HeaderResults/ui";
 import { InputTextClikClik } from "widgets/InputTextClikClik";
 import InteractableKeyboard from "widgets/InteractableKeyboard/ui";
 import { storeClikClik } from "../model";
@@ -14,6 +15,7 @@ const ClikClik = () => {
   return (
     <Provider store={storeClikClik}>
       <div className={styles.container}>
+        <HeaderResults />
         <InputTextClikClik />
         <InteractableKeyboard />
       </div>

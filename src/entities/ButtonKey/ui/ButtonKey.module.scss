@@ -116,14 +116,23 @@ sup {
   color: black !important;
 }
 
-.active_default {
-  background-color: #ddd !important;
-  color: black !important;
-}
-
 .default {
   background-color: transparent;
   color: white;
+}
+
+.active_default {
+  animation: showHide 1s linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes showHide {
+  from {
+    background: #9d0e0e;
+  }
+  to {
+    background-color: transparent;
+  }
 }
 
 .sys_default {

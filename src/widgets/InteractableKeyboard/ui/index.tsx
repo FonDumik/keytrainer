@@ -9,14 +9,14 @@ const InteractableKeyboard = () => {
     (state) => state.InteractiveKeyboardReducer.keyList
   );
   const dispatch = useClikDispatch();
-  const { inputLetter } = useClikSelector(
+  const { inputLetter, typos } = useClikSelector(
     (state) => state.InputTextClikClikReducer
   );
 
   useEffect(() => {
     dispatch(showPressedKey(inputLetter));
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputLetter]);
+  }, [typos]);
 
   function renderContentKey(content1: string, content2: string | undefined) {
     if (content2 !== undefined) {
