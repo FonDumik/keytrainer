@@ -6,10 +6,14 @@ import { keyboardCasesKeys } from "shared/types/keyboardConfiguration";
 
 interface keyboardState {
   keyList: keyboardConfiguration[];
+  letterTypo: string;
+  counterTypo: number;
 }
 
 const initialState: keyboardState = {
   keyList: arrayList,
+  letterTypo: "",
+  counterTypo: 0,
 };
 
 const InteractiveKeyboardSlice = createSlice({
@@ -18,6 +22,13 @@ const InteractiveKeyboardSlice = createSlice({
   reducers: {
     showPressedKey(state, action: PayloadAction<string>) {
       state.keyList = arraySelectedKey(state.keyList, action.payload);
+    },
+    returnKeyList(state) {
+      state.keyList = initialState.keyList;
+    },
+    setLetterTypo(state, action: PayloadAction<string>) {
+      state.letterTypo = action.payload;
+      state.counterTypo = state.counterTypo + 1;
     },
   },
 });
@@ -74,6 +85,7 @@ const arraySelectedKey = (
   }
 };
 
-export const { showPressedKey } = InteractiveKeyboardSlice.actions;
+export const { showPressedKey, returnKeyList, setLetterTypo } =
+  InteractiveKeyboardSlice.actions;
 
 export const InteractiveKeyboardReducer = InteractiveKeyboardSlice.reducer;

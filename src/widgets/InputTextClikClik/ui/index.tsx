@@ -4,7 +4,6 @@ import styles from "./styles.module.scss";
 import {
   updateTextInput,
   decreaseTextInput,
-  setInputLetter,
   addTypos,
   addLetterCounter,
   clearLetterCounter,
@@ -16,40 +15,32 @@ import {
   updateAccuracy,
   updateSpeed,
 } from "widgets/HeaderResults/model";
+import { usePressedKey } from "shared/hooks/usePressedKey";
+import { setLetterTypo } from "widgets/InteractableKeyboard";
 
 export const InputTextClikClik: FC = () => {
   const {
     textInput,
     lastLetter,
     completeText,
-    inputLetter,
     letterCounter,
     inputTextLength,
     typos,
   } = useClikSelector((state) => state.InputTextClikClikReducer);
   const dispatch = useClikDispatch();
 
+  const [inputLetter, counterInput] = usePressedKey();
+
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [intervalCounter, setIntervalCounter] = useState(0);
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Shift") {
-      dispatch(setInputLetter(e.code));
-    } else {
-      dispatch(setInputLetter(e.key));
-    }
-  };
-
   useEffect(() => {
-    document.addEventListener("keydown", onKeyDown);
-
     const start = setInterval(() => {
       setIntervalCounter((prev) => prev + 1);
     }, 1000);
 
     return () => {
       clearInterval(start);
-      document.removeEventListener("keydown", onKeyDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -76,11 +67,23 @@ export const InputTextClikClik: FC = () => {
     }
 
     if (inputLetter !== lastLetter) {
-      dispatch(addTypos());
-      dispatch(updateAccuracy({ textLength: inputTextLength, typos }));
+      errorHandler(inputLetter);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputLetter]);
+  }, [inputLetter, counterInput]);
+
+  const errorHandler = (inputLetter: string) => {
+    if (
+      inputLetter !== "ShiftLeft" &&
+      inputLetter !== "ShiftRight" &&
+      inputLetter !== "" &&
+      inputLetter !== null
+    ) {
+      dispatch(addTypos());
+      dispatch(setLetterTypo(inputLetter));
+      dispatch(updateAccuracy({ textLength: inputTextLength, typos }));
+    }
+  };
 
   return (
     <div className={styles.container}>

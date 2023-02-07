@@ -1,22 +1,26 @@
 import { ButtonKey } from "entities/ButtonKey";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
-import { showPressedKey } from "../model";
+import { usePressedKey } from "shared/hooks/usePressedKey";
+import { returnKeyList, showPressedKey } from "../model";
 import styles from "./styles.module.scss";
 
 const InteractableKeyboard = () => {
-  const keyList = useClikSelector(
-    (state) => state.InteractiveKeyboardReducer.keyList
+  const { keyList, letterTypo, counterTypo } = useClikSelector(
+    (state) => state.InteractiveKeyboardReducer
   );
   const dispatch = useClikDispatch();
-  const { inputLetter, typos } = useClikSelector(
-    (state) => state.InputTextClikClikReducer
-  );
+
+  const changeKeyboard = useCallback(() => {
+    dispatch(showPressedKey(letterTypo));
+    setTimeout(() => {
+      dispatch(returnKeyList());
+    }, 100);
+  }, [letterTypo, counterTypo]);
 
   useEffect(() => {
-    dispatch(showPressedKey(inputLetter));
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [typos]);
+    changeKeyboard();
+  }, [changeKeyboard]);
 
   function renderContentKey(content1: string, content2: string | undefined) {
     if (content2 !== undefined) {
