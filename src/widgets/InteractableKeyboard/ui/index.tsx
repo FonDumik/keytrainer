@@ -1,50 +1,66 @@
-import { ButtonKey } from "entities/ButtonKey";
+import { ButtonKeyClikClik } from "entities/ButtonKeyClikClik/ui";
 import { useCallback, useEffect } from "react";
 import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
-import { usePressedKey } from "shared/hooks/usePressedKey";
-import { returnKeyList, showPressedKey } from "../model";
+import { textInputConfig } from "widgets/InputTextClikClik";
+import {
+  clearTypoKeyboard,
+  returnKeyList,
+  setPriorityTypoKeys,
+  showErrorKey,
+  showSelectedKey,
+} from "../model";
 import styles from "./styles.module.scss";
 
 const InteractableKeyboard = () => {
   const { keyList, letterTypo, counterTypo } = useClikSelector(
     (state) => state.InteractiveKeyboardReducer
   );
+  const { inputText, isEndLine } = useClikSelector(
+    (state) => state.InputTextClikClikReducer
+  );
+
   const dispatch = useClikDispatch();
 
   const changeKeyboard = useCallback(() => {
-    dispatch(showPressedKey(letterTypo));
-    setTimeout(() => {
-      dispatch(returnKeyList());
-    }, 100);
+    if (!isEndLine) {
+      dispatch(showErrorKey(letterTypo));
+      setTimeout(() => {
+        dispatch(returnKeyList());
+      }, 100);
+    }
   }, [letterTypo, counterTypo]);
+
+  const selectLetter = useCallback(() => {
+    if (isEndLine) {
+      dispatch(showSelectedKey("Enter"));
+    } else {
+      const lastLetter: textInputConfig = inputText.find(
+        (elem) => elem.isSelected === true
+      );
+      dispatch(showSelectedKey(lastLetter.content));
+    }
+  }, [inputText]);
+
+  useEffect(() => {
+    selectLetter();
+  }, [selectLetter]);
 
   useEffect(() => {
     changeKeyboard();
   }, [changeKeyboard]);
 
-  function renderContentKey(content1: string, content2: string | undefined) {
-    if (content2 !== undefined) {
-      return (
-        <section>
-          <p>{content1}</p>
-          <sup>{content2}</sup>
-        </section>
-      );
-    } else if (content2 === undefined) {
-      return (
-        <section>
-          <p>{content1}</p>
-        </section>
-      );
+  useEffect(() => {
+    if (isEndLine === true) {
+      dispatch(setPriorityTypoKeys());
+    } else {
+      dispatch(clearTypoKeyboard());
     }
-  }
+  }, [isEndLine]);
 
   return (
     <div className={styles.keyboard}>
       {keyList.map((elem) => (
-        <ButtonKey setType={elem.setType} selected={elem.selected}>
-          {renderContentKey(elem.content1, elem.content2)}
-        </ButtonKey>
+        <ButtonKeyClikClik config={elem} />
       ))}
     </div>
   );

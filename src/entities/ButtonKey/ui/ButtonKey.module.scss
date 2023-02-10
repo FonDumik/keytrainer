@@ -6,8 +6,7 @@ section {
 .f1_2,
 .f3,
 .f4,
-.f5,
-.default {
+.f5 {
   width: 50px;
   height: 50px;
 
@@ -114,39 +113,4 @@ sup {
   background-color: #ffa !important;
   border: 1.5px solid black !important;
   color: black !important;
-}
-
-.default {
-  background-color: transparent;
-  color: white;
-}
-
-.active_default {
-  animation: showHide 0.1s linear;
-  animation-iteration-count: 1;
-}
-
-@keyframes showHide {
-  from {
-    background: #9d0e0e;
-  }
-  to {
-    background-color: transparent;
-  }
-}
-
-.sys_default {
-  border: 1px solid lightgray;
-  border-radius: 5px;
-
-  display: flex;
-  align-items: center;
-
-  font-family: Arial, Helvetica, sans-serif;
-  color: white;
-  font-size: 11px;
-  background-color: transparent;
-  line-height: 100%;
-  padding: 5px;
-  margin: 1px;
 }

@@ -1,7 +1,7 @@
 $font-primary: "Roboto Mono", sans-serif;
 
 .last_letter {
-  background-color: rgb(110, 150, 224);
+  background-color: #6e96e0;
   padding: 1px;
   color: white;
   font-family: $font-primary;
@@ -14,7 +14,12 @@ $font-primary: "Roboto Mono", sans-serif;
 
 .complete_text {
   font-family: $font-primary;
-  color: rgba(211, 211, 211, 0.658);
+  color: #d3d3d3a8;
+}
+
+.error {
+  font-family: $font-primary;
+  color: #fa3030ce;
 }
 
 .text_input {

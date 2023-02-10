@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from "react";
-import { renderDefault, renderKey } from "../model";
+import { renderKey } from "../model";
 import classes from "./ButtonKey.module.scss";
 
 type buttonKeyInterface = {
@@ -13,23 +13,14 @@ export const ButtonKey: FC<buttonKeyInterface> = ({
   setType,
   selected,
   children,
-  isColored,
 }) => {
   const [style, setClass] = useState("");
 
   useEffect(() => {
-    if (isColored === true) {
-      if (selected === true) {
-        setClass(renderKey(setType) + ` ${classes.active}`);
-      } else {
-        setClass(renderKey(setType));
-      }
+    if (selected === true) {
+      setClass(renderKey(setType) + ` ${classes.active}`);
     } else {
-      if (selected === true) {
-        setClass(renderDefault(setType) + ` ${classes.active_default}`);
-      } else {
-        setClass(renderDefault(setType));
-      }
+      setClass(renderKey(setType));
     }
   }, [selected]);
 

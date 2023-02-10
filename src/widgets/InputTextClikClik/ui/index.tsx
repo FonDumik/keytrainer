@@ -3,11 +3,15 @@ import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
 import styles from "./styles.module.scss";
 import {
   updateTextInput,
-  decreaseTextInput,
   addTypos,
   addLetterCounter,
   clearLetterCounter,
   clearTypos,
+  textInputConfig,
+  updateLastLetterForward,
+  initTypo,
+  updateLastLetterBackward,
+  setEndStroke,
 } from "../model";
 import {
   clearAccuracy,
@@ -16,17 +20,11 @@ import {
   updateSpeed,
 } from "widgets/HeaderResults/model";
 import { usePressedKey } from "shared/hooks/usePressedKey";
-import { setLetterTypo } from "widgets/InteractableKeyboard";
+import { setArrayTypos, setLetterTypo } from "widgets/InteractableKeyboard";
 
 export const InputTextClikClik: FC = () => {
-  const {
-    textInput,
-    lastLetter,
-    completeText,
-    letterCounter,
-    inputTextLength,
-    typos,
-  } = useClikSelector((state) => state.InputTextClikClikReducer);
+  const { inputText, letterCounter, inputTextLength, typos, isEndLine } =
+    useClikSelector((state) => state.InputTextClikClikReducer);
   const dispatch = useClikDispatch();
 
   const [inputLetter, counterInput] = usePressedKey();
@@ -54,20 +52,54 @@ export const InputTextClikClik: FC = () => {
   }, [intervalCounter]);
 
   useEffect(() => {
-    if (inputLetter === lastLetter && textInput.length !== 0) {
-      dispatch(decreaseTextInput());
+    const lastLetter: textInputConfig = inputText.find(
+      (elem) => elem.isSelected === true
+    );
+    if (inputLetter === "Backspace" && isEndLine === false) {
+      dispatch(updateLastLetterBackward());
+    } else if (
+      lastLetter !== undefined &&
+      inputLetter === lastLetter.content &&
+      inputText.indexOf(lastLetter) !== inputTextLength - 1 &&
+      isEndLine === false
+    ) {
+      dispatch(updateLastLetterForward());
       setIsStarted(true);
       dispatch(addLetterCounter());
-    } else if (inputLetter === lastLetter && textInput.length === 0) {
+    } else if (
+      lastLetter !== undefined &&
+      inputLetter === lastLetter.content &&
+      inputText.indexOf(lastLetter) === inputTextLength - 1 &&
+      isEndLine === false
+    ) {
+      dispatch(setEndStroke());
+      setIsStarted(false);
+    }
+
+    if (inputLetter === "Enter" && isEndLine === true) {
       dispatch(updateTextInput());
       dispatch(clearTypos());
       dispatch(clearAccuracy());
       dispatch(clearSpeed());
-      setIsStarted(false);
     }
 
-    if (inputLetter !== lastLetter) {
+    if (
+      lastLetter !== undefined &&
+      inputLetter !== lastLetter.content &&
+      inputText.indexOf(lastLetter) !== inputTextLength - 1 &&
+      isEndLine === false
+    ) {
+      dispatch(setArrayTypos(lastLetter.content));
       errorHandler(inputLetter);
+    }
+
+    if (
+      lastLetter !== undefined &&
+      inputLetter !== lastLetter.content &&
+      inputText.indexOf(lastLetter) === inputTextLength - 1
+    ) {
+      dispatch(setEndStroke());
+      setIsStarted(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputLetter, counterInput]);
@@ -77,19 +109,31 @@ export const InputTextClikClik: FC = () => {
       inputLetter !== "ShiftLeft" &&
       inputLetter !== "ShiftRight" &&
       inputLetter !== "" &&
-      inputLetter !== null
+      inputLetter !== null &&
+      inputLetter !== "Backspace"
     ) {
       dispatch(addTypos());
+      dispatch(initTypo());
       dispatch(setLetterTypo(inputLetter));
       dispatch(updateAccuracy({ textLength: inputTextLength, typos }));
     }
   };
 
+  function configureSpan(config: textInputConfig) {
+    if (config.isSelected) {
+      return <span className={styles.last_letter}>{config.content}</span>;
+    } else if (config.correctlyPressed) {
+      return <span className={styles.complete_text}>{config.content}</span>;
+    } else if (config.typoPressed) {
+      return <span className={styles.error}>{config.content}</span>;
+    } else {
+      return <span className={styles.text_input}>{config.content}</span>;
+    }
+  }
+
   return (
     <div className={styles.container}>
-      <span className={styles.complete_text}>{completeText}</span>
-      <span className={styles.last_letter}>{lastLetter}</span>
-      <span className={styles.text_input}>{textInput}</span>
+      {inputText.map((elem) => configureSpan(elem))}
     </div>
   );
 };

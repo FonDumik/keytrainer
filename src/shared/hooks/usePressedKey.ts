@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-export const usePressedKey = () => {
+export const usePressedKey = (): [string, number] => {
   const [key, setKey] = useState<string | null>(null);
   const [repeatCounter, setRepeatCounter] = useState<number>(1);
 

@@ -10,7 +10,6 @@ export function setSelectedShift(
 ) {
   for (let elem of keysList) {
     if (elem.positionFor !== undefined && elem.positionFor === pos) {
-      console.log(pos);
       elem.selected = true;
     }
   }
