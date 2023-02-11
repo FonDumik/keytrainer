@@ -55,21 +55,26 @@ export const InputTextClikClik: FC = () => {
     const lastLetter: textInputConfig = inputText.find(
       (elem) => elem.isSelected === true
     );
+
     if (inputLetter === "Backspace" && isEndLine === false) {
       dispatch(updateLastLetterBackward());
-    } else if (
+    }
+
+    if (
       lastLetter !== undefined &&
       inputLetter === lastLetter.content &&
-      inputText.indexOf(lastLetter) !== inputTextLength - 1 &&
+      inputText.indexOf(lastLetter) !== inputText.length - 1 &&
       isEndLine === false
     ) {
       dispatch(updateLastLetterForward());
       setIsStarted(true);
       dispatch(addLetterCounter());
-    } else if (
+    }
+
+    if (
       lastLetter !== undefined &&
       inputLetter === lastLetter.content &&
-      inputText.indexOf(lastLetter) === inputTextLength - 1 &&
+      inputText.indexOf(lastLetter) === inputText.length - 1 &&
       isEndLine === false
     ) {
       dispatch(setEndStroke());

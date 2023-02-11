@@ -4,9 +4,9 @@ import {
   keysCases,
   arrayList,
 } from "../config/keyboardRU";
-import { keyboardCasesKeys } from "shared/types/keyboardConfiguration";
-import { setSelectedShift } from "shared/utils/keyboardPresets/common";
-import { keyboardCases } from "shared/types/keyboardConfiguration";
+import { setErrorKey } from "../lib/setErrorKey";
+import { setSelectedKey } from "../lib/setSelectedKey";
+import { setPriorErrorKeys } from "../lib/setPriorErrorKeys";
 
 interface keyboardState {
   keyList: keyboardConfiguration[];
@@ -27,10 +27,10 @@ const InteractiveKeyboardSlice = createSlice({
   initialState,
   reducers: {
     showErrorKey(state, action: PayloadAction<string>) {
-      state.keyList = arrayErrorKey(state.keyList, action.payload);
+      state.keyList = setErrorKey(state.keyList, action.payload, keysCases);
     },
     showSelectedKey(state, action: PayloadAction<string>) {
-      state.keyList = selectLetter(keysCases, action.payload, state.keyList);
+      state.keyList = setSelectedKey(keysCases, action.payload, state.keyList);
     },
     returnKeyList(state) {
       state.keyList = state.keyList.map((elem) => {
@@ -61,16 +61,16 @@ const InteractiveKeyboardSlice = createSlice({
           array1.push({ content: elem, priority: 1 });
         } else if (maxValue / stack[elem] <= 0.5) {
           array1.push({ content: elem, priority: 2 });
-        } else if (maxValue / stack[elem] >= 0.5) {
+        } else if (maxValue / stack[elem] > 0.5) {
           array1.push({ content: elem, priority: 3 });
         }
       }
-
       for (let elem of array1) {
-        state.keyList = arrayPriorTypo(
+        state.keyList = setPriorErrorKeys(
           elem.content,
           elem.priority,
-          state.keyList
+          state.keyList,
+          keysCases
         );
       }
     },
@@ -86,150 +86,6 @@ const InteractiveKeyboardSlice = createSlice({
     },
   },
 });
-
-const arrayPriorTypo = (
-  priorKey: string,
-  priority: number,
-  arrayList: keyboardConfiguration[]
-) => {
-  for (let elem in keysCases) {
-    if (keysCases[elem as keyof keyboardCasesKeys].indexOf(priorKey) !== -1) {
-      switch (elem) {
-        case "downCase":
-          return arrayList.map((elem) => {
-            if (
-              elem.content1.toLowerCase() === priorKey ||
-              elem.content1 === priorKey
-            ) {
-              elem.errorPriority = priority;
-            }
-            return elem;
-          });
-        case "upperCase":
-          return arrayList.map((elem) => {
-            if (elem.content1 === priorKey) {
-              elem.errorPriority = priority;
-            }
-            return elem;
-          });
-        case "symbols":
-          return arrayList.map((elem) => {
-            if (elem.content1 === priorKey) {
-              elem.errorPriority = priority;
-            } else if (elem.content2 === priorKey) {
-              elem.errorPriority = priority;
-            }
-
-            return elem;
-          });
-        default:
-          return arrayList;
-      }
-    } else {
-      return arrayList;
-    }
-  }
-};
-
-const arrayErrorKey = (
-  arrayList: keyboardConfiguration[],
-  pressedKey: string
-) => {
-  for (let elem in keysCases) {
-    if (keysCases[elem as keyof keyboardCasesKeys].indexOf(pressedKey) !== -1) {
-      switch (elem) {
-        case "downCase":
-          return arrayList.map((elem) => {
-            elem.errorPressed = false;
-            if (
-              (pressedKey === "ShiftLeft" && elem.positionFor === "left") ||
-              (pressedKey === "ShiftRight" && elem.positionFor === "right")
-            ) {
-              elem.errorPressed = true;
-            }
-            if (
-              elem.content1.toLowerCase() === pressedKey ||
-              elem.content1 === pressedKey
-            ) {
-              elem.errorPressed = true;
-            }
-            return elem;
-          });
-        case "upperCase":
-          return arrayList.map((elem) => {
-            elem.errorPressed = false;
-            if (elem.content1 === pressedKey) {
-              elem.errorPressed = true;
-            }
-            return elem;
-          });
-        case "symbols":
-          return arrayList.map((elem) => {
-            elem.errorPressed = false;
-            if (elem.content1 === pressedKey) {
-              elem.errorPressed = true;
-            } else if (elem.content2 === pressedKey) {
-              elem.errorPressed = true;
-            }
-
-            return elem;
-          });
-        default:
-          return arrayList;
-      }
-    } else {
-      return arrayList;
-    }
-  }
-};
-
-function selectLetter(
-  keysCases: keyboardCases,
-  lastLetter: string,
-  keysList: Array<keyboardConfiguration>
-) {
-  for (let elem in keysCases) {
-    if (keysCases[elem as keyof keyboardCasesKeys].indexOf(lastLetter) !== -1) {
-      switch (elem) {
-        case "downCase":
-          return keysList.map((elem) => {
-            elem.selected = false;
-            if (
-              elem.content1 === lastLetter.toUpperCase() ||
-              elem.content1 === lastLetter
-            ) {
-              elem.selected = true;
-            }
-            return elem;
-          });
-        case "upperCase":
-          return keysList.map((elem) => {
-            elem.selected = false;
-            if (elem.content1 === lastLetter) {
-              elem.selected = true;
-            }
-
-            setSelectedShift(elem.needShift, keysList);
-            return elem;
-          });
-        case "symbols":
-          return keysList.map((elem) => {
-            elem.selected = false;
-            if (elem.content1 === lastLetter) {
-              elem.selected = true;
-            } else if (elem.content2 === lastLetter) {
-              elem.selected = true;
-            }
-
-            setSelectedShift(elem.needShift, keysList);
-            return elem;
-          });
-        default:
-          return keysList;
-      }
-    }
-  }
-}
 
 export const {
   showErrorKey,
