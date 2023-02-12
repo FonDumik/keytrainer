@@ -2,18 +2,8 @@ import {
   keyboardCases,
   keyboardCasesKeys,
   keyboardConfiguration,
-} from "../../types/keyboardConfiguration";
-
-export function setSelectedShift(
-  pos: string,
-  keysList: Array<keyboardConfiguration>
-) {
-  for (let elem of keysList) {
-    if (elem.positionFor !== undefined && elem.positionFor === pos) {
-      elem.selected = true;
-    }
-  }
-}
+} from "shared/types/keyboardConfiguration";
+import { setSelectedShift } from "shared/utils/setSelectedShift";
 
 export function setFirstSelect(
   array: Array<keyboardConfiguration>,

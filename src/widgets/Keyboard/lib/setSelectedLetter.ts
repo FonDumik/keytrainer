@@ -1,13 +1,15 @@
-import { keyboardCasesKeys } from "shared/types/keyboardConfiguration";
+import {
+  keyboardCases,
+  keyboardConfiguration,
+  keyboardCasesKeys,
+} from "shared/types/keyboardConfiguration";
 import { setSelectedShift } from "shared/utils/setSelectedShift";
-import { keyboardCases } from "shared/types/keyboardConfiguration";
-import { keyboardConfiguration } from "../config/keyboardRU";
 
-export const setSelectedKey = (
+export function selectLetter(
   keysCases: keyboardCases,
   lastLetter: string,
   keysList: Array<keyboardConfiguration>
-) => {
+) {
   for (let elem in keysCases) {
     if (keysCases[elem as keyof keyboardCasesKeys].indexOf(lastLetter) !== -1) {
       switch (elem) {
@@ -49,4 +51,4 @@ export const setSelectedKey = (
       }
     }
   }
-};
+}

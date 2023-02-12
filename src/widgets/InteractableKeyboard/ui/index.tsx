@@ -1,5 +1,5 @@
-import { ButtonKeyClikClik } from "entities/ButtonKeyClikClik/ui";
-import { useCallback, useEffect } from "react";
+import ButtonKeyClikClik from "entities/ButtonKeyClikClik";
+import { useCallback, useEffect, memo } from "react";
 import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
 import { textInputConfig } from "widgets/InputTextClikClik";
 import {
@@ -66,4 +66,4 @@ const InteractableKeyboard = () => {
   );
 };
 
-export default InteractableKeyboard;
+export default memo(InteractableKeyboard);

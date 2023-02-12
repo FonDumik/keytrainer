@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { generateOneWordText } from "shared/utils/textGenerator/generateOneWordText";
 import { arrayWords } from "shared/utils/textGenerator/wordsToPrint";
 

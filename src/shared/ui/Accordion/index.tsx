@@ -2,6 +2,7 @@ import { PrimaryButton } from "shared/ui/PrimaryButton";
 import styles from "./styles.module.scss";
 import { useState } from "react";
 import AnimateHeight from "react-animate-height";
+import arrowImg from "shared/assets/chevron-down.svg";
 
 export const Accordion = ({ children, header }) => {
   const [styleImg, setStyleImg] = useState(styles.button__img);
@@ -26,7 +27,7 @@ export const Accordion = ({ children, header }) => {
           aria-controls="open_accordion_content"
           onClick={toggleContent}
         >
-          <img src="./img/chevron-down.svg" alt="" className={styleImg} />
+          <img src={arrowImg} alt="" className={styleImg} />
         </PrimaryButton>
       </div>
 

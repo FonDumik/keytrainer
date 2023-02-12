@@ -1,14 +1,12 @@
 import { ButtonSection } from "shared/ui/ButtonSection";
 import styles from "./styles.module.scss";
 
+import docImg from "shared/assets/file-earmark-text.svg";
+
 export function DocumentationSection() {
   return (
     <div className={styles.documentationSection}>
-      <img
-        src="./img/file-earmark-text.svg"
-        alt=""
-        className={styles.description_icon}
-      />
+      <img src={docImg} alt="docImg" className={styles.description_icon} />
       <ButtonSection link="/documentationRU" styleSheet="documentation">
         Русский
       </ButtonSection>

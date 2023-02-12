@@ -1,7 +1,7 @@
 import {
   keyboardCases,
   keyboardConfiguration,
-} from "../../types/keyboardConfiguration";
+} from "shared/types/keyboardConfiguration";
 
 export const keysCasesEng: keyboardCases = {
   downCase: [

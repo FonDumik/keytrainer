@@ -4,6 +4,9 @@ import AnimateHeight from "react-animate-height";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 
+import homeImg from "shared/assets/house-door-fill.svg";
+import menuImg from "shared/assets/list.svg";
+
 export const MenuSection = () => {
   const [height, setHeight] = useState<"auto" | number>(0);
 
@@ -19,14 +22,14 @@ export const MenuSection = () => {
         aria-controls="open_menu"
         onClick={toggleDropdown}
       >
-        <img src="./img/list.svg" alt="menu" />
+        <img src={menuImg} alt="menu" />
       </PrimaryButton>
 
       <AnimateHeight id="open_menu" duration={300} height={height}>
         <div className={styles.menu_hiddenContent}>
           <Link to="/">
             <PrimaryButton styleSheet="home">
-              <img src="./img/house-door-fill.svg" alt="" />
+              <img src={homeImg} alt="" />
             </PrimaryButton>
           </Link>
         </div>

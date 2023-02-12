@@ -7,6 +7,8 @@ import * as hooks from "shared/hooks";
 import { setSelectedTime, updateCurrentTime, renderToTimer } from "../model";
 import { DropdownObject } from "shared/ui/DropdownObject";
 
+import timeImg from "shared/assets/time.png";
+
 const timeSelectCases = [5, 10, 15, 20, 25, 30];
 
 export const Timer = () => {
@@ -45,7 +47,7 @@ export const Timer = () => {
   return (
     <div className={styles.timer}>
       <div className={styles.current}>
-        <img src="./img/time.png" alt="t" width="20" />
+        <img src={timeImg} alt="t" width="20" />
         <button className={styles.switch} onClick={openMenu}>
           <p>{renderToTimer(currentTime)}</p>
         </button>

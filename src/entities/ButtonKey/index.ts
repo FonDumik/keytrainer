@@ -1,1 +1,3 @@
-export { ButtonKey } from "./ui";
+import ButtonKey from "./ui";
+
+export default ButtonKey;

@@ -1,2 +1,4 @@
-export { Keyboard } from './ui'
-export { keyboardReducer } from './model'
+import Keyboard from "./ui";
+
+export default Keyboard;
+export { keyboardReducer } from "./model";

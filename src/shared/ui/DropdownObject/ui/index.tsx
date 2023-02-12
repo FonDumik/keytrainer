@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import styles from "./styles.module.scss";
 import "./animation.css";
+import closeImg from "shared/assets/close-button.png";
 
 type DropdownObjectProps = {
   isOpenDropDownState: {
@@ -38,7 +39,7 @@ export const DropdownObject = ({
             className={styles.header__closeButton}
             onClick={closeDropdown}
           >
-            <img src="./img/close-button.png" alt="" />
+            <img src={closeImg} alt="" />
           </button>
         </div>
         {children}

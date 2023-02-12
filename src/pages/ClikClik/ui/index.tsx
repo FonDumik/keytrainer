@@ -1,8 +1,8 @@
 import React from "react";
 import { Provider } from "react-redux";
-import HeaderResults from "widgets/HeaderResults/ui";
+import { HeaderResults } from "widgets/HeaderResults";
 import { InputTextClikClik } from "widgets/InputTextClikClik";
-import InteractableKeyboard from "widgets/InteractableKeyboard/ui";
+import InteractableKeyboard from "widgets/InteractableKeyboard";
 import { storeClikClik } from "../model";
 import styles from "./styles.module.scss";
 

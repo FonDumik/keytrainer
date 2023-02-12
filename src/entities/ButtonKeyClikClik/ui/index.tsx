@@ -1,13 +1,13 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, useCallback, memo } from "react";
 import { keyboardConfiguration } from "widgets/InteractableKeyboard/config/keyboardRU";
-import { renderDefault } from "../model";
+import { renderDefault } from "../lib/renderKey";
 import classes from "./styles.module.scss";
 
 type buttonKeyInterface = {
   config: keyboardConfiguration;
 };
 
-export const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
+const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
   const [style, setClass] = useState("");
   const { selected, setType, content1, content2, errorPressed, errorPriority } =
     config;
@@ -29,7 +29,7 @@ export const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
     }
   }
 
-  useEffect(() => {
+  const setError = useCallback(() => {
     if (errorPressed === true) {
       setClass(renderDefault(setType) + ` ${classes.error_default}`);
     } else {
@@ -38,6 +38,10 @@ export const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
   }, [errorPressed]);
 
   useEffect(() => {
+    setError();
+  }, [setError]);
+
+  const setSelected = useCallback(() => {
     if (selected === true) {
       setClass(renderDefault(setType) + ` ${classes.active_default}`);
     } else {
@@ -46,6 +50,10 @@ export const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
   }, [selected]);
 
   useEffect(() => {
+    setSelected();
+  }, [setSelected]);
+
+  const setPriority = useCallback(() => {
     switch (errorPriority) {
       case 1:
         return setClass(renderDefault(setType) + ` ${classes.error_1prior}`);
@@ -58,5 +66,11 @@ export const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
     }
   }, [errorPriority]);
 
+  useEffect(() => {
+    setPriority();
+  }, [setPriority]);
+
   return <div className={style}>{renderContentKey(content1, content2)}</div>;
 };
+
+export default memo(ButtonKeyClikClik);

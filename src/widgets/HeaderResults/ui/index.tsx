@@ -5,9 +5,9 @@ import speedImg from "shared/assets/speed.svg";
 import accuracyImg from "shared/assets/accuracy.svg";
 import typosImg from "shared/assets/typos.svg";
 import { useClikSelector } from "shared/hooks/ClikClikHooks";
-import { average } from "../model";
+import { average } from "../lib/average";
 
-const HeaderResults: FC = () => {
+export const HeaderResults: FC = () => {
   const { typos } = useClikSelector((state) => state.InputTextClikClikReducer);
   const { speedArray, accuracy } = useClikSelector(
     (state) => state.headerResultsReducer
@@ -34,5 +34,3 @@ const HeaderResults: FC = () => {
     </div>
   );
 };
-
-export default HeaderResults;
