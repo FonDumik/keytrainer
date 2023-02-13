@@ -104,6 +104,9 @@ export const keysCases: keyboardCases = {
     ".",
     ",",
     ":",
+    "(",
+    ")",
+    "_",
   ],
 };
 

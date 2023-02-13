@@ -1,14 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { textInputConfig } from "widgets/InputTextClikClik";
 
 interface headerResultsProps {
   speedArray: number[];
   accuracy: number;
 }
-
-type updateAccuracyProps = {
-  textLength: number;
-  typos: number;
-};
 
 const initialState: headerResultsProps = {
   speedArray: [],
@@ -22,9 +18,29 @@ const HeaderResultsSlice = createSlice({
     updateSpeed(state, action: PayloadAction<number>) {
       state.speedArray = [...state.speedArray, action.payload];
     },
-    updateAccuracy(state, action: PayloadAction<updateAccuracyProps>) {
-      const { textLength, typos } = action.payload;
-      state.accuracy = Math.floor(((textLength - typos) / textLength) * 100);
+    updateAccuracy(state, action: PayloadAction<textInputConfig[]>) {
+      const inputText = action.payload;
+      const lenght = inputText.reduce((accumulator, currentValue) => {
+        if (
+          currentValue.correctlyPressed === true ||
+          currentValue.typoPressed === true
+        ) {
+          return accumulator + 1;
+        } else {
+          return accumulator;
+        }
+      }, 0);
+
+      const typos = inputText.reduce((accumulator, currentValue) => {
+        if (currentValue.typoPressed === true) {
+          return accumulator + 1;
+        } else {
+          return accumulator;
+        }
+      }, 0);
+      if (lenght !== 0) {
+        state.accuracy = Math.floor(((lenght - typos) / lenght) * 100);
+      }
     },
     clearSpeed(state) {
       state.speedArray = [];

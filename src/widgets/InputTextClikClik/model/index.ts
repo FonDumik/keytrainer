@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { generateOneWordText } from "shared/utils/textGenerator/generateOneWordText";
 import { arrayWords } from "shared/utils/textGenerator/wordsToPrint";
+import { configureStroke } from "../lib/configureStroke";
 
 export type textInputConfig = {
   content: string;
@@ -18,17 +19,7 @@ interface InputTextClikClikProps {
 }
 
 const initialState: InputTextClikClikProps = {
-  inputText: generateOneWordText(arrayWords)
-    .slice(0, -1)
-    .split("")
-    .map((elem) => {
-      return {
-        content: elem,
-        correctlyPressed: false,
-        typoPressed: false,
-        isSelected: false,
-      };
-    }),
+  inputText: configureStroke(generateOneWordText(arrayWords)),
   letterCounter: 0,
   typos: 0,
   inputTextLength: 0,
@@ -59,22 +50,15 @@ const InputTextClikClikSlice = createSlice({
       );
       inputText[inputText.indexOf(lastLetter)].isSelected = false;
 
-      inputText[inputText.indexOf(lastLetter) - 1].isSelected = true;
-      inputText[inputText.indexOf(lastLetter) - 1].correctlyPressed = false;
-      inputText[inputText.indexOf(lastLetter) - 1].typoPressed = false;
+      inputText[inputText.indexOf(lastLetter) - 1] = {
+        ...inputText[inputText.indexOf(lastLetter) - 1],
+        isSelected: true,
+        correctlyPressed: false,
+        typoPressed: false,
+      };
     },
     updateTextInput(state) {
-      const text = generateOneWordText(arrayWords)
-        .slice(0, -1)
-        .split("")
-        .map((elem) => {
-          return {
-            content: elem,
-            correctlyPressed: false,
-            typoPressed: false,
-            isSelected: false,
-          };
-        });
+      const text = configureStroke(generateOneWordText(arrayWords));
       text[0].isSelected = true;
       state.inputText = text;
       state.isEndLine = false;
@@ -105,7 +89,11 @@ const InputTextClikClikSlice = createSlice({
       const lastLetter: textInputConfig = inputText.find(
         (elem) => elem.isSelected === true
       );
-      inputText[inputText.indexOf(lastLetter)].isSelected = false;
+      inputText[inputText.indexOf(lastLetter)] = {
+        ...inputText[inputText.indexOf(lastLetter)],
+        isSelected: false,
+        correctlyPressed: true,
+      };
       state.isEndLine = true;
     },
   },

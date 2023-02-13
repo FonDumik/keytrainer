@@ -40,7 +40,6 @@ export const InputTextClikClik: FC = () => {
     return () => {
       clearInterval(start);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -56,8 +55,13 @@ export const InputTextClikClik: FC = () => {
       (elem) => elem.isSelected === true
     );
 
-    if (inputLetter === "Backspace" && isEndLine === false) {
+    if (
+      inputLetter === "Backspace" &&
+      isEndLine === false &&
+      inputText.indexOf(lastLetter) !== 0
+    ) {
       dispatch(updateLastLetterBackward());
+      dispatch(updateAccuracy(inputText));
     }
 
     if (
@@ -69,6 +73,7 @@ export const InputTextClikClik: FC = () => {
       dispatch(updateLastLetterForward());
       setIsStarted(true);
       dispatch(addLetterCounter());
+      dispatch(updateAccuracy(inputText));
     }
 
     if (
@@ -79,13 +84,7 @@ export const InputTextClikClik: FC = () => {
     ) {
       dispatch(setEndStroke());
       setIsStarted(false);
-    }
-
-    if (inputLetter === "Enter" && isEndLine === true) {
-      dispatch(updateTextInput());
-      dispatch(clearTypos());
-      dispatch(clearAccuracy());
-      dispatch(clearSpeed());
+      dispatch(updateAccuracy(inputText));
     }
 
     if (
@@ -106,6 +105,14 @@ export const InputTextClikClik: FC = () => {
       dispatch(setEndStroke());
       setIsStarted(false);
     }
+
+    if (inputLetter === "Enter" && isEndLine === true) {
+      dispatch(updateTextInput());
+      dispatch(clearTypos());
+      dispatch(clearAccuracy());
+      dispatch(clearSpeed());
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputLetter, counterInput]);
 
@@ -120,7 +127,6 @@ export const InputTextClikClik: FC = () => {
       dispatch(addTypos());
       dispatch(initTypo());
       dispatch(setLetterTypo(inputLetter));
-      dispatch(updateAccuracy({ textLength: inputTextLength, typos }));
     }
   };
 

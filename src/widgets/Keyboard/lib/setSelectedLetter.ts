@@ -25,27 +25,36 @@ export function selectLetter(
             return elem;
           });
         case "upperCase":
-          return keysList.map((elem) => {
+          keysList.map((elem) => {
             elem.selected = false;
-            if (elem.content1 === lastLetter) {
-              elem.selected = true;
-            }
-
-            setSelectedShift(elem.needShift, keysList);
             return elem;
           });
+          let needShift2: string = "";
+          for (let elem of keysList) {
+            if (elem.content1 === lastLetter) {
+              elem.selected = true;
+              needShift2 = elem.needShift;
+            }
+          }
+          setSelectedShift(needShift2, keysList);
+          return keysList;
         case "symbols":
-          return keysList.map((elem) => {
+          keysList.map((elem) => {
             elem.selected = false;
+            return elem;
+          });
+
+          let needShift3: string = "";
+          for (let elem of keysList) {
             if (elem.content1 === lastLetter) {
               elem.selected = true;
             } else if (elem.content2 === lastLetter) {
               elem.selected = true;
+              needShift3 = elem.needShift;
             }
-
-            setSelectedShift(elem.needShift, keysList);
-            return elem;
-          });
+          }
+          setSelectedShift(needShift3, keysList);
+          return keysList;
         default:
           return keysList;
       }

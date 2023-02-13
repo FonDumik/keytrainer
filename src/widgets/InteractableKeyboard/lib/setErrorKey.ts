@@ -14,12 +14,6 @@ export const setErrorKey = (
           return arrayList.map((elem) => {
             elem.errorPressed = false;
             if (
-              (pressedKey === "ShiftLeft" && elem.positionFor === "left") ||
-              (pressedKey === "ShiftRight" && elem.positionFor === "right")
-            ) {
-              elem.errorPressed = true;
-            }
-            if (
               elem.content1.toLowerCase() === pressedKey ||
               elem.content1 === pressedKey
             ) {
@@ -38,12 +32,9 @@ export const setErrorKey = (
         case "symbols":
           return arrayList.map((elem) => {
             elem.errorPressed = false;
-            if (elem.content1 === pressedKey) {
-              elem.errorPressed = true;
-            } else if (elem.content2 === pressedKey) {
+            if (elem.content1 === pressedKey || elem.content2 === pressedKey) {
               elem.errorPressed = true;
             }
-
             return elem;
           });
         default:
