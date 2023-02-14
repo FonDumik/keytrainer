@@ -25,8 +25,8 @@ const InteractableKeyboard = () => {
     if (!isEndLine) {
       dispatch(showErrorKey(letterTypo));
       setTimeout(() => {
-        dispatch(returnKeyList());
-      }, 100);
+        dispatch(returnKeyList(letterTypo));
+      }, 5000);
     }
   }, [letterTypo, counterTypo]);
 

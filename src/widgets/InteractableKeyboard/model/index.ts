@@ -7,6 +7,7 @@ import {
 import { setErrorKey } from "../lib/setErrorKey";
 import { setSelectedKey } from "../lib/setSelectedKey";
 import { setPriorErrorKeys } from "../lib/setPriorErrorKeys";
+import { clearErrorKey } from "../lib/clearErrorKey";
 
 interface keyboardState {
   keyList: keyboardConfiguration[];
@@ -32,11 +33,8 @@ const InteractiveKeyboardSlice = createSlice({
     showSelectedKey(state, action: PayloadAction<string>) {
       state.keyList = setSelectedKey(keysCases, action.payload, state.keyList);
     },
-    returnKeyList(state) {
-      state.keyList = state.keyList.map((elem) => {
-        elem.errorPressed = false;
-        return elem;
-      });
+    returnKeyList(state, action: PayloadAction<string>) {
+      state.keyList = clearErrorKey(state.keyList, action.payload, keysCases);
     },
     setLetterTypo(state, action: PayloadAction<string>) {
       state.letterTypo = action.payload;

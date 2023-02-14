@@ -12,6 +12,8 @@ const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
   const { selected, setType, content1, content2, errorPressed, errorPriority } =
     config;
 
+  const [styleError, setStyleError] = useState<string>("");
+
   function renderContentKey(content1: string, content2: string | undefined) {
     if (content2 !== undefined) {
       return (
@@ -31,9 +33,9 @@ const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
 
   const setError = useCallback(() => {
     if (errorPressed === true) {
-      setClass(renderDefault(setType) + ` ${classes.error_default}`);
+      setStyleError(` ${classes.error_default}`);
     } else {
-      setClass(renderDefault(setType));
+      setStyleError("");
     }
   }, [errorPressed]);
 
@@ -70,7 +72,11 @@ const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
     setPriority();
   }, [setPriority]);
 
-  return <div className={style}>{renderContentKey(content1, content2)}</div>;
+  return (
+    <div className={style + styleError}>
+      {renderContentKey(content1, content2)}
+    </div>
+  );
 };
 
 export default memo(ButtonKeyClikClik);

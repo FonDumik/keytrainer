@@ -64,7 +64,7 @@ sup {
   justify-content: center;
   align-items: center;
 
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif !important;
   font-size: 15px;
   line-height: 100%;
 
@@ -87,7 +87,20 @@ sup {
 }
 
 .error_default {
-  animation: showHideError 0.1s linear;
+  position: relative;
+}
+
+.error_default::after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 5px;
+  z-index: -1;
+  animation: showHideError 5s linear;
   animation-iteration-count: 1;
 }
 

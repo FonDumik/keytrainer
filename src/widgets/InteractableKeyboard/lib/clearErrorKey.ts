@@ -2,7 +2,7 @@ import { keyboardCasesKeys } from "shared/types/keyboardConfiguration";
 import { keyboardCases } from "shared/types/keyboardConfiguration";
 import { keyboardConfiguration } from "../config/keyboardRU";
 
-export const setErrorKey = (
+export const clearErrorKey = (
   arrayList: keyboardConfiguration[],
   pressedKey: string,
   keysCases: keyboardCases
@@ -16,21 +16,21 @@ export const setErrorKey = (
               elem.content1.toLowerCase() === pressedKey ||
               elem.content1 === pressedKey
             ) {
-              elem.errorPressed = true;
+              elem.errorPressed = false;
             }
             return elem;
           });
         case "upperCase":
           return arrayList.map((elem) => {
             if (elem.content1 === pressedKey) {
-              elem.errorPressed = true;
+              elem.errorPressed = false;
             }
             return elem;
           });
         case "symbols":
           return arrayList.map((elem) => {
             if (elem.content1 === pressedKey || elem.content2 === pressedKey) {
-              elem.errorPressed = true;
+              elem.errorPressed = false;
             }
             return elem;
           });
