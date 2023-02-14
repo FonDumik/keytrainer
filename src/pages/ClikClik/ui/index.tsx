@@ -9,7 +9,7 @@ import styles from "./styles.module.scss";
 const ClikClik = () => {
   React.useEffect(() => {
     document.title = "ClikClik";
-    document.querySelector("html").style.backgroundColor = "#474448";
+    document.querySelector("html").style.backgroundColor = "#131217";
   }, []);
 
   return (

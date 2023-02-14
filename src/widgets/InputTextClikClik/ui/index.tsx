@@ -133,7 +133,9 @@ export const InputTextClikClik: FC = () => {
   function configureSpan(config: textInputConfig) {
     if (config.isSelected) {
       return <span className={styles.last_letter}>{config.content}</span>;
-    } else if (config.correctlyPressed || config.typoPressed) {
+    } else if (config.correctlyPressed && config.typoPressed) {
+      return <span className={styles.complete_text}>{config.content}</span>;
+    } else if (config.correctlyPressed && !config.typoPressed) {
       return <span className={styles.complete_text}>{config.content}</span>;
     } else {
       return <span className={styles.text_input}>{config.content}</span>;
@@ -143,7 +145,7 @@ export const InputTextClikClik: FC = () => {
   function configureSpanOnEnd(config: textInputConfig) {
     if (config.isSelected) {
       return <span className={styles.last_letter}>{config.content}</span>;
-    } else if (config.correctlyPressed) {
+    } else if (config.correctlyPressed && !config.typoPressed) {
       return <span className={styles.complete_text}>{config.content}</span>;
     } else if (config.typoPressed) {
       return <span className={styles.error}>{config.content}</span>;

@@ -54,7 +54,6 @@ const InputTextClikClikSlice = createSlice({
         ...inputText[inputText.indexOf(lastLetter) - 1],
         isSelected: true,
         correctlyPressed: false,
-        typoPressed: false,
       };
     },
     updateTextInput(state) {
@@ -70,6 +69,7 @@ const InputTextClikClikSlice = createSlice({
       );
       inputText[inputText.indexOf(lastLetter)].isSelected = false;
       inputText[inputText.indexOf(lastLetter)].typoPressed = true;
+      inputText[inputText.indexOf(lastLetter)].correctlyPressed = true;
       inputText[inputText.indexOf(lastLetter) + 1].isSelected = true;
     },
     addLetterCounter(state) {
