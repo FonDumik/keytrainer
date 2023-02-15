@@ -23,7 +23,7 @@ import { usePressedKey } from "shared/hooks/usePressedKey";
 import { setArrayTypos, setLetterTypo } from "widgets/InteractableKeyboard";
 
 export const InputTextClikClik: FC = () => {
-  const { inputText, letterCounter, inputTextLength, typos, isEndLine } =
+  const { inputText, letterCounter, inputTextLength, isEndLine } =
     useClikSelector((state) => state.InputTextClikClikReducer);
   const dispatch = useClikDispatch();
 
@@ -133,9 +133,9 @@ export const InputTextClikClik: FC = () => {
   function configureSpan(config: textInputConfig) {
     if (config.isSelected) {
       return <span className={styles.last_letter}>{config.content}</span>;
-    } else if (config.correctlyPressed && config.typoPressed) {
-      return <span className={styles.complete_text}>{config.content}</span>;
-    } else if (config.correctlyPressed && !config.typoPressed) {
+    } else if (config.typoPressed) {
+      return <span className={styles.error}>{config.content}</span>;
+    } else if (config.correctlyPressed) {
       return <span className={styles.complete_text}>{config.content}</span>;
     } else {
       return <span className={styles.text_input}>{config.content}</span>;
@@ -145,9 +145,9 @@ export const InputTextClikClik: FC = () => {
   function configureSpanOnEnd(config: textInputConfig) {
     if (config.isSelected) {
       return <span className={styles.last_letter}>{config.content}</span>;
-    } else if (config.correctlyPressed && !config.typoPressed) {
+    } else if (config.correctlyPressed && !config.isTypo) {
       return <span className={styles.complete_text}>{config.content}</span>;
-    } else if (config.typoPressed) {
+    } else if (config.isTypo) {
       return <span className={styles.error}>{config.content}</span>;
     } else {
       return <span className={styles.text_input}>{config.content}</span>;

@@ -8,6 +8,7 @@ export const configureStroke = (stroke: string) => {
         correctlyPressed: false,
         typoPressed: false,
         isSelected: false,
+        isTypo: false,
       };
     });
   return text;

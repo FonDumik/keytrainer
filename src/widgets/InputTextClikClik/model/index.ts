@@ -8,6 +8,7 @@ export type textInputConfig = {
   correctlyPressed: boolean;
   typoPressed: boolean;
   isSelected: boolean;
+  isTypo: boolean;
 };
 
 interface InputTextClikClikProps {
@@ -54,6 +55,7 @@ const InputTextClikClikSlice = createSlice({
         ...inputText[inputText.indexOf(lastLetter) - 1],
         isSelected: true,
         correctlyPressed: false,
+        typoPressed: false,
       };
     },
     updateTextInput(state) {
@@ -69,7 +71,8 @@ const InputTextClikClikSlice = createSlice({
       );
       inputText[inputText.indexOf(lastLetter)].isSelected = false;
       inputText[inputText.indexOf(lastLetter)].typoPressed = true;
-      inputText[inputText.indexOf(lastLetter)].correctlyPressed = true;
+      inputText[inputText.indexOf(lastLetter)].isTypo = true;
+      inputText[inputText.indexOf(lastLetter)].correctlyPressed = false;
       inputText[inputText.indexOf(lastLetter) + 1].isSelected = true;
     },
     addLetterCounter(state) {
@@ -83,6 +86,10 @@ const InputTextClikClikSlice = createSlice({
     },
     clearTypos(state) {
       state.typos = 0;
+      state.inputText = state.inputText.map((elem) => {
+        elem.isTypo = false;
+        return elem;
+      });
     },
     setEndStroke(state) {
       const { inputText } = state;
