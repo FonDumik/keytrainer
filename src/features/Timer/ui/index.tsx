@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import styles from "./Timer.module.scss";
 //hooks
 import * as hooks from "shared/hooks";
-
-import { setSelectedTime, updateCurrentTime, renderToTimer } from "../model";
+import { renderToTimer } from "../lib/renderTimer";
+import { setSelectedTime, updateCurrentTime } from "../model";
 import { DropdownObject } from "shared/ui/DropdownObject";
 
 import timeImg from "shared/assets/time.png";

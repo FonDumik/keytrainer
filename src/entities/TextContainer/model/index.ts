@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { generateSentence } from "shared/utils/textGenerator/generateSentences";
-import { generateOneWordText } from "shared/utils/textGenerator/generateOneWordText";
-import { generateMultipleWordText } from "shared/utils/textGenerator/generateMultipleWordText";
+import { generateSentence } from "../lib/generateSentences";
+import { generateOneWordText } from "../lib/generateOneWordText";
+import { generateMultipleWordText } from "entities/TextContainer/lib/generateMultipleWordText";
 import { configurationTrainingType } from "shared/types/configurationTraining";
-import { arrayWords } from "shared/utils/textGenerator/wordsToPrint";
-import { arrayWordsENG } from "shared/utils/textGenerator/wordsToPrintENG";
-import { sentencesToPrintENG } from "shared/utils/textGenerator/sentenceToPrintENG";
-import { sentencesToPrint } from "shared/utils/textGenerator/sentenceToPrint";
+import { arrayWords } from "shared/utils/wordsToPrint";
+import { arrayWordsENG } from "shared/utils/wordsToPrintENG";
+import { sentencesToPrintENG } from "shared/utils/sentenceToPrintENG";
+import { sentencesToPrint } from "shared/utils/sentenceToPrint";
+
 interface textContainerState {
   complexText: string[];
   randomText: string;

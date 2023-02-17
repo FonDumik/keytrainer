@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { generateOneWordText } from "shared/utils/textGenerator/generateOneWordText";
-import { arrayWords } from "shared/utils/textGenerator/wordsToPrint";
+import { generateOneWordText } from "entities/TextContainer/lib/generateOneWordText";
+import { arrayWords } from "shared/utils/wordsToPrint";
 import { configureStroke } from "../lib/configureStroke";
 
 export type textInputConfig = {
