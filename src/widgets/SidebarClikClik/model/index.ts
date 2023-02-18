@@ -8,7 +8,6 @@ export type configText = {
 
 export type configKeyboard = {
   isSoundError: boolean;
-  showHands: boolean;
   keyHints: boolean;
 };
 
@@ -28,7 +27,6 @@ const initialState: configSidebarState = {
   },
   configurationKeyboard: {
     isSoundError: false,
-    showHands: false,
     keyHints: true,
   },
   isOpenSidebar: false,
@@ -57,10 +55,6 @@ const sidebarSlice = createSlice({
       state.configurationKeyboard.isSoundError =
         !state.configurationKeyboard.isSoundError;
     },
-    toggleShowHands(state) {
-      state.configurationKeyboard.showHands =
-        !state.configurationKeyboard.showHands;
-    },
     toggleSidebar(state, action: PayloadAction<boolean>) {
       state.isOpenSidebar = action.payload;
     },
@@ -71,7 +65,6 @@ export const {
   toggleCapitalLetters,
   toggleNumbers,
   togglePunctuation,
-  toggleShowHands,
   toggleShowHints,
   toggleSoundError,
   toggleSidebar,

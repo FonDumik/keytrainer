@@ -89,25 +89,7 @@ export const keysCases: keyboardCases = {
     "Ю",
     "Я",
   ],
-  symbols: [
-    "!",
-    "@",
-    "#",
-    "$",
-    "%",
-    "&",
-    "?",
-    "-",
-    "+",
-    "=",
-    "~",
-    ".",
-    ",",
-    ":",
-    "(",
-    ")",
-    "_",
-  ],
+  symbols: ["!", "%", "?", "-", "+", "=", ".", ",", ":", "(", ")", "_", "*"],
 };
 
 export const arrayList: Array<keyboardConfiguration> = [

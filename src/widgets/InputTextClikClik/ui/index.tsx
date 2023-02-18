@@ -25,6 +25,9 @@ import { setArrayTypos, setLetterTypo } from "widgets/InteractableKeyboard";
 export const InputTextClikClik: FC = () => {
   const { inputText, letterCounter, inputTextLength, isEndLine } =
     useClikSelector((state) => state.InputTextClikClikReducer);
+  const { configurationText } = useClikSelector(
+    (state) => state.sidebarReducer
+  );
   const dispatch = useClikDispatch();
 
   const [inputLetter, counterInput] = usePressedKey();
@@ -99,6 +102,11 @@ export const InputTextClikClik: FC = () => {
 
     if (
       lastLetter !== undefined &&
+      inputLetter !== "ShiftLeft" &&
+      inputLetter !== "ShiftRight" &&
+      inputLetter !== "" &&
+      inputLetter !== null &&
+      inputLetter !== "Backspace" &&
       inputLetter !== lastLetter.content &&
       inputText.indexOf(lastLetter) === inputTextLength - 1
     ) {
@@ -107,7 +115,7 @@ export const InputTextClikClik: FC = () => {
     }
 
     if (inputLetter === "Enter" && isEndLine === true) {
-      dispatch(updateTextInput());
+      dispatch(updateTextInput(configurationText));
       dispatch(clearTypos());
       dispatch(clearAccuracy());
       dispatch(clearSpeed());
@@ -141,6 +149,13 @@ export const InputTextClikClik: FC = () => {
       return <span className={styles.text_input}>{config.content}</span>;
     }
   }
+
+  useEffect(() => {
+    dispatch(updateTextInput(configurationText));
+    dispatch(clearTypos());
+    dispatch(clearAccuracy());
+    dispatch(clearSpeed());
+  }, [configurationText]);
 
   function configureSpanOnEnd(config: textInputConfig) {
     if (config.isSelected) {

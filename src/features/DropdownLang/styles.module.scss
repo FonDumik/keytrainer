@@ -1,0 +1,45 @@
+.container {
+  position: relative;
+  color: white;
+  img {
+    width: 30px;
+    height: 20px;
+  }
+}
+
+.major_section {
+  display: flex;
+  cursor: pointer;
+  width: 60px;
+  padding: 2px;
+  gap: 5px;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+
+.major_section:hover {
+  background-color: #53525c;
+}
+
+.hiddenContent {
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  top: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.hiddenContent_section {
+  width: 100%;
+  background-color: gray;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

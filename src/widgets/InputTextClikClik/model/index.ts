@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { generateOneWordText } from "entities/TextContainer/lib/generateOneWordText";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { arrayWords } from "shared/utils/wordsToPrint";
 import { configureStroke } from "../lib/configureStroke";
+import { generateText } from "../lib/generateText";
+import { configText } from "widgets/SidebarClikClik/model";
 
 export type textInputConfig = {
   content: string;
@@ -20,7 +21,12 @@ interface InputTextClikClikProps {
 }
 
 const initialState: InputTextClikClikProps = {
-  inputText: configureStroke(generateOneWordText(arrayWords)),
+  inputText: configureStroke(
+    generateText(
+      { isNumbers: false, isCapitalLetters: false, isPunctuation: false },
+      arrayWords
+    )
+  ),
   letterCounter: 0,
   typos: 0,
   inputTextLength: 0,
@@ -58,8 +64,8 @@ const InputTextClikClikSlice = createSlice({
         typoPressed: false,
       };
     },
-    updateTextInput(state) {
-      const text = configureStroke(generateOneWordText(arrayWords));
+    updateTextInput(state, config: PayloadAction<configText>) {
+      const text = configureStroke(generateText(config.payload, arrayWords));
       text[0].isSelected = true;
       state.inputText = text;
       state.isEndLine = false;

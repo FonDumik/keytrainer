@@ -8,6 +8,7 @@ import { setErrorKey } from "../lib/setErrorKey";
 import { setSelectedKey } from "../lib/setSelectedKey";
 import { setPriorErrorKeys } from "../lib/setPriorErrorKeys";
 import { clearErrorKey } from "../lib/clearErrorKey";
+import { textInputConfig } from "widgets/InputTextClikClik";
 
 interface keyboardState {
   keyList: keyboardConfiguration[];
@@ -40,9 +41,13 @@ const InteractiveKeyboardSlice = createSlice({
       state.letterTypo = action.payload;
       state.counterTypo = state.counterTypo + 1;
     },
-    setPriorityTypoKeys(state, typos: PayloadAction<number>) {
-      const { arrayTypo } = state;
-      const stack = arrayTypo.reduce((acc, el) => {
+    setPriorityTypoKeys(state, inputText: PayloadAction<textInputConfig[]>) {
+      let arrayText = inputText.payload
+        .filter((elem) => elem.isTypo)
+        .map((elem) => {
+          return elem.content;
+        });
+      const stack = arrayText.reduce((acc, el) => {
         acc[el] = (acc[el] || 0) + 1;
         return acc;
       }, {});

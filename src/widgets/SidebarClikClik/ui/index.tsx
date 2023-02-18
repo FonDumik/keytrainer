@@ -7,12 +7,12 @@ import {
   toggleCapitalLetters,
   toggleNumbers,
   togglePunctuation,
-  toggleShowHands,
   toggleShowHints,
   toggleSoundError,
 } from "../model";
 import Checkbox from "shared/ui/Checkbox";
 import { toggleSidebar } from "widgets/SidebarClikClik/model";
+import DropdownLanguage from "features/DropdownLang";
 
 const Sidebar = () => {
   const dispatch = useClikDispatch();
@@ -73,10 +73,7 @@ const Sidebar = () => {
             </div>
             <div className={styles.settings_section}>
               <p>Language</p>
-              <Checkbox
-                checked={configurationText.isPunctuation}
-                onClick={() => dispatch(togglePunctuation())}
-              />
+              <DropdownLanguage />
             </div>
           </div>
           <div className={styles.settings_container}>
@@ -89,15 +86,6 @@ const Sidebar = () => {
                 checked={configurationKeyboard.keyHints}
                 onClick={() => {
                   dispatch(toggleShowHints());
-                }}
-              />
-            </div>
-            <div className={styles.settings_section}>
-              <p>Show hands</p>
-              <Checkbox
-                checked={configurationKeyboard.showHands}
-                onClick={() => {
-                  dispatch(toggleShowHands());
                 }}
               />
             </div>

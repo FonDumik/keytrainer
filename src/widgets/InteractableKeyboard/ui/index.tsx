@@ -51,7 +51,7 @@ const InteractableKeyboard = () => {
 
   useEffect(() => {
     if (isEndLine === true) {
-      dispatch(setPriorityTypoKeys());
+      dispatch(setPriorityTypoKeys(inputText));
     } else {
       dispatch(clearTypoKeyboard());
     }
