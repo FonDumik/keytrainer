@@ -1,12 +1,12 @@
 import { keyboardCasesKeys } from "shared/types/keyboardConfiguration";
 import { setSelectedShift } from "shared/utils/setSelectedShift";
 import { keyboardCases } from "shared/types/keyboardConfiguration";
-import { keyboardConfiguration } from "../config/keyboardRU";
+import { keyConfigClik } from "shared/types/keyConfigClik";
 
 export const setSelectedKey = (
   keysCases: keyboardCases,
   lastLetter: string,
-  keysList: Array<keyboardConfiguration>
+  keysList: Array<keyConfigClik>
 ) => {
   for (let elem in keysCases) {
     if (keysCases[elem as keyof keyboardCasesKeys].indexOf(lastLetter) !== -1) {

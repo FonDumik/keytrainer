@@ -1,11 +1,11 @@
 import { keyboardCasesKeys } from "shared/types/keyboardConfiguration";
 import { keyboardCases } from "shared/types/keyboardConfiguration";
-import { keyboardConfiguration } from "../config/keyboardRU";
+import { keyConfigClik } from "shared/types/keyConfigClik";
 
 export const setPriorErrorKeys = (
   priorKey: string,
   priority: number,
-  arrayList: keyboardConfiguration[],
+  arrayList: keyConfigClik[],
   keysCases: keyboardCases
 ) => {
   for (let elem in keysCases) {

@@ -3,9 +3,11 @@ import russianFlag from "shared/assets/russia.png";
 import englishFlag from "shared/assets/united-kingdom.png";
 import AnimateHeight from "react-animate-height";
 import { useState } from "react";
+import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
+import { changeLanguage } from "widgets/SidebarClikClik/model";
 
 type languageConfig = {
-  language: string;
+  language: "Ru" | "En";
   img: string;
 };
 
@@ -16,17 +18,38 @@ const arrayLang: languageConfig[] = [
 
 const DropdownLanguage = () => {
   const [height, setHeight] = useState<"auto" | number>(0);
-  const [currentLang, setCurrentLang] = useState<languageConfig>({
-    language: "Ru",
-    img: russianFlag,
-  });
+  const { configurationKeyboard } = useClikSelector(
+    (state) => state.sidebarReducer
+  );
+  const dispatch = useClikDispatch();
+
+  const setLanguageState = (lang: "Ru" | "En") => {
+    if (lang === "Ru") {
+      const config: languageConfig = {
+        language: "Ru",
+        img: russianFlag,
+      };
+      return config;
+    } else if (lang === "En") {
+      const config: languageConfig = {
+        language: "En",
+        img: englishFlag,
+      };
+      return config;
+    }
+  };
 
   const toggleDropdown = () => {
     return setHeight(height === 0 ? "auto" : 0);
   };
 
+  const [currentLang, setCurrentLang] = useState<languageConfig>(
+    setLanguageState(configurationKeyboard.language)
+  );
+
   const selectLang = (elem: languageConfig) => {
     setCurrentLang(elem);
+    dispatch(changeLanguage(elem.language));
     setHeight(height === 0 ? "auto" : 0);
   };
 

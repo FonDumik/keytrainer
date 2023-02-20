@@ -3,6 +3,8 @@ import { useCallback, useEffect, memo } from "react";
 import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
 import { textInputConfig } from "widgets/InputTextClikClik";
 import {
+  changeKeyboard,
+  clearSelectedKeys,
   clearTypoKeyboard,
   returnKeyList,
   setPriorityTypoKeys,
@@ -10,6 +12,7 @@ import {
   showSelectedKey,
 } from "../model";
 import styles from "./styles.module.scss";
+import audio_alert from "shared/assets/tindeck_1.mp3";
 
 const InteractableKeyboard = () => {
   const { keyList, letterTypo, counterTypo } = useClikSelector(
@@ -18,10 +21,17 @@ const InteractableKeyboard = () => {
   const { inputText, isEndLine } = useClikSelector(
     (state) => state.InputTextClikClikReducer
   );
+  const { configurationKeyboard } = useClikSelector(
+    (state) => state.sidebarReducer
+  );
 
   const dispatch = useClikDispatch();
 
-  const changeKeyboard = useCallback(() => {
+  const setErrorKey = useCallback(() => {
+    if (configurationKeyboard.isSoundError) {
+      let audio = new Audio(audio_alert);
+      audio.play();
+    }
     if (!isEndLine) {
       dispatch(showErrorKey(letterTypo));
       setTimeout(() => {
@@ -31,23 +41,25 @@ const InteractableKeyboard = () => {
   }, [letterTypo, counterTypo]);
 
   const selectLetter = useCallback(() => {
-    if (isEndLine) {
-      dispatch(showSelectedKey("Enter"));
-    } else {
+    if (configurationKeyboard.keyHints && !isEndLine) {
       const lastLetter: textInputConfig = inputText.find(
         (elem) => elem.isSelected === true
       );
       dispatch(showSelectedKey(lastLetter.content));
+    } else if (isEndLine) {
+      dispatch(showSelectedKey("Enter"));
+    } else {
+      dispatch(clearSelectedKeys());
     }
-  }, [inputText]);
+  }, [inputText, configurationKeyboard]);
 
   useEffect(() => {
     selectLetter();
   }, [selectLetter]);
 
   useEffect(() => {
-    changeKeyboard();
-  }, [changeKeyboard]);
+    setErrorKey();
+  }, [setErrorKey]);
 
   useEffect(() => {
     if (isEndLine === true) {
@@ -56,6 +68,10 @@ const InteractableKeyboard = () => {
       dispatch(clearTypoKeyboard());
     }
   }, [isEndLine]);
+
+  useEffect(() => {
+    dispatch(changeKeyboard(configurationKeyboard.language));
+  }, [configurationKeyboard]);
 
   return (
     <div className={styles.keyboard}>

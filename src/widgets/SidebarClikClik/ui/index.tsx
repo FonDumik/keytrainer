@@ -19,11 +19,13 @@ const Sidebar = () => {
   const nodeRef = React.useRef<HTMLDivElement | null>(null);
   const { isOpenSidebar, configurationText, configurationKeyboard } =
     useClikSelector((state) => state.sidebarReducer);
+
   const setSidebar = () => {
     if (isOpenSidebar) {
       dispatch(toggleSidebar());
     }
   };
+
   return (
     <CSSTransition
       nodeRef={nodeRef}

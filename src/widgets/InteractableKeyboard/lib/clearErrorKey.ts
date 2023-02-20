@@ -1,9 +1,9 @@
 import { keyboardCasesKeys } from "shared/types/keyboardConfiguration";
 import { keyboardCases } from "shared/types/keyboardConfiguration";
-import { keyboardConfiguration } from "../config/keyboardRU";
+import { keyConfigClik } from "shared/types/keyConfigClik";
 
 export const clearErrorKey = (
-  arrayList: keyboardConfiguration[],
+  arrayList: keyConfigClik[],
   pressedKey: string,
   keysCases: keyboardCases
 ) => {

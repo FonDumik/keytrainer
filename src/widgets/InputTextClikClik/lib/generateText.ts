@@ -1,5 +1,8 @@
+import { arrayWords } from "shared/utils/wordsToPrint";
+import { arrayWordsENG } from "shared/utils/wordsToPrintENG";
 import { configText } from "widgets/SidebarClikClik/model";
 import { symbols } from "../config/symbols";
+import { symbolsEn } from "../config/symbolsEn";
 
 const selectWord = (arrayWords: string[]) => {
   let randomNum = Math.floor(arrayWords.length * Math.random());
@@ -20,26 +23,35 @@ const getCapitalLetter = (word: string, isCapital: boolean) => {
   }
 };
 
-const getPunctuation = (isPunctuation: boolean) => {
+const getPunctuation = (isPunctuation: boolean, symbolsArray: string[]) => {
   if (isPunctuation && Math.random() >= 0.4) {
-    return selectWord(symbols);
+    return selectWord(symbolsArray);
   } else {
     return "";
   }
 };
 
-export const generateText = (config: configText, arrayWords: string[]) => {
+export const generateText = (config: configText, language: "Ru" | "En") => {
   const { isNumbers, isCapitalLetters, isPunctuation } = config;
+  let arrayWordsText: string[];
+  let symbolsText: string[];
+  if (language === "Ru") {
+    arrayWordsText = arrayWords;
+    symbolsText = symbols;
+  } else if (language === "En") {
+    arrayWordsText = arrayWordsENG;
+    symbolsText = symbolsEn;
+  }
   let string = "";
   while (string.length < 70) {
     let word: string;
 
     if (isNumbers && Math.random() <= 0.4) {
-      word = getRandomNumber() + getPunctuation(isPunctuation);
+      word = getRandomNumber() + getPunctuation(isPunctuation, symbolsText);
     } else {
       word =
-        getCapitalLetter(selectWord(arrayWords), isCapitalLetters) +
-        getPunctuation(isPunctuation);
+        getCapitalLetter(selectWord(arrayWordsText), isCapitalLetters) +
+        getPunctuation(isPunctuation, symbolsText);
     }
 
     if (string.length + word.length + 1 < 80) {

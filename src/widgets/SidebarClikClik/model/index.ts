@@ -4,28 +4,30 @@ export type configText = {
   isCapitalLetters: boolean;
   isNumbers: boolean;
   isPunctuation: boolean;
+  language: "Ru" | "En";
 };
 
 export type configKeyboard = {
+  language: "Ru" | "En";
   isSoundError: boolean;
   keyHints: boolean;
 };
 
 interface configSidebarState {
-  language: string;
   configurationText: configText;
   configurationKeyboard: configKeyboard;
   isOpenSidebar: boolean;
 }
 
 const initialState: configSidebarState = {
-  language: "Ru",
   configurationText: {
+    language: "Ru",
     isCapitalLetters: false,
     isNumbers: false,
     isPunctuation: false,
   },
   configurationKeyboard: {
+    language: "Ru",
     isSoundError: false,
     keyHints: true,
   },
@@ -58,6 +60,10 @@ const sidebarSlice = createSlice({
     toggleSidebar(state, action: PayloadAction<boolean>) {
       state.isOpenSidebar = action.payload;
     },
+    changeLanguage(state, action: PayloadAction<"En" | "Ru">) {
+      state.configurationKeyboard.language = action.payload;
+      state.configurationText.language = action.payload;
+    },
   },
 });
 
@@ -68,6 +74,7 @@ export const {
   toggleShowHints,
   toggleSoundError,
   toggleSidebar,
+  changeLanguage,
 } = sidebarSlice.actions;
 
 export const sidebarReducer = sidebarSlice.reducer;

@@ -1,23 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  keyboardConfiguration,
-  keysCases,
-  arrayList,
-} from "../config/keyboardRU";
+import { keysCases, arrayList } from "../config/keyboardRU";
 import { setErrorKey } from "../lib/setErrorKey";
 import { setSelectedKey } from "../lib/setSelectedKey";
 import { setPriorErrorKeys } from "../lib/setPriorErrorKeys";
 import { clearErrorKey } from "../lib/clearErrorKey";
 import { textInputConfig } from "widgets/InputTextClikClik";
+import { keyConfigClik } from "shared/types/keyConfigClik";
+import { arrayListENG, keysCasesEng } from "../config/keyboardEN";
+import { keyboardCases } from "shared/types/keyboardConfiguration";
 
 interface keyboardState {
-  keyList: keyboardConfiguration[];
+  keysCases: keyboardCases;
+  keyList: keyConfigClik[];
   letterTypo: string;
   counterTypo: number;
   arrayTypo: string[];
 }
 
 const initialState: keyboardState = {
+  keysCases: keysCases,
   keyList: arrayList,
   letterTypo: "",
   counterTypo: 0,
@@ -29,13 +30,25 @@ const InteractiveKeyboardSlice = createSlice({
   initialState,
   reducers: {
     showErrorKey(state, action: PayloadAction<string>) {
-      state.keyList = setErrorKey(state.keyList, action.payload, keysCases);
+      state.keyList = setErrorKey(
+        state.keyList,
+        action.payload,
+        state.keysCases
+      );
     },
     showSelectedKey(state, action: PayloadAction<string>) {
-      state.keyList = setSelectedKey(keysCases, action.payload, state.keyList);
+      state.keyList = setSelectedKey(
+        state.keysCases,
+        action.payload,
+        state.keyList
+      );
     },
     returnKeyList(state, action: PayloadAction<string>) {
-      state.keyList = clearErrorKey(state.keyList, action.payload, keysCases);
+      state.keyList = clearErrorKey(
+        state.keyList,
+        action.payload,
+        state.keysCases
+      );
     },
     setLetterTypo(state, action: PayloadAction<string>) {
       state.letterTypo = action.payload;
@@ -73,7 +86,7 @@ const InteractiveKeyboardSlice = createSlice({
           elem.content,
           elem.priority,
           state.keyList,
-          keysCases
+          state.keysCases
         );
       }
     },
@@ -87,6 +100,21 @@ const InteractiveKeyboardSlice = createSlice({
       });
       state.arrayTypo = [];
     },
+    clearSelectedKeys(state) {
+      state.keyList = state.keyList.map((elem) => {
+        elem.selected = false;
+        return elem;
+      });
+    },
+    changeKeyboard(state, action: PayloadAction<string>) {
+      if (action.payload === "Ru") {
+        state.keyList = arrayList;
+        state.keysCases = keysCases;
+      } else if (action.payload === "En") {
+        state.keyList = arrayListENG;
+        state.keysCases = keysCasesEng;
+      }
+    },
   },
 });
 
@@ -98,6 +126,8 @@ export const {
   setPriorityTypoKeys,
   clearTypoKeyboard,
   setArrayTypos,
+  clearSelectedKeys,
+  changeKeyboard,
 } = InteractiveKeyboardSlice.actions;
 
 export const InteractiveKeyboardReducer = InteractiveKeyboardSlice.reducer;

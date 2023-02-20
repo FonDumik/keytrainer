@@ -23,8 +23,13 @@ interface InputTextClikClikProps {
 const initialState: InputTextClikClikProps = {
   inputText: configureStroke(
     generateText(
-      { isNumbers: false, isCapitalLetters: false, isPunctuation: false },
-      arrayWords
+      {
+        language: "Ru",
+        isNumbers: false,
+        isCapitalLetters: false,
+        isPunctuation: false,
+      },
+      "Ru"
     )
   ),
   letterCounter: 0,
@@ -65,7 +70,9 @@ const InputTextClikClikSlice = createSlice({
       };
     },
     updateTextInput(state, config: PayloadAction<configText>) {
-      const text = configureStroke(generateText(config.payload, arrayWords));
+      const text = configureStroke(
+        generateText(config.payload, config.payload.language)
+      );
       text[0].isSelected = true;
       state.inputText = text;
       state.isEndLine = false;
