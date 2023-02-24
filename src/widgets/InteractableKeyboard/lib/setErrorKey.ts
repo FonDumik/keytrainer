@@ -7,38 +7,55 @@ export const setErrorKey = (
   pressedKey: string,
   keysCases: keyboardCases
 ) => {
+  let objectDetected;
   for (let elem in keysCases) {
-    if (keysCases[elem as keyof keyboardCasesKeys].indexOf(pressedKey) !== -1) {
-      switch (elem) {
-        case "downCase":
-          return arrayList.map((elem) => {
-            if (
-              elem.content1.toLowerCase() === pressedKey ||
-              elem.content1 === pressedKey
-            ) {
-              elem.errorPressed = true;
-            }
-            return elem;
-          });
-        case "upperCase":
-          return arrayList.map((elem) => {
-            if (elem.content1 === pressedKey) {
-              elem.errorPressed = true;
-            }
-            return elem;
-          });
-        case "symbols":
-          return arrayList.map((elem) => {
-            if (elem.content1 === pressedKey || elem.content2 === pressedKey) {
-              elem.errorPressed = true;
-            }
-            return elem;
-          });
-        default:
-          return arrayList;
-      }
-    } else {
-      return arrayList;
+    let isOnArray =
+      keysCases[elem as keyof keyboardCasesKeys].includes(pressedKey);
+    if (isOnArray) {
+      objectDetected = {
+        isOnArray,
+        elemArray: elem,
+      };
+      break;
     }
+  }
+
+  if (objectDetected === undefined) {
+    return arrayList;
+  }
+
+  if (objectDetected.isOnArray && objectDetected.elemArray === "downCase") {
+    return arrayList.map((elem) => {
+      if (
+        elem.content1.toLowerCase() === pressedKey ||
+        elem.content1 === pressedKey
+      ) {
+        elem.errorPressed = false;
+      }
+      return elem;
+    });
+  } else if (
+    objectDetected.isOnArray &&
+    objectDetected.elemArray === "upperCase"
+  ) {
+    return arrayList.map((elem) => {
+      if (elem.content1 === pressedKey) {
+        elem.errorPressed = false;
+      }
+      return elem;
+    });
+  } else if (
+    objectDetected.isOnArray &&
+    objectDetected.elemArray === "symbols"
+  ) {
+    return arrayList.map((elem) => {
+      if (elem.content1 === pressedKey) {
+        elem.errorPressed = false;
+      } else if (elem.content2 === pressedKey) {
+        elem.errorPressed = false;
+      }
+
+      return elem;
+    });
   }
 };

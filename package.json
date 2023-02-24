@@ -6,7 +6,6 @@
     "@reduxjs/toolkit": "^1.9.1",
     "classnames": "^2.3.2",
     "compose-function": "^3.0.3",
-    "eslint": "^8.33.0",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-animate-height": "^3.1.0",
@@ -21,7 +20,10 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "eslintConfig": {
     "extends": [
@@ -42,12 +44,11 @@
     ]
   },
   "devDependencies": {
-    "http-cache-semantics": ">=4.1.1",
+    "eslint": "^8.33.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/compose-function": "^0.0.30",
-    "@types/jest": "^29.2.5",
     "@types/node": "^18.11.18",
     "@types/node-sass": "^4.11.3",
     "@types/react": "^18.0.26",
@@ -56,6 +57,7 @@
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
     "@vitejs/plugin-react": "^3.0.1",
+    "@vitest/coverage-c8": "^0.28.5",
     "babel-eslint": "^10.1.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-flowtype": "^8.0.3",
@@ -63,8 +65,12 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "http-cache-semantics": ">=4.1.1",
     "vite": "^4.0.4",
     "vite-plugin-svgr": "^2.4.0",
-    "vite-tsconfig-paths": "^4.0.5"
+    "vite-tsconfig-paths": "^4.0.5",
+    "vitest": "^0.28.5",
+    "@vitest/ui": "latest",
+    "jsdom": "latest"
   }
 }

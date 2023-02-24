@@ -47,9 +47,6 @@ export const keysCases: keyboardCases = {
     "8",
     "9",
     "0",
-    "Backspace",
-    "ShiftLeft",
-    "ShiftRight",
     "Enter",
   ],
   upperCase: [
@@ -87,7 +84,22 @@ export const keysCases: keyboardCases = {
     "Ю",
     "Я",
   ],
-  symbols: ["!", "%", "?", "-", "+", "=", ".", ",", ":", "(", ")", "_", "*"],
+  symbols: [
+    "!",
+    "%",
+    "?",
+    "-",
+    "+",
+    "=",
+    ".",
+    ",",
+    ";",
+    ":",
+    "(",
+    ")",
+    "_",
+    "*",
+  ],
 };
 
 export const arrayList: Array<keyConfigClik> = [
@@ -214,7 +226,7 @@ export const arrayList: Array<keyConfigClik> = [
     selected: false,
   },
 
-  { setType: "sys tab", content1: "Tab", selected: false },
+  { setType: "sys tab", content1: "Tab", errorPressed: false, selected: false },
   {
     setType: "5",
     content1: "Й",
@@ -324,6 +336,7 @@ export const arrayList: Array<keyConfigClik> = [
   {
     setType: "sys caps",
     content1: "CapsLock",
+    errorPressed: false,
     selected: false,
   },
   {
@@ -505,6 +518,7 @@ export const arrayList: Array<keyConfigClik> = [
     content1: ".",
     content2: ",",
     needShift: "left",
+    errorPressed: false,
     errorPriority: 0,
     selected: false,
   },

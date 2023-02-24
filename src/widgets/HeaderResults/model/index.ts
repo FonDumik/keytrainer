@@ -38,6 +38,7 @@ const HeaderResultsSlice = createSlice({
           return accumulator;
         }
       }, 0);
+
       if (lenght !== 0) {
         state.accuracy = Math.floor(((lenght - typos) / lenght) * 100);
       }

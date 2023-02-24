@@ -40,9 +40,6 @@ export const keysCasesEng: keyboardCases = {
     "8",
     "9",
     "0",
-    "Backspace",
-    "ShiftLeft",
-    "ShiftRight",
     "Enter",
   ],
   upperCase: [
@@ -92,6 +89,7 @@ export const keysCasesEng: keyboardCases = {
     ">",
     "/",
     "`",
+    "|",
   ],
 };
 

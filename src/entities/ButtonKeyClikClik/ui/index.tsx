@@ -1,10 +1,10 @@
 import { useState, useEffect, FC, useCallback, memo } from "react";
-import { keyboardConfiguration } from "widgets/InteractableKeyboard/config/keyboardRU";
+import { keyConfigClik } from "shared/types/keyConfigClik";
 import { renderDefault } from "../lib/renderKey";
 import classes from "./styles.module.scss";
 
 type buttonKeyInterface = {
-  config: keyboardConfiguration;
+  config: keyConfigClik;
 };
 
 const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {

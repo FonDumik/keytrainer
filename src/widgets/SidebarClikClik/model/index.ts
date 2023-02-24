@@ -1,17 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export type configText = {
-  isCapitalLetters: boolean;
-  isNumbers: boolean;
-  isPunctuation: boolean;
-  language: "Ru" | "En";
-};
-
-export type configKeyboard = {
-  language: "Ru" | "En";
-  isSoundError: boolean;
-  keyHints: boolean;
-};
+import { configText, configKeyboard } from "shared/types/sidebarConfig";
 
 interface configSidebarState {
   configurationText: configText;

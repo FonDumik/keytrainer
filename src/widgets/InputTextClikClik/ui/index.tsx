@@ -6,13 +6,12 @@ import {
   addTypos,
   addLetterCounter,
   clearLetterCounter,
-  clearTypos,
-  textInputConfig,
   updateLastLetterForward,
   initTypo,
   updateLastLetterBackward,
   setEndStroke,
 } from "../model";
+import { textInputConfig } from "shared/types/textInputConfig";
 import {
   clearAccuracy,
   clearSpeed,
@@ -116,7 +115,6 @@ export const InputTextClikClik: FC = () => {
 
     if (inputLetter === "Enter" && isEndLine === true) {
       dispatch(updateTextInput(configurationText));
-      dispatch(clearTypos());
       dispatch(clearAccuracy());
       dispatch(clearSpeed());
     }
@@ -152,7 +150,6 @@ export const InputTextClikClik: FC = () => {
 
   useEffect(() => {
     dispatch(updateTextInput(configurationText));
-    dispatch(clearTypos());
     dispatch(clearAccuracy());
     dispatch(clearSpeed());
   }, [configurationText]);

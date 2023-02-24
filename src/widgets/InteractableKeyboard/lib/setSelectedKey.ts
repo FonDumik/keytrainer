@@ -6,7 +6,7 @@ import { keyConfigClik } from "shared/types/keyConfigClik";
 export const setSelectedKey = (
   keysCases: keyboardCases,
   lastLetter: string,
-  keysList: Array<keyConfigClik>
+  keysList: keyConfigClik[]
 ) => {
   for (let elem in keysCases) {
     if (keysCases[elem as keyof keyboardCasesKeys].indexOf(lastLetter) !== -1) {
@@ -52,8 +52,6 @@ export const setSelectedKey = (
             }
           }
           setSelectedShift(needShift3, keysList);
-          return keysList;
-        default:
           return keysList;
       }
     }

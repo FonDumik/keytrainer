@@ -1,7 +1,7 @@
 import ButtonKeyClikClik from "entities/ButtonKeyClikClik";
 import { useCallback, useEffect, memo } from "react";
 import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
-import { textInputConfig } from "widgets/InputTextClikClik";
+import { textInputConfig } from "shared/types/textInputConfig";
 import {
   changeKeyboard,
   clearSelectedKeys,
@@ -74,7 +74,7 @@ const InteractableKeyboard = () => {
   }, [configurationKeyboard]);
 
   return (
-    <div className={styles.keyboard}>
+    <div className={styles.keyboard} data-testid="int-keyboard">
       {keyList.map((elem) => (
         <ButtonKeyClikClik config={elem} />
       ))}

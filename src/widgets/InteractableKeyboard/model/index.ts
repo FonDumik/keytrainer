@@ -1,13 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import { textInputConfig } from "shared/types/textInputConfig";
+import { keyConfigClik } from "shared/types/keyConfigClik";
+import { keyboardCases } from "shared/types/keyboardConfiguration";
+
 import { keysCases, arrayList } from "../config/keyboardRU";
+import { arrayListENG, keysCasesEng } from "../config/keyboardEN";
+
+import { createPriorArray } from "../lib/createPriorArray";
 import { setErrorKey } from "../lib/setErrorKey";
 import { setSelectedKey } from "../lib/setSelectedKey";
 import { setPriorErrorKeys } from "../lib/setPriorErrorKeys";
 import { clearErrorKey } from "../lib/clearErrorKey";
-import { textInputConfig } from "widgets/InputTextClikClik";
-import { keyConfigClik } from "shared/types/keyConfigClik";
-import { arrayListENG, keysCasesEng } from "../config/keyboardEN";
-import { keyboardCases } from "shared/types/keyboardConfiguration";
 
 interface keyboardState {
   keysCases: keyboardCases;
@@ -25,7 +29,7 @@ const initialState: keyboardState = {
   arrayTypo: [],
 };
 
-const InteractiveKeyboardSlice = createSlice({
+export const InteractiveKeyboardSlice = createSlice({
   name: "InteractiveKeyboard",
   initialState,
   reducers: {
@@ -55,33 +59,9 @@ const InteractiveKeyboardSlice = createSlice({
       state.counterTypo = state.counterTypo + 1;
     },
     setPriorityTypoKeys(state, inputText: PayloadAction<textInputConfig[]>) {
-      let arrayText = inputText.payload
-        .filter((elem) => elem.isTypo)
-        .map((elem) => {
-          return elem.content;
-        });
-      const stack = arrayText.reduce((acc, el) => {
-        acc[el] = (acc[el] || 0) + 1;
-        return acc;
-      }, {});
+      let priorArray = createPriorArray(inputText.payload);
 
-      let array = [];
-      for (let elem in stack) {
-        array.push(stack[elem]);
-      }
-      let array1 = [];
-      let maxValue = Math.max.apply(null, array);
-
-      for (let elem in stack) {
-        if (stack[elem] === maxValue) {
-          array1.push({ content: elem, priority: 1 });
-        } else if (maxValue / stack[elem] <= 0.5) {
-          array1.push({ content: elem, priority: 2 });
-        } else if (maxValue / stack[elem] > 0.5) {
-          array1.push({ content: elem, priority: 3 });
-        }
-      }
-      for (let elem of array1) {
+      for (let elem of priorArray) {
         state.keyList = setPriorErrorKeys(
           elem.content,
           elem.priority,

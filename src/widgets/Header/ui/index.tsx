@@ -2,12 +2,14 @@ import { Timer } from "features/Timer";
 import styles from "./styles.module.scss";
 import { ConfigureTraining } from "features/ConfigureTraining";
 import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
-import { average, setIsRestart } from "../model";
+import { setIsRestart } from "../model";
+import { average } from "../lib/average";
 
-import logoImg from "shared/assets/logo.png";
-import speedImg from "shared/assets/speed.png";
-import restartImg from "shared/assets/restart.png";
-import stopImg from "shared/assets/stop.png";
+import logoImg from "shared/assets/img/logo.png";
+import speedImg from "shared/assets/img/speed.png";
+import restartImg from "shared/assets/img/restart.png";
+import stopImg from "shared/assets/img/stop.png";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const { speed, speedArray, errors, errorsArray, isRestart } =
@@ -23,9 +25,9 @@ export const Header = () => {
       <div className="wrapper">
         <div className={styles.header__container}>
           <div className={styles.header__left}>
-            <a href="#" className={styles.logo}>
+            <Link to="/" className={styles.logo}>
               <img src={logoImg} alt="logo" />
-            </a>
+            </Link>
             <ConfigureTraining />
             <button
               className={styles.text_reset}

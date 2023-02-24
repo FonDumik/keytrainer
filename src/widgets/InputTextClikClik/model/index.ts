@@ -1,16 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { arrayWords } from "shared/utils/wordsToPrint";
 import { configureStroke } from "../lib/configureStroke";
 import { generateText } from "../lib/generateText";
-import { configText } from "widgets/SidebarClikClik/model";
-
-export type textInputConfig = {
-  content: string;
-  correctlyPressed: boolean;
-  typoPressed: boolean;
-  isSelected: boolean;
-  isTypo: boolean;
-};
+import { configText } from "shared/types/sidebarConfig";
+import { textInputConfig } from "shared/types/textInputConfig";
 
 interface InputTextClikClikProps {
   inputText: textInputConfig[];
@@ -76,6 +68,12 @@ const InputTextClikClikSlice = createSlice({
       text[0].isSelected = true;
       state.inputText = text;
       state.isEndLine = false;
+
+      state.typos = 0;
+      state.inputText = state.inputText.map((elem) => {
+        elem.isTypo = false;
+        return elem;
+      });
     },
     initTypo(state) {
       const { inputText } = state;
@@ -96,13 +94,6 @@ const InputTextClikClikSlice = createSlice({
     },
     addTypos(state) {
       state.typos++;
-    },
-    clearTypos(state) {
-      state.typos = 0;
-      state.inputText = state.inputText.map((elem) => {
-        elem.isTypo = false;
-        return elem;
-      });
     },
     setEndStroke(state) {
       const { inputText } = state;
@@ -126,7 +117,6 @@ export const {
   addLetterCounter,
   clearLetterCounter,
   addTypos,
-  clearTypos,
   initTypo,
   setEndStroke,
 } = InputTextClikClikSlice.actions;
