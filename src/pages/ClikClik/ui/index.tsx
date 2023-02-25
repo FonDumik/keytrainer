@@ -5,7 +5,8 @@ import { InputTextClikClik } from "widgets/InputTextClikClik";
 import InteractableKeyboard from "widgets/InteractableKeyboard";
 import { storeClikClik } from "../model";
 import styles from "./styles.module.scss";
-import { ButtonsWidget } from "widgets/ButtonsWidget";
+import { ButtonsWidget } from "features/ButtonsWidget";
+import { SidebarClicClik } from "widgets/SidebarClikClik";
 
 const ClikClik = () => {
   React.useEffect(() => {
@@ -20,6 +21,7 @@ const ClikClik = () => {
         <InputTextClikClik />
         <InteractableKeyboard />
         <ButtonsWidget />
+        <SidebarClicClik />
       </div>
     </Provider>
   );

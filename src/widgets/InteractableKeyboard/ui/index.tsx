@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ButtonKeyClikClik from "entities/ButtonKeyClikClik";
 import { useCallback, useEffect, memo } from "react";
 import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
@@ -40,18 +41,32 @@ const InteractableKeyboard = () => {
     }
   }, [letterTypo, counterTypo]);
 
+  const [isVisibleHints, setIsVisible] = useState(true);
+
   const selectLetter = useCallback(() => {
-    if (configurationKeyboard.keyHints && !isEndLine) {
+    if (isVisibleHints && !isEndLine) {
       const lastLetter: textInputConfig = inputText.find(
         (elem) => elem.isSelected === true
       );
       dispatch(showSelectedKey(lastLetter.content));
-    } else if (isEndLine) {
+    }
+
+    if (isEndLine) {
       dispatch(showSelectedKey("Enter"));
-    } else {
+    }
+
+    if (!isVisibleHints && !isEndLine) {
       dispatch(clearSelectedKeys());
     }
-  }, [inputText, configurationKeyboard]);
+  }, [inputText, isVisibleHints]);
+
+  useEffect(() => {
+    if (configurationKeyboard.keyHints) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }, [configurationKeyboard]);
 
   useEffect(() => {
     selectLetter();

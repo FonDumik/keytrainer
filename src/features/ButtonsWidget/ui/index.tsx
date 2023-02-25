@@ -5,7 +5,6 @@ import returnImg from "shared/assets/img/arrow-left.svg";
 import { Link } from "react-router-dom";
 import { toggleSidebar } from "widgets/SidebarClikClik/model";
 import { useClikDispatch } from "shared/hooks/ClikClikHooks";
-import { SidebarClicClik } from "widgets/SidebarClikClik";
 
 export const ButtonsWidget = () => {
   const dispatch = useClikDispatch();
@@ -18,7 +17,6 @@ export const ButtonsWidget = () => {
         img={settingsImg}
         onClick={() => dispatch(toggleSidebar(true))}
       />
-      <SidebarClicClik />
     </div>
   );
 };

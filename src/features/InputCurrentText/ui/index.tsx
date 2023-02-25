@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import cn from "classnames";
-import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
+import {
+  useKlavaogrDispatch,
+  useKlavaogrSelector,
+} from "shared/hooks/KlavaogrHooks";
 import styles from "./styles.module.scss";
 import { updateErrors, updateSpeed } from "widgets/Header";
 import {

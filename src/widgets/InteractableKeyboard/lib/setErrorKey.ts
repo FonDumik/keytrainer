@@ -30,7 +30,7 @@ export const setErrorKey = (
         elem.content1.toLowerCase() === pressedKey ||
         elem.content1 === pressedKey
       ) {
-        elem.errorPressed = false;
+        elem.errorPressed = true;
       }
       return elem;
     });
@@ -40,7 +40,7 @@ export const setErrorKey = (
   ) {
     return arrayList.map((elem) => {
       if (elem.content1 === pressedKey) {
-        elem.errorPressed = false;
+        elem.errorPressed = true;
       }
       return elem;
     });
@@ -50,9 +50,9 @@ export const setErrorKey = (
   ) {
     return arrayList.map((elem) => {
       if (elem.content1 === pressedKey) {
-        elem.errorPressed = false;
+        elem.errorPressed = true;
       } else if (elem.content2 === pressedKey) {
-        elem.errorPressed = false;
+        elem.errorPressed = true;
       }
 
       return elem;

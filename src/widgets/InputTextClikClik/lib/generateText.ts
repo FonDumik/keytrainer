@@ -1,6 +1,6 @@
 import { arrayWords } from "shared/utils/wordsToPrint";
 import { arrayWordsENG } from "shared/utils/wordsToPrintENG";
-import { configText } from "widgets/SidebarClikClik/model";
+import { configText } from "shared/types/sidebarConfig";
 import { symbols } from "../config/symbols";
 import { symbolsEn } from "../config/symbolsEn";
 

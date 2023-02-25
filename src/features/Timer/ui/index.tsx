@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 //styles
 import styles from "./Timer.module.scss";
 //hooks
-import * as hooks from "shared/hooks";
+import * as hooks from "shared/hooks/KlavaogrHooks";
 import { renderToTimer } from "../lib/renderTimer";
 import { setSelectedTime, updateCurrentTime } from "../model";
 import { DropdownObject } from "shared/ui/DropdownObject";

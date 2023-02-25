@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import cn from "classnames";
 import styles from "./styles.module.scss";
-import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
+import {
+  useKlavaogrDispatch,
+  useKlavaogrSelector,
+} from "shared/hooks/KlavaogrHooks";
 import { setSelectedTime } from "features/Timer";
 import { setIsStartedTime } from "features/InputCurrentText/model";
 import { setIsRestart } from "widgets/Header";

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { textInputConfig } from "widgets/InputTextClikClik";
+import { textInputConfig } from "shared/types/textInputConfig";
 
 interface headerResultsProps {
   speedArray: number[];

@@ -5,7 +5,10 @@ import styles from "./styles.module.scss";
 import ButtonKey from "entities/ButtonKey";
 import { changeKeyboard, updateKeyboard } from "../model";
 
-import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
+import {
+  useKlavaogrDispatch,
+  useKlavaogrSelector,
+} from "shared/hooks/KlavaogrHooks";
 
 const Keyboard = () => {
   const { lastLetter } = useKlavaogrSelector(

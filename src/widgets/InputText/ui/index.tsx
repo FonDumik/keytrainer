@@ -3,7 +3,10 @@ import cn from "classnames";
 
 import styles from "./styles.module.scss";
 
-import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
+import {
+  useKlavaogrDispatch,
+  useKlavaogrSelector,
+} from "shared/hooks/KlavaogrHooks";
 
 import { setIsStartedTime } from "features/InputCurrentText/model";
 import { TextContainer } from "entities/TextContainer";

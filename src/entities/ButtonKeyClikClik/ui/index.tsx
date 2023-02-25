@@ -49,7 +49,7 @@ const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
     } else {
       setClass(renderDefault(setType));
     }
-  }, [selected]);
+  }, [selected, setType]);
 
   useEffect(() => {
     setSelected();
@@ -66,7 +66,7 @@ const ButtonKeyClikClik: FC<buttonKeyInterface> = ({ config }) => {
       default:
         return setClass(renderDefault(setType));
     }
-  }, [errorPriority]);
+  }, [errorPriority, setType]);
 
   useEffect(() => {
     setPriority();

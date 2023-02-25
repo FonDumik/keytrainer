@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { AccordionDocumentationRU } from "widgets/AccordionDocumentationRU/ui";
+import { AccordionDocumentationRU } from "features/AccordionDocumentationRU";
 import { HeaderDocumentation } from "widgets/HeaderDocumentation";
 import styles from "./styles.module.scss";
 

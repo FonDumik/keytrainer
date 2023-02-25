@@ -1,6 +1,9 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
+import {
+  useKlavaogrDispatch,
+  useKlavaogrSelector,
+} from "shared/hooks/KlavaogrHooks";
 import { updateConfigurationText, updateConfigurationTraining } from "../model";
 import { setIsRestart } from "widgets/Header";
 import { DropdownObject } from "shared/ui/DropdownObject";

@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { useKlavaogrDispatch, useKlavaogrSelector } from "shared/hooks";
+import {
+  useKlavaogrDispatch,
+  useKlavaogrSelector,
+} from "shared/hooks/KlavaogrHooks";
 import {
   resetComplexText,
   updateComplexText,

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { AppsSection } from "widgets/AppsSection";
-import { DocumentationSection } from "widgets/DocumentationSection";
+import { AppsSection } from "features/AppsSection";
+import { DocumentationSection } from "features/DocumentationSection";
 import styles from "./styles.module.scss";
 
 const StartPage = () => {
