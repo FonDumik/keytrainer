@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
-import russianFlag from "shared/assets/russia.png";
-import englishFlag from "shared/assets/united-kingdom.png";
+import russianFlag from "shared/assets/img/russia.png";
+import englishFlag from "shared/assets/img/united-kingdom.png";
 import AnimateHeight from "react-animate-height";
 import { useState } from "react";
 import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";

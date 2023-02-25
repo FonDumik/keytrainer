@@ -7,7 +7,7 @@ import { renderToTimer } from "../lib/renderTimer";
 import { setSelectedTime, updateCurrentTime } from "../model";
 import { DropdownObject } from "shared/ui/DropdownObject";
 
-import timeImg from "shared/assets/time.png";
+import timeImg from "shared/assets/img/time.png";
 
 const timeSelectCases = [5, 10, 15, 20, 25, 30];
 

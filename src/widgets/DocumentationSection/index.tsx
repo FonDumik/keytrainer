@@ -1,7 +1,7 @@
 import { ButtonSection } from "shared/ui/ButtonSection";
 import styles from "./styles.module.scss";
 
-import docImg from "shared/assets/file-earmark-text.svg";
+import docImg from "shared/assets/img/file-earmark-text.svg";
 
 export function DocumentationSection() {
   return (

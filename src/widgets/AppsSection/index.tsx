@@ -1,9 +1,9 @@
 import { ButtonSection } from "shared/ui/ButtonSection";
 import styles from "./styles.module.scss";
 
-import keyboardImg from "shared/assets/keyboard.svg";
-import CiImg from "shared/assets/c-square.svg";
-import windowImg from "shared/assets/window.svg";
+import keyboardImg from "shared/assets/img/keyboard.svg";
+import CiImg from "shared/assets/img/c-square.svg";
+import windowImg from "shared/assets/img/window.svg";
 
 export function AppsSection() {
   return (

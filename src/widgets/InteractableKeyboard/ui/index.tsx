@@ -12,7 +12,7 @@ import {
   showSelectedKey,
 } from "../model";
 import styles from "./styles.module.scss";
-import audio_alert from "shared/assets/tindeck_1.mp3";
+import audio_alert from "shared/assets/audio/tindeck_1.mp3";
 
 const InteractableKeyboard = () => {
   const { keyList, letterTypo, counterTypo } = useClikSelector(

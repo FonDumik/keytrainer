@@ -1,9 +1,9 @@
 import { FC } from "react";
 import ResultDisplay from "shared/ui/ResultDisplay";
 import styles from "./styles.module.scss";
-import speedImg from "shared/assets/speed.svg";
-import accuracyImg from "shared/assets/accuracy.svg";
-import typosImg from "shared/assets/typos.svg";
+import speedImg from "shared/assets/img/speed.svg";
+import accuracyImg from "shared/assets/img/accuracy.svg";
+import typosImg from "shared/assets/img/typos.svg";
 import { useClikSelector } from "shared/hooks/ClikClikHooks";
 import { average } from "../lib/average";
 

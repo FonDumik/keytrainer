@@ -2,7 +2,7 @@ import { PrimaryButton } from "shared/ui/PrimaryButton";
 import styles from "./styles.module.scss";
 import { useState } from "react";
 import AnimateHeight from "react-animate-height";
-import arrowImg from "shared/assets/chevron-down.svg";
+import arrowImg from "shared/assets/img/chevron-down.svg";
 
 export const Accordion = ({ children, header }) => {
   const [styleImg, setStyleImg] = useState(styles.button__img);

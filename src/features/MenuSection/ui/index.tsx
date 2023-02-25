@@ -4,8 +4,8 @@ import AnimateHeight from "react-animate-height";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 
-import homeImg from "shared/assets/house-door-fill.svg";
-import menuImg from "shared/assets/list.svg";
+import homeImg from "shared/assets/img/house-door-fill.svg";
+import menuImg from "shared/assets/img/list.svg";
 
 export const MenuSection = () => {
   const [height, setHeight] = useState<"auto" | number>(0);

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import styles from "./styles.module.scss";
 import "./animation.css";
-import closeImg from "shared/assets/close-button.png";
+import closeImg from "shared/assets/img/close-button.png";
 
 type DropdownObjectProps = {
   isOpenDropDownState: {
