@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ButtonKeyClikClik from "entities/ButtonKeyClikClik";
 import { useCallback, useEffect, memo } from "react";
-import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks/reduxHooks";
 import { textInputConfig } from "shared/types/textInputConfig";
 import {
   changeKeyboard,
@@ -16,17 +16,17 @@ import styles from "./styles.module.scss";
 import audio_alert from "shared/assets/audio/tindeck_1.mp3";
 
 const InteractableKeyboard = () => {
-  const { keyList, letterTypo, counterTypo } = useClikSelector(
+  const { keyList, letterTypo, counterTypo } = useAppSelector(
     (state) => state.InteractiveKeyboardReducer
   );
-  const { inputText, isEndLine } = useClikSelector(
+  const { inputText, isEndLine } = useAppSelector(
     (state) => state.InputTextClikClikReducer
   );
-  const { configurationKeyboard } = useClikSelector(
+  const { configurationKeyboard } = useAppSelector(
     (state) => state.sidebarReducer
   );
 
-  const dispatch = useClikDispatch();
+  const dispatch = useAppDispatch();
 
   const setErrorKey = useCallback(() => {
     if (configurationKeyboard.isSoundError) {

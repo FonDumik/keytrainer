@@ -3,7 +3,7 @@ import russianFlag from "shared/assets/img/russia.png";
 import englishFlag from "shared/assets/img/united-kingdom.png";
 import AnimateHeight from "react-animate-height";
 import { useState } from "react";
-import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks/reduxHooks";
 import { changeLanguage } from "widgets/SidebarClikClik/model";
 
 type languageConfig = {
@@ -18,10 +18,10 @@ const arrayLang: languageConfig[] = [
 
 const DropdownLanguage = () => {
   const [height, setHeight] = useState<"auto" | number>(0);
-  const { configurationKeyboard } = useClikSelector(
+  const { configurationKeyboard } = useAppSelector(
     (state) => state.sidebarReducer
   );
-  const dispatch = useClikDispatch();
+  const dispatch = useAppDispatch();
 
   const setLanguageState = (lang: "Ru" | "En") => {
     if (lang === "Ru") {

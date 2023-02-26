@@ -1,0 +1,1 @@
+export { ColumnTextKlavaogrEN } from "./ui";

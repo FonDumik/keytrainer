@@ -43,7 +43,7 @@ export const generateText = (config: configText, language: "Ru" | "En") => {
     symbolsText = symbolsEn;
   }
   let string = "";
-  while (string.length < 70) {
+  while (string.length < 80) {
     let word: string;
 
     if (isNumbers && Math.random() <= 0.4) {

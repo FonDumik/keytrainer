@@ -80,11 +80,18 @@ const InputTextClikClikSlice = createSlice({
       const lastLetter: textInputConfig = inputText.find(
         (elem) => elem.isSelected === true
       );
-      inputText[inputText.indexOf(lastLetter)].isSelected = false;
-      inputText[inputText.indexOf(lastLetter)].typoPressed = true;
-      inputText[inputText.indexOf(lastLetter)].isTypo = true;
-      inputText[inputText.indexOf(lastLetter)].correctlyPressed = false;
-      inputText[inputText.indexOf(lastLetter) + 1].isSelected = true;
+      if (inputText.indexOf(lastLetter) !== inputText.length - 1) {
+        inputText[inputText.indexOf(lastLetter)].isSelected = false;
+        inputText[inputText.indexOf(lastLetter)].typoPressed = true;
+        inputText[inputText.indexOf(lastLetter)].isTypo = true;
+        inputText[inputText.indexOf(lastLetter)].correctlyPressed = false;
+        inputText[inputText.indexOf(lastLetter) + 1].isSelected = true;
+      }else{
+        inputText[inputText.indexOf(lastLetter)].typoPressed = true;
+        inputText[inputText.indexOf(lastLetter)].isTypo = true;
+        inputText[inputText.indexOf(lastLetter)].isSelected = false;        
+        state.isEndLine = true
+      }
     },
     addLetterCounter(state) {
       state.letterCounter++;

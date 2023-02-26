@@ -4,12 +4,12 @@ import styles from "./styles.module.scss";
 import speedImg from "shared/assets/img/speed.svg";
 import accuracyImg from "shared/assets/img/accuracy.svg";
 import typosImg from "shared/assets/img/typos.svg";
-import { useClikSelector } from "shared/hooks/ClikClikHooks";
+import { useAppSelector } from "shared/hooks/reduxHooks";
 import { average } from "../lib/average";
 
 export const HeaderResults: FC = () => {
-  const { typos } = useClikSelector((state) => state.InputTextClikClikReducer);
-  const { speedArray, accuracy } = useClikSelector(
+  const { typos } = useAppSelector((state) => state.InputTextClikClikReducer);
+  const { speedArray, accuracy } = useAppSelector(
     (state) => state.headerResultsReducer
   );
 

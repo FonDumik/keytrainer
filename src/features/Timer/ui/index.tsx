@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 //styles
 import styles from "./Timer.module.scss";
 //hooks
-import * as hooks from "shared/hooks/KlavaogrHooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks/reduxHooks";
 import { renderToTimer } from "../lib/renderTimer";
 import { setSelectedTime, updateCurrentTime } from "../model";
 import { DropdownObject } from "shared/ui/DropdownObject";
@@ -12,16 +12,16 @@ import timeImg from "shared/assets/img/time.png";
 const timeSelectCases = [5, 10, 15, 20, 25, 30];
 
 export const Timer = () => {
-  const { currentTime, selectedTime } = hooks.useKlavaogrSelector(
+  const { currentTime, selectedTime } = useAppSelector(
     (state) => state.timerReducer
   );
-  const { isTimeStarted } = hooks.useKlavaogrSelector(
+  const { isTimeStarted } = useAppSelector(
     (state) => state.inputCurrentTextReducer
   );
-  const { isRestart } = hooks.useKlavaogrSelector(
+  const { isRestart } = useAppSelector(
     (state) => state.headerReducer
   );
-  const dispatch = hooks.useKlavaogrDispatch();
+  const dispatch = useAppDispatch();
 
   let [isOpenMenu, setIsOpenMenu] = useState(false);
 

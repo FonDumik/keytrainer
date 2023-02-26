@@ -1,5 +1,5 @@
 import React from "react";
-import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks/reduxHooks";
 import { CSSTransition } from "react-transition-group";
 import "./animation.css";
 import styles from "./styles.module.scss";
@@ -15,10 +15,10 @@ import { toggleSidebar } from "widgets/SidebarClikClik/model";
 import DropdownLanguage from "features/DropdownLang";
 
 const Sidebar = () => {
-  const dispatch = useClikDispatch();
+  const dispatch = useAppDispatch();
   const nodeRef = React.useRef<HTMLDivElement | null>(null);
   const { isOpenSidebar, configurationText, configurationKeyboard } =
-    useClikSelector((state) => state.sidebarReducer);
+    useAppSelector((state) => state.sidebarReducer);
 
   const setSidebar = () => {
     if (isOpenSidebar) {

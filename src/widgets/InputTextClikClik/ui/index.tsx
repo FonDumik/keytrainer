@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { useClikDispatch, useClikSelector } from "shared/hooks/ClikClikHooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks/reduxHooks";
 import styles from "./styles.module.scss";
 import {
   updateTextInput,
@@ -23,11 +23,9 @@ import { setArrayTypos, setLetterTypo } from "widgets/InteractableKeyboard";
 
 export const InputTextClikClik: FC = () => {
   const { inputText, letterCounter, inputTextLength, isEndLine } =
-    useClikSelector((state) => state.InputTextClikClikReducer);
-  const { configurationText } = useClikSelector(
-    (state) => state.sidebarReducer
-  );
-  const dispatch = useClikDispatch();
+    useAppSelector((state) => state.InputTextClikClikReducer);
+  const { configurationText } = useAppSelector((state) => state.sidebarReducer);
+  const dispatch = useAppDispatch();
 
   const [inputLetter, counterInput] = usePressedKey();
 
@@ -106,7 +104,6 @@ export const InputTextClikClik: FC = () => {
       inputLetter !== "" &&
       inputLetter !== null &&
       inputLetter !== "Backspace" &&
-      inputLetter !== lastLetter.content &&
       inputText.indexOf(lastLetter) === inputTextLength - 1
     ) {
       dispatch(setEndStroke());

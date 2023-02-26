@@ -5,20 +5,17 @@ import styles from "./styles.module.scss";
 import ButtonKey from "entities/ButtonKey";
 import { changeKeyboard, updateKeyboard } from "../model";
 
-import {
-  useKlavaogrDispatch,
-  useKlavaogrSelector,
-} from "shared/hooks/KlavaogrHooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks/reduxHooks";
 
 const Keyboard = () => {
-  const { lastLetter } = useKlavaogrSelector(
+  const { lastLetter } = useAppSelector(
     (state) => state.inputCurrentTextReducer
   );
-  const { keyList } = useKlavaogrSelector((state) => state.keyboardReducer);
-  const { configuration } = useKlavaogrSelector(
+  const { keyList } = useAppSelector((state) => state.keyboardReducer);
+  const { configuration } = useAppSelector(
     (state) => state.configurationTrainingReducer
   );
-  const dispatch = useKlavaogrDispatch();
+  const dispatch = useAppDispatch();
 
   const setLastLetter = useCallback(() => {
     dispatch(updateKeyboard(lastLetter));

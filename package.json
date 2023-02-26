@@ -1,6 +1,6 @@
 {
-  "name": "klavaorg",
-  "version": "0.2.1",
+  "name": "keytrainer",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
@@ -18,7 +18,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "test": "vitest",
@@ -73,6 +73,16 @@
     "vite": "^4.0.4",
     "vite-plugin-svgr": "^2.4.0",
     "vite-tsconfig-paths": "^4.0.5",
-    "vitest": "^0.28.5"
-  }
+    "vitest": "^0.28.5",
+    "prettier": "latest",
+    "prettier-eslint": "latest"
+  },
+  "keywords": [
+    "React",
+    "vite",
+    "keyboard",
+    "trainer",
+    "ReactJS",
+    "Typescript"
+  ]
 }

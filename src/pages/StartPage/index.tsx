@@ -14,6 +14,7 @@ const StartPage = () => {
       <div className={styles.startPage__wrapper}>
         <DocumentationSection />
         <AppsSection />
+        <a href="https://github.com/Cunningham16" className={styles.link}>@Cunningham16</a>
       </div>
     </div>
   );

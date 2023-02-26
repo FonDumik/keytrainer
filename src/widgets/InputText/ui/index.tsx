@@ -3,10 +3,7 @@ import cn from "classnames";
 
 import styles from "./styles.module.scss";
 
-import {
-  useKlavaogrDispatch,
-  useKlavaogrSelector,
-} from "shared/hooks/KlavaogrHooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks/reduxHooks";
 
 import { setIsStartedTime } from "features/InputCurrentText/model";
 import { TextContainer } from "entities/TextContainer";
@@ -14,11 +11,11 @@ import { NotificationRest } from "entities/NotificationRest";
 import { InputCurrentText } from "features/InputCurrentText/ui";
 
 export const InputText = () => {
-  const { selectedTime } = useKlavaogrSelector((state) => state.timerReducer);
-  const { wasError, currentText } = useKlavaogrSelector(
+  const { selectedTime } = useAppSelector((state) => state.timerReducer);
+  const { wasError, currentText } = useAppSelector(
     (state) => state.inputCurrentTextReducer
   );
-  const dispatch = useKlavaogrDispatch();
+  const dispatch = useAppDispatch();
   const [styleText, setStyleText] = useState(cn(styles.text));
 
   useEffect(() => {

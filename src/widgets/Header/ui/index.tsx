@@ -1,10 +1,7 @@
 import { Timer } from "features/Timer";
 import styles from "./styles.module.scss";
 import { ConfigureTraining } from "features/ConfigureTraining";
-import {
-  useKlavaogrDispatch,
-  useKlavaogrSelector,
-} from "shared/hooks/KlavaogrHooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks/reduxHooks";
 import { setIsRestart } from "../model";
 import { average } from "../lib/average";
 
@@ -15,9 +12,10 @@ import stopImg from "shared/assets/img/stop.png";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
-  const { speed, speedArray, errors, errorsArray, isRestart } =
-    useKlavaogrSelector((state) => state.headerReducer);
-  const dispatch = useKlavaogrDispatch();
+  const { speed, speedArray, errors, errorsArray, isRestart } = useAppSelector(
+    (state) => state.headerReducer
+  );
+  const dispatch = useAppDispatch();
 
   function restartTraining() {
     dispatch(setIsRestart(!isRestart));

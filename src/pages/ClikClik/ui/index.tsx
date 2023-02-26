@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { HeaderResults } from "widgets/HeaderResults";
 import { InputTextClikClik } from "widgets/InputTextClikClik";
 import InteractableKeyboard from "widgets/InteractableKeyboard";
-import { storeClikClik } from "../model";
+import { store } from "shared/store";
 import styles from "./styles.module.scss";
 import { ButtonsWidget } from "features/ButtonsWidget";
 import { SidebarClicClik } from "widgets/SidebarClikClik";
@@ -15,7 +15,7 @@ const ClikClik = () => {
   }, []);
 
   return (
-    <Provider store={storeClikClik}>
+    <Provider store={store}>
       <div className={styles.container}>
         <HeaderResults />
         <InputTextClikClik />

@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import cn from "classnames";
 import {
-  useKlavaogrDispatch,
-  useKlavaogrSelector,
-} from "shared/hooks/KlavaogrHooks";
+  useAppDispatch,
+  useAppSelector,
+} from "shared/hooks/reduxHooks";
 import styles from "./styles.module.scss";
 import { updateErrors, updateSpeed } from "widgets/Header";
 import {
@@ -18,17 +18,17 @@ import {
 } from "../model";
 
 export function InputCurrentText() {
-  const { randomText } = useKlavaogrSelector(
+  const { randomText } = useAppSelector(
     (state) => state.textContainerReducer
   );
-  const { currentText, textErrors, wasError } = useKlavaogrSelector(
+  const { currentText, textErrors, wasError } = useAppSelector(
     (state) => state.inputCurrentTextReducer
   );
-  const { currentTime, selectedTime } = useKlavaogrSelector(
+  const { currentTime, selectedTime } = useAppSelector(
     (state) => state.timerReducer
   );
-  const { isRestart } = useKlavaogrSelector((state) => state.headerReducer);
-  const dispatch = useKlavaogrDispatch();
+  const { isRestart } = useAppSelector((state) => state.headerReducer);
+  const dispatch = useAppDispatch();
 
   const [styleInput, setStyleInput] = useState(cn(styles.input_text));
 

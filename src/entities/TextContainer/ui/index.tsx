@@ -1,8 +1,5 @@
 import { useEffect } from "react";
-import {
-  useKlavaogrDispatch,
-  useKlavaogrSelector,
-} from "shared/hooks/KlavaogrHooks";
+import { useAppDispatch, useAppSelector } from "shared/hooks/reduxHooks";
 import {
   resetComplexText,
   updateComplexText,
@@ -13,17 +10,17 @@ import { setLastLetter } from "features/InputCurrentText/model";
 import styles from "./styles.module.scss";
 
 export function TextContainer() {
-  const { isFinishedLine } = useKlavaogrSelector(
+  const { isFinishedLine } = useAppSelector(
     (state) => state.inputCurrentTextReducer
   );
-  const { configuration } = useKlavaogrSelector(
+  const { configuration } = useAppSelector(
     (state) => state.configurationTrainingReducer
   );
-  const { isRestart } = useKlavaogrSelector((state) => state.headerReducer);
-  const { complexText, randomText } = useKlavaogrSelector(
+  const { isRestart } = useAppSelector((state) => state.headerReducer);
+  const { complexText, randomText } = useAppSelector(
     (state) => state.textContainerReducer
   );
-  const dispatch = useKlavaogrDispatch();
+  const dispatch = useAppDispatch();
 
   let configurationRUSimpleText =
     configuration.language === "RU" &&
